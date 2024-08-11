@@ -1,15 +1,8 @@
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
-
-import 'app/routes/app_pages.dart';
+import 'package:tbd_flutter/my_app.dart';
+import 'app/data/all.dart';
 
 void main() {
   runApp(
-    GetMaterialApp(
-      title: "Application",
-      initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
-    ),
+      MyApp()
   );
 }

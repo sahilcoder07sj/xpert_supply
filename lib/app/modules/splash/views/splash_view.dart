@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tbd_flutter/app/CommonWidget/common_widget.dart';
+import 'package:tbd_flutter/app/CommonWidget/screen.dart';
+import 'package:tbd_flutter/app/data/all.dart';
 import '../controllers/splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {
@@ -7,15 +10,17 @@ class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     Get.put(SplashController());
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('SplashView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'SplashView is working',
-          style: TextStyle(fontSize: 20),
+    return CommonScreen(
+      backgroundColor: AppColors.primary,
+      isAppbar: false,
+      body: Center(
+        child: CircleAvatar(
+          radius: 90.0,
+          backgroundColor: AppColors.white.withOpacity(0.2),
+          child: CircleAvatar(
+            radius: 80.0,
+            backgroundColor: AppColors.white,
+          ),
         ),
       ),
     );

@@ -17,7 +17,7 @@ class AppText extends StatelessWidget {
     this.text, {
     this.fontSize,
     this.color,
-    this.fontFamily = FontFamily.light,
+    this.fontFamily = FontFamily.regular,
     this.letterSpacing,
     this.overflow,
     this.textDecoration = TextDecoration.none,
@@ -133,7 +133,7 @@ class AppRichText extends StatelessWidget {
           style: TextStyle(
             fontSize: fontSize ?? 18.0,
             color: firstTextColor ?? AppColors.primary,
-            fontFamily: firstTextFontFamily ?? FontFamily.regular,
+            fontFamily: firstTextFontFamily ?? FontFamily.light,
             height: height ?? 1.3,
             decoration: firstDecoration,
           ),
@@ -144,7 +144,7 @@ class AppRichText extends StatelessWidget {
               style: TextStyle(
                 fontSize: fontSize ?? 18.0,
                 color: secondTextColor ?? AppColors.primary,
-                fontFamily: secondTextFontFamily ?? FontFamily.medium,
+                fontFamily: secondTextFontFamily ?? FontFamily.regular,
                 decoration: secondDecoration,
               ),
             ),
@@ -154,7 +154,7 @@ class AppRichText extends StatelessWidget {
               style: TextStyle(
                 fontSize: fontSize ?? 18.0,
                 color: thirdTextColor ?? AppColors.primary,
-                fontFamily: thirdTextFontFamily ?? FontFamily.regular,
+                fontFamily: thirdTextFontFamily ?? FontFamily.light,
                 decoration: thirdDecoration,
               ),
             ),
@@ -164,7 +164,7 @@ class AppRichText extends StatelessWidget {
               style: TextStyle(
                 fontSize: fontSize ?? 18.0,
                 color: fourthTextColor ?? AppColors.primary,
-                fontFamily: fourthTextFontFamily ?? FontFamily.medium,
+                fontFamily: fourthTextFontFamily ?? FontFamily.regular,
                 decoration: fourthDecoration,
               ),
             ),

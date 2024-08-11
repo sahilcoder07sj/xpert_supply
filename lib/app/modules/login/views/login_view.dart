@@ -62,6 +62,11 @@ class LoginView extends GetView<LoginController> {
                 38.verticalSpace,
                 CommonButton(
                   text: AppStrings.signIn,
+                  onTap: () {
+                    if(Constants.vendor == Constants.selectUser){
+                      Get.offAllNamed(Routes.MANAGEMENT);
+                    }
+                  },
                 ),
                 10.verticalSpace,
               ],

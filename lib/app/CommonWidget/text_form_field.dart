@@ -79,21 +79,7 @@ class CommonTextFormField extends StatelessWidget {
           5.verticalSpace,
         ],
         DecoratedBox(
-          decoration: ShapeDecoration(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(width: 1, color: Color(0xFFF2F2F6)),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            shadows: [
-              BoxShadow(
-                color: Color(0xFFEFF0F3),
-                blurRadius: 20.40,
-                offset: Offset(0, 7),
-                spreadRadius: 0,
-              )
-            ],
-          ),
+          decoration: CommonWidget.commonShadowWidget(),
           child: TextFormField(
             controller: controller,
             style: AppTextStyle(

@@ -8,6 +8,8 @@ import '../modules/category/bindings/category_binding.dart';
 import '../modules/category/views/category_view.dart';
 import '../modules/delivery/bindings/delivery_binding.dart';
 import '../modules/delivery/views/delivery_view.dart';
+import '../modules/editProduct/bindings/edit_product_binding.dart';
+import '../modules/editProduct/views/edit_product_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/forgot_password.dart';
 import '../modules/login/views/login_view.dart';
@@ -15,6 +17,8 @@ import '../modules/login/views/otp_view.dart';
 import '../modules/login/views/reset_password_view.dart';
 import '../modules/management/bindings/management_binding.dart';
 import '../modules/management/views/management_view.dart';
+import '../modules/product/bindings/product_binding.dart';
+import '../modules/product/views/product_view.dart';
 import '../modules/productDetail/bindings/product_detail_binding.dart';
 import '../modules/productDetail/views/product_detail_view.dart';
 import '../modules/selectUser/bindings/select_user_binding.dart';
@@ -93,6 +97,16 @@ class AppPages {
       name: _Paths.PRODUCT_DETAIL,
       page: () => const ProductDetailView(),
       binding: ProductDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCT,
+      page: () => const ProductView(),
+      binding: ProductBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PRODUCT,
+      page: () => const EditProductView(),
+      binding: EditProductBinding(),
     ),
   ];
 }

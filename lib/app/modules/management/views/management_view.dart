@@ -30,7 +30,7 @@ class ManagementView extends GetView<ManagementController> {
             SizedBox(height: responsiveHeight(20)),
             SizedBox(
               width: double.infinity,
-              height: responsiveHeight(180),
+              height: responsiveHeight(190),
               child: DecoratedBox(
                 decoration: CommonWidget.commonShadowWidget(),
                 child: Column(
@@ -55,7 +55,7 @@ class ManagementView extends GetView<ManagementController> {
             ),
             SizedBox(height: responsiveHeight(20)),
             SizedBox(
-              height: responsiveHeight(180),
+              height: responsiveHeight(190),
               width: double.infinity,
               child: DecoratedBox(
                 decoration: CommonWidget.commonShadowWidget(),

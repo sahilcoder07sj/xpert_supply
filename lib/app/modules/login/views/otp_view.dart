@@ -79,7 +79,17 @@ class OtpView extends GetView<LoginController> {
               45.verticalSpace,
               CommonButton(
                 text: AppStrings.verify,
-                onTap: () => Constants.isSignUp ? Get.offAllNamed(Routes.MANAGEMENT) : Get.toNamed(Routes.RESET_PASSWORD),
+                onTap: () {
+                  if(Constants.isSignUp){
+                    if(Constants.vendor == Constants.selectUser){
+                      Get.offAllNamed(Routes.DELIVERY);
+                    } else{
+                      Get.offAllNamed(Routes.CONSUMER_PRODUCTS);
+                    }
+                  } else{
+                    Get.toNamed(Routes.RESET_PASSWORD);
+                  }
+                },
               ),
               20.verticalSpace,
             ],

@@ -67,6 +67,8 @@ class LoginView extends GetView<LoginController> {
                     if(Constants.vendor == Constants.selectUser){
                       // Get.offAllNamed(Routes.MANAGEMENT);
                       Get.offAllNamed(Routes.DELIVERY);
+                    } else{
+                      Get.offAllNamed(Routes.CONSUMER_PRODUCTS);
                     }
                   },
                 ),

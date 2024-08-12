@@ -161,7 +161,9 @@ class DeliveryView extends GetView<DeliveryController> {
           children: [
             CommonButton(
                 text: AppStrings.next,
-              onTap: () => Get.offAllNamed(Routes.MANAGEMENT),
+              onTap: () {
+                Get.offAllNamed(Routes.CATEGORY);
+              } ,
             ),
             SizedBox(height: MediaQuery.of(context).padding.bottom + 10.0),
           ],

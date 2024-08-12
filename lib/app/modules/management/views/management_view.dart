@@ -3,6 +3,7 @@ import '../controllers/management_controller.dart';
 
 class ManagementView extends GetView<ManagementController> {
   const ManagementView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CommonScreen(
@@ -20,7 +21,7 @@ class ManagementView extends GetView<ManagementController> {
           children: [
             20.verticalSpace,
             CommonButton(
-                text: "    "+AppStrings.yourVendorCode+" 16547",
+              text: "    " + AppStrings.yourVendorCode + " 16547",
               textSize: 15.0,
               alignment: Alignment.topLeft,
             ),
@@ -28,7 +29,7 @@ class ManagementView extends GetView<ManagementController> {
             SizedBox(
               width: double.infinity,
               child: DecoratedBox(
-                  decoration: CommonWidget.commonShadowWidget(),
+                decoration: CommonWidget.commonShadowWidget(),
                 child: Column(
                   children: [
                     17.verticalSpace,
@@ -38,7 +39,7 @@ class ManagementView extends GetView<ManagementController> {
                     ),
                     14.verticalSpace,
                     AppText(
-                        AppStrings.productManagement,
+                      AppStrings.productManagement,
                       fontSize: 20.0,
                       fontFamily: FontFamily.medium,
                     ),
@@ -46,7 +47,6 @@ class ManagementView extends GetView<ManagementController> {
                     CommonWidget.circularIconWidget(
                       radius: 18.0,
                       icon: AppIcons.iconsRightArrow,
-                      // radius: 40.0,
                     ),
                     17.verticalSpace,
                   ],
@@ -91,8 +91,11 @@ class ManagementView extends GetView<ManagementController> {
           mainAxisSize: MainAxisSize.min,
           children: [
             CommonButton(
-                text: AppStrings.quoteRequest,
+              text: AppStrings.quoteRequest,
               bgColor: AppColors.white,
+              onTap: () {
+                Get.toNamed(Routes.DELIVERY);
+              },
               fontColor: AppColors.primary,
             ),
             SizedBox(height: MediaQuery.of(context).padding.bottom + 10.0),

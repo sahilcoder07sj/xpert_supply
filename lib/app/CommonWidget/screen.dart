@@ -1,7 +1,6 @@
 import '../data/all.dart';
 
 class CommonScreen extends StatelessWidget {
-
   final bool isAppbar;
   final Widget? body;
   final bool isLeading;
@@ -29,26 +28,38 @@ class CommonScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor ?? AppColors.screenBG,
-      appBar: isAppbar ? AppBar(
-        backgroundColor: AppColors.screenBG,
-        surfaceTintColor: AppColors.screenBG,
-        title: title != null ? AppText(
-            title ?? "",
-          fontSize: 26.0,
-        ) : null,
-        leading: isLeading ? GestureDetector(
-          onTap: () => Get.back(),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 15.0),
-            child: CircleAvatar(
-              backgroundColor: AppColors.iconBG,
-              child: SvgPicture.asset(AppIcons.iconsBack),
-            ),
-          ),
-        ) : null,
-        actions: actions,
-        automaticallyImplyLeading: automaticallyImplyLeading,
-      ) : null,
+      extendBody: true,
+      appBar: isAppbar
+          ? AppBar(
+              scrolledUnderElevation: 0,
+              elevation: 0,
+              foregroundColor: AppColors.screenBG ,
+              backgroundColor: AppColors.screenBG,
+              surfaceTintColor: AppColors.screenBG,
+              title: title != null
+                  ? AppText(
+                      title ?? "",
+                      fontSize: 20,
+                    )
+                  : null,
+              leading: isLeading
+                  ? GestureDetector(
+                      onTap: () => Get.back(),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 15.0),
+                        child: CircleAvatar(
+                          backgroundColor: AppColors.iconBG,
+                          child: SvgPicture.asset(
+                            AppIcons.iconsBack,
+                          ),
+                        ),
+                      ),
+                    )
+                  : null,
+              actions: actions,
+              automaticallyImplyLeading: automaticallyImplyLeading,
+            )
+          : null,
       body: body,
       bottomNavigationBar: bottomNavigationBar,
       floatingActionButton: floatingActionButton,

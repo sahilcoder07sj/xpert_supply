@@ -1,11 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class AddEditCategoryController extends GetxController {
-  //TODO: Implement AddEditCategoryController
+  TextEditingController categoryController = TextEditingController();
+  bool isEdit = false;
 
-  final count = 0.obs;
   @override
   void onInit() {
+    print("Get.arguments-----${Get.arguments}");
+    if (Get.arguments != null) {
+      isEdit = Get.arguments["is_edit"];
+      print("isEdit --- Get.arguments $isEdit");
+    }
     super.onInit();
   }
 
@@ -18,6 +24,4 @@ class AddEditCategoryController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

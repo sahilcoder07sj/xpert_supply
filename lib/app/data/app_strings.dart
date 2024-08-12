@@ -45,7 +45,8 @@ class AppStrings{
   static const category = "Category";
   static const addCategory = "Add Category";
   static const categoryName = "Category Name";
-  static const editCategory = "Edit Category";
+    static const editCategory = "Edit Category";
+    static const save = "Save";
   static const addProducts = "Add Products";
   static const productName = "Product Name";
   static const amount = "Amount";

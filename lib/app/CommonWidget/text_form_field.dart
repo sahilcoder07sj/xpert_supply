@@ -4,7 +4,6 @@ import 'package:tbd_flutter/app/data/extenstion.dart';
 import '../data/all.dart';
 
 class CommonTextFormField extends StatelessWidget {
-
   final TextEditingController? controller;
   final String? prefixIcon;
   final String? title;
@@ -76,18 +75,18 @@ class CommonTextFormField extends StatelessWidget {
         if (title != null) ...[
           AppText(
             title ?? "",
-            fontFamily: FontFamily.semiBold,
+            fontFamily: FontFamily.medium,
           ),
           5.verticalSpace,
         ],
         DecoratedBox(
-          decoration: isShadow ? CommonWidget.commonShadowWidget() : BoxDecoration(),
+          decoration:
+              isShadow ? CommonWidget.commonShadowWidget() : BoxDecoration(),
           child: TextFormField(
             controller: controller,
             style: AppTextStyle(
-              fontFamily: fontTextStyle ?? FontFamily.regular,
-              fontSize: fontSize ?? 16.0
-            ),
+                fontFamily: fontTextStyle ?? FontFamily.regular,
+                fontSize: fontSize ?? 16.0),
             onTap: onTap,
             onChanged: onChanged,
             autofocus: autofocus,
@@ -105,32 +104,42 @@ class CommonTextFormField extends StatelessWidget {
               if (onSubmit != null) onSubmit!(value);
             },
             decoration: InputDecoration(
-              border: border ?? customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
-              enabledBorder: border ?? customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
-              disabledBorder: border ?? customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
-              focusedBorder: border ?? customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
+              border: border ??
+                  customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
+              enabledBorder: border ??
+                  customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
+              disabledBorder: border ??
+                  customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
+              focusedBorder: border ??
+                  customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
               fillColor: fillColor ?? AppColors.white,
               filled: filled,
               isDense: isDense,
-              prefixIcon: prefixIcon != null ? GestureDetector(
-                  onTap: () {
-                    if (onPrefixTap != null) {
-                      onPrefixTap!();
-                    }
-                  },
-                  child: Transform.scale(
-                    scale: 0.6,
-                      child: SvgPicture.asset(prefixIcon ?? ""),
-                  ),
-                )
-              : null,
+              prefixIcon: prefixIcon != null
+                  ? GestureDetector(
+                      onTap: () {
+                        if (onPrefixTap != null) {
+                          onPrefixTap!();
+                        }
+                      },
+                      child: SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: Center(
+                          child: SvgPicture.asset(prefixIcon ?? ""),
+                        ),
+                      ),
+                    )
+                  : null,
               suffixIcon: suffixIcon,
               counterText: "",
-              contentPadding: contentPadding ?? EdgeInsets.symmetric(vertical: 15.0),
+              contentPadding:
+                  contentPadding ?? EdgeInsets.symmetric(vertical: 5),
               hintText: hintText,
               hintStyle: AppTextStyle(
                 fontFamily: hintFamily ?? FontFamily.light,
                 color: hintColor ?? AppColors.primary,
+                fontSize: 14
               ),
             ),
           ),
@@ -226,8 +235,8 @@ class CommonTextFormField extends StatelessWidget {
   }
 }*/
 
-
-OutlineInputBorder customOutlineInputBorder({Color? borderColor, bool isInfinityRadius = false}) {
+OutlineInputBorder customOutlineInputBorder(
+    {Color? borderColor, bool isInfinityRadius = false}) {
   return OutlineInputBorder(
     borderRadius: BorderRadius.circular(isInfinityRadius ? 100 : 11.0),
     borderSide: BorderSide(color: borderColor ?? AppColors.white),

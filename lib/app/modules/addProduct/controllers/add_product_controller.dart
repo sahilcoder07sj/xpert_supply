@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class AddProductController extends GetxController {
-  //TODO: Implement AddProductController
+  TextEditingController productNameController = TextEditingController();
+  TextEditingController productAmountController = TextEditingController();
+    TextEditingController productDiscountController = TextEditingController();
 
   final count = 0.obs;
   @override

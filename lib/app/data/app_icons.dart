@@ -47,5 +47,13 @@ class AppIcons {
   static const String iconsUploadImage = 'assets/icons/upload_image.svg';
   static const String iconsUser = 'assets/icons/user.svg';
   static const String iconsVendor = 'assets/icons/vendor.svg';
+  static const String emptyProduct = 'assets/icons/empty_product.svg';
+
+
+
+
+
+
+
 
 }

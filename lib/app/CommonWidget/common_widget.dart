@@ -21,10 +21,10 @@ class CommonWidget{
     );
   }
 
-  static circularIconWidget({required String icon, double? radius}){
+  static circularIconWidget({Color? backgroundColor,required String icon, double? radius}){
     return CircleAvatar(
       radius: radius ?? 22.0,
-      backgroundColor: AppColors.iconBG,
+      backgroundColor: backgroundColor ??AppColors.iconBG,
       child: SvgPicture.asset(icon),
     );
   }

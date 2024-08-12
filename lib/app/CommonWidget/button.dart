@@ -28,7 +28,7 @@ class CommonButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 12.0),
+        height: 50,
         alignment: alignment ?? Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
@@ -37,7 +37,7 @@ class CommonButton extends StatelessWidget {
         ),
         child: AppText(
           text,
-          fontSize: textSize ?? 20.0,
+          fontSize: textSize ?? 14,
           fontFamily: FontFamily.semiBold,
           color: fontColor ?? AppColors.white,
         ),

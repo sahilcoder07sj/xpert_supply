@@ -19,6 +19,7 @@ class LoginView extends GetView<LoginController> {
                     AppStrings.signInToYourAccount,
                   fontSize: 26.0,
                   fontFamily: FontFamily.semiBold,
+                  textAlign: TextAlign.center,
                 ),
                 5.verticalSpace,
                 AppText(

@@ -27,11 +27,10 @@ class ManagementView extends GetView<ManagementController> {
               textSize: 15.0,
               alignment: Alignment.centerLeft,
             ),
-
             SizedBox(height: responsiveHeight(20)),
             SizedBox(
               width: double.infinity,
-              height: 180,
+              height: responsiveHeight(180),
               child: DecoratedBox(
                 decoration: CommonWidget.commonShadowWidget(),
                 child: Column(
@@ -41,7 +40,6 @@ class ManagementView extends GetView<ManagementController> {
                       icon: AppIcons.iconsProductManager,
                       radius: responsiveHeight(45),
                     ),
-
                     AppText(
                       AppStrings.productManagement,
                       fontSize: 18,
@@ -51,14 +49,13 @@ class ManagementView extends GetView<ManagementController> {
                       radius: responsiveHeight(18.0),
                       icon: AppIcons.iconsRightArrow,
                     ),
-
                   ],
                 ),
               ),
             ),
             SizedBox(height: responsiveHeight(20)),
             SizedBox(
-              height: 180,
+              height: responsiveHeight(180),
               width: double.infinity,
               child: DecoratedBox(
                 decoration: CommonWidget.commonShadowWidget(),
@@ -69,19 +66,16 @@ class ManagementView extends GetView<ManagementController> {
                       icon: AppIcons.iconsOrderManagement,
                       radius: responsiveHeight(45),
                     ),
-
                     AppText(
                       AppStrings.orderManagement,
-                      fontSize: 20.0,
+                      fontSize: 18,
                       fontFamily: FontFamily.medium,
                     ),
-
                     CommonWidget.circularIconWidget(
                       radius: responsiveHeight(18),
                       icon: AppIcons.iconsRightArrow,
                       // radius: 40.0,
                     ),
-
                   ],
                 ),
               ),

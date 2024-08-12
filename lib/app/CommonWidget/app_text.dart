@@ -1,4 +1,5 @@
 import 'package:flutter/gestures.dart';
+import 'package:tbd_flutter/app/data/responsive.dart';
 import '../data/all.dart';
 
 class AppText extends StatelessWidget {
@@ -37,7 +38,7 @@ class AppText extends StatelessWidget {
         height: height,
         color: color ?? AppColors.primary,
         fontFamily: fontFamily,
-        fontSize: fontSize ?? 14,
+        fontSize: responsiveText(fontSize ?? 14),
         letterSpacing: letterSpacing,
         decoration: textDecoration,
         overflow: overflow,

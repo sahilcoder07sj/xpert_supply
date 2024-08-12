@@ -1,3 +1,5 @@
+import 'package:tbd_flutter/app/data/responsive.dart';
+
 import '../../../data/all.dart';
 import '../controllers/management_controller.dart';
 
@@ -19,65 +21,67 @@ class ManagementView extends GetView<ManagementController> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           children: [
-            20.verticalSpace,
+            SizedBox(height: responsiveHeight(15)),
             CommonButton(
               text: "    " + AppStrings.yourVendorCode + " 16547",
               textSize: 15.0,
-              alignment: Alignment.topLeft,
+              alignment: Alignment.centerLeft,
             ),
-            30.verticalSpace,
+
+            SizedBox(height: responsiveHeight(20)),
             SizedBox(
               width: double.infinity,
+              height: 180,
               child: DecoratedBox(
                 decoration: CommonWidget.commonShadowWidget(),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    17.verticalSpace,
                     CommonWidget.circularIconWidget(
                       icon: AppIcons.iconsProductManager,
-                      radius: 40.0,
+                      radius: responsiveHeight(45),
                     ),
-                    14.verticalSpace,
+
                     AppText(
                       AppStrings.productManagement,
-                      fontSize: 20.0,
+                      fontSize: 18,
                       fontFamily: FontFamily.medium,
                     ),
-                    14.verticalSpace,
                     CommonWidget.circularIconWidget(
-                      radius: 18.0,
+                      radius: responsiveHeight(18.0),
                       icon: AppIcons.iconsRightArrow,
                     ),
-                    17.verticalSpace,
+
                   ],
                 ),
               ),
             ),
-            40.verticalSpace,
+            SizedBox(height: responsiveHeight(20)),
             SizedBox(
+              height: 180,
               width: double.infinity,
               child: DecoratedBox(
                 decoration: CommonWidget.commonShadowWidget(),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    17.verticalSpace,
                     CommonWidget.circularIconWidget(
                       icon: AppIcons.iconsOrderManagement,
-                      radius: 40.0,
+                      radius: responsiveHeight(45),
                     ),
-                    14.verticalSpace,
+
                     AppText(
                       AppStrings.orderManagement,
                       fontSize: 20.0,
                       fontFamily: FontFamily.medium,
                     ),
-                    14.verticalSpace,
+
                     CommonWidget.circularIconWidget(
-                      radius: 18.0,
+                      radius: responsiveHeight(18),
                       icon: AppIcons.iconsRightArrow,
                       // radius: 40.0,
                     ),
-                    17.verticalSpace,
+
                   ],
                 ),
               ),

@@ -43,8 +43,8 @@ class OtpView extends GetView<LoginController> {
                 ),
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.box,
-                  fieldWidth: 70,
-                  fieldHeight: 60,
+                  fieldWidth: 50,
+                  fieldHeight: 50,
                   borderWidth: 1,
                   borderRadius: BorderRadius.circular(12.0),
                   activeBoxShadow: [

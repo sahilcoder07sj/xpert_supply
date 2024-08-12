@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:tbd_flutter/app/CommonWidget/app_text.dart';
 import 'package:tbd_flutter/app/data/extenstion.dart';
+import 'package:tbd_flutter/app/data/responsive.dart';
 import '../data/all.dart';
 
 class CommonTextFormField extends StatelessWidget {
@@ -86,7 +87,7 @@ class CommonTextFormField extends StatelessWidget {
             controller: controller,
             style: AppTextStyle(
                 fontFamily: fontTextStyle ?? FontFamily.regular,
-                fontSize: fontSize ?? 16.0),
+                fontSize: fontSize ?? 15),
             onTap: onTap,
             onChanged: onChanged,
             autofocus: autofocus,
@@ -139,7 +140,7 @@ class CommonTextFormField extends StatelessWidget {
               hintStyle: AppTextStyle(
                 fontFamily: hintFamily ?? FontFamily.light,
                 color: hintColor ?? AppColors.primary,
-                fontSize: 14
+                fontSize: 15
               ),
             ),
           ),

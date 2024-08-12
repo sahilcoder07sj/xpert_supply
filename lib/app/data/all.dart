@@ -4,6 +4,7 @@ export 'package:get/get.dart';
 export 'package:tbd_flutter/app/data/app_colors.dart';
 export 'package:tbd_flutter/app/data/app_icons.dart';
 export 'package:tbd_flutter/app/data/font_family.dart';
+export 'package:tbd_flutter/app/data/responsive.dart';
 export 'package:tbd_flutter/app/CommonWidget/app_text.dart';
 export 'package:tbd_flutter/app/CommonWidget/button.dart';
 export 'package:tbd_flutter/app/CommonWidget/common_widget.dart';

@@ -74,7 +74,6 @@ class ManagementView extends GetView<ManagementController> {
                     CommonWidget.circularIconWidget(
                       radius: responsiveHeight(18),
                       icon: AppIcons.iconsRightArrow,
-                      // radius: 40.0,
                     ),
                   ],
                 ),

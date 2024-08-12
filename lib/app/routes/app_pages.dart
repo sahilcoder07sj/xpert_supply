@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/delivery/bindings/delivery_binding.dart';
+import '../modules/delivery/views/delivery_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/forgot_password.dart';
 import '../modules/login/views/login_view.dart';
@@ -58,6 +60,11 @@ class AppPages {
       name: _Paths.MANAGEMENT,
       page: () => const ManagementView(),
       binding: ManagementBinding(),
+    ),
+    GetPage(
+      name: _Paths.DELIVERY,
+      page: () => const DeliveryView(),
+      binding: DeliveryBinding(),
     ),
   ];
 }

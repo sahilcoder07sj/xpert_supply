@@ -33,6 +33,7 @@ class CommonTextFormField extends StatelessWidget {
   final Function? onPrefixTap;
   final void Function()? onTap;
   final void Function(String)? onChanged;
+  final bool isShadow;
 
   CommonTextFormField({
     super.key,
@@ -64,6 +65,7 @@ class CommonTextFormField extends StatelessWidget {
     this.onTap,
     this.onChanged,
     this.readOnly = false,
+    this.isShadow = true,
   });
 
   @override
@@ -79,7 +81,7 @@ class CommonTextFormField extends StatelessWidget {
           5.verticalSpace,
         ],
         DecoratedBox(
-          decoration: CommonWidget.commonShadowWidget(),
+          decoration: isShadow ? CommonWidget.commonShadowWidget() : BoxDecoration(),
           child: TextFormField(
             controller: controller,
             style: AppTextStyle(
@@ -124,7 +126,7 @@ class CommonTextFormField extends StatelessWidget {
               : null,
               suffixIcon: suffixIcon,
               counterText: "",
-              contentPadding: EdgeInsets.symmetric(vertical: 15.0),
+              contentPadding: contentPadding ?? EdgeInsets.symmetric(vertical: 15.0),
               hintText: hintText,
               hintStyle: AppTextStyle(
                 fontFamily: hintFamily ?? FontFamily.light,
@@ -227,7 +229,7 @@ class CommonTextFormField extends StatelessWidget {
 
 OutlineInputBorder customOutlineInputBorder({Color? borderColor, bool isInfinityRadius = false}) {
   return OutlineInputBorder(
-    borderRadius: BorderRadius.circular(isInfinityRadius ? 100 : 12.0),
+    borderRadius: BorderRadius.circular(isInfinityRadius ? 100 : 11.0),
     borderSide: BorderSide(color: borderColor ?? AppColors.white),
   );
 }

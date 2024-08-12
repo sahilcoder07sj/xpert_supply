@@ -30,12 +30,12 @@ class CommonWidget{
   }
 
 
-  static commonShadowWidget(){
+  static commonShadowWidget({double? radius}){
     return ShapeDecoration(
       color: Colors.white,
       shape: RoundedRectangleBorder(
         side: BorderSide(width: 1, color: Color(0xFFF2F2F6)),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(radius ?? 12),
       ),
       shadows: [
         BoxShadow(

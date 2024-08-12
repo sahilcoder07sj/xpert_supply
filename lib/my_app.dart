@@ -13,6 +13,13 @@ class MyApp extends StatelessWidget {
       initialBinding: SplashBinding(),
       initialRoute: Routes.SPLASH,
       getPages: AppPages.routes,
+      builder: (context, child) {
+        child = MediaQuery(
+          child: child!,
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+        );
+        return child;
+      },
     );
   }
 }

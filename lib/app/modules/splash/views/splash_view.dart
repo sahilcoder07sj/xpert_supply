@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:tbd_flutter/app/CommonWidget/common_widget.dart';
 import 'package:tbd_flutter/app/CommonWidget/screen.dart';
 import 'package:tbd_flutter/app/data/all.dart';
+import 'package:tbd_flutter/app/data/utils.dart';
 import '../controllers/splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {
   const SplashView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Utils.darkStatusBar();
     Get.put(SplashController());
     return CommonScreen(
       backgroundColor: AppColors.primary,

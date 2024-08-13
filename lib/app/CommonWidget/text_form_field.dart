@@ -83,64 +83,72 @@ class CommonTextFormField extends StatelessWidget {
         DecoratedBox(
           decoration:
               isShadow ? CommonWidget.commonShadowWidget() : BoxDecoration(),
-          child: TextFormField(
-            controller: controller,
-            style: AppTextStyle(
-                fontFamily: fontTextStyle ?? FontFamily.regular,
-                fontSize: fontSize ?? 15),
-            onTap: onTap,
-            onChanged: onChanged,
-            autofocus: autofocus,
-            readOnly: readOnly,
-            textAlign: textAlign,
-            keyboardType: keyboardType ?? TextInputType.text,
-            textInputAction: textInputAction ?? TextInputAction.next,
-            maxLength: maxLength,
-            maxLines: maxLines,
-            obscureText: obscureText,
-            inputFormatters: inputFormatters,
-            onTapOutside: (event) =>
-                FocusManager.instance.primaryFocus?.unfocus(),
-            onFieldSubmitted: (value) {
-              if (onSubmit != null) onSubmit!(value);
-            },
-            decoration: InputDecoration(
-              border: border ??
-                  customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
-              enabledBorder: border ??
-                  customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
-              disabledBorder: border ??
-                  customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
-              focusedBorder: border ??
-                  customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
-              fillColor: fillColor ?? AppColors.white,
-              filled: filled,
-              isDense: isDense,
-              prefixIcon: prefixIcon != null
-                  ? GestureDetector(
-                      onTap: () {
-                        if (onPrefixTap != null) {
-                          onPrefixTap!();
-                        }
-                      },
-                      child: SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: Center(
-                          child: SvgPicture.asset(prefixIcon ?? ""),
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              textSelectionTheme: TextSelectionThemeData(
+                selectionHandleColor: AppColors.primary,
+              ),
+            ),
+            child: TextFormField(
+              controller: controller,
+              style: AppTextStyle(
+                  fontFamily: fontTextStyle ?? FontFamily.regular,
+                  fontSize: fontSize ?? 15),
+              onTap: onTap,
+              onChanged: onChanged,
+              cursorColor: AppColors.primary,
+              autofocus: autofocus,
+              readOnly: readOnly,
+              textAlign: textAlign,
+              keyboardType: keyboardType ?? TextInputType.text,
+              textInputAction: textInputAction ?? TextInputAction.next,
+              maxLength: maxLength,
+              maxLines: maxLines,
+              obscureText: obscureText,
+              inputFormatters: inputFormatters,
+              onTapOutside: (event) =>
+                  FocusManager.instance.primaryFocus?.unfocus(),
+              onFieldSubmitted: (value) {
+                if (onSubmit != null) onSubmit!(value);
+              },
+              decoration: InputDecoration(
+                border: border ??
+                    customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
+                enabledBorder: border ??
+                    customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
+                disabledBorder: border ??
+                    customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
+                focusedBorder: border ??
+                    customOutlineInputBorder(isInfinityRadius: isInfinityRadius),
+                fillColor: fillColor ?? AppColors.white,
+                filled: filled,
+                isDense: isDense,
+                prefixIcon: prefixIcon != null
+                    ? GestureDetector(
+                        onTap: () {
+                          if (onPrefixTap != null) {
+                            onPrefixTap!();
+                          }
+                        },
+                        child: SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: Center(
+                            child: SvgPicture.asset(prefixIcon ?? ""),
+                          ),
                         ),
-                      ),
-                    )
-                  : null,
-              suffixIcon: suffixIcon,
-              counterText: "",
-              contentPadding:
-                  contentPadding ?? EdgeInsets.symmetric(vertical: 5),
-              hintText: hintText,
-              hintStyle: AppTextStyle(
-                fontFamily: hintFamily ?? FontFamily.light,
-                color: hintColor ?? AppColors.primary,
-                fontSize: 15
+                      )
+                    : null,
+                suffixIcon: suffixIcon,
+                counterText: "",
+                contentPadding:
+                    contentPadding ?? EdgeInsets.symmetric(vertical: 5),
+                hintText: hintText,
+                hintStyle: AppTextStyle(
+                  fontFamily: hintFamily ?? FontFamily.light,
+                  color: hintColor ?? AppColors.primary,
+                  fontSize: 15
+                ),
               ),
             ),
           ),

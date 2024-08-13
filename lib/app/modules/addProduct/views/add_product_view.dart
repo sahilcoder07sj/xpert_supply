@@ -43,6 +43,15 @@ class AddProductView extends GetView<AddProductController> {
             textInputAction: TextInputAction.next,
           ),
           SizedBox(height: 20),
+          CommonTextFormField(
+            controller: controller.productDescriptionController,
+            hintText: AppStrings.description,
+            title: AppStrings.description,
+            textInputAction: TextInputAction.next,
+            contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            maxLines: 5,
+          ),
+          SizedBox(height: 20),
           DottedBorder(
             color: Color(0xffB9B9B9),
             dashPattern: [8, 4],
@@ -66,7 +75,7 @@ class AddProductView extends GetView<AddProductController> {
               ),
             ),
           ),
-          SizedBox(height: 100),
+          SizedBox(height: 30),
           CommonButton(
             text: AppStrings.save,
           )

@@ -115,4 +115,5 @@ class AppStrings{
   static const orderHistory = "Order History";
   static const quate = "Quate";
   static const enterVendorCode = "Enter Vendor Code";
+  static const uploadFile = "Upload file";
 }

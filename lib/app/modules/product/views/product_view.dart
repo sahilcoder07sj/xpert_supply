@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tbd_flutter/app/data/all.dart';
 import 'package:tbd_flutter/app/data/dynamic_height_grid.dart';
+import 'package:tbd_flutter/app/modules/addProduct/widget/add_product_sheet.dart';
 
 import '../controllers/product_controller.dart';
 
@@ -20,7 +21,8 @@ class ProductView extends GetView<ProductController> {
             actions: [
               GestureDetector(
                 onTap: () {
-                  Get.toNamed(Routes.ADD_PRODUCT);
+
+                  Get.bottomSheet(AddProductSheet());
                 },
                 child: CommonWidget.circularIconWidget(
                   icon: AppIcons.iconsPlus,
@@ -30,7 +32,7 @@ class ProductView extends GetView<ProductController> {
               ),
               SizedBox(width: 10)
             ],
-            body: controller.noDatFound.isEmpty
+            body: !controller.noDatFound.isEmpty
                 ? Center(child: SvgPicture.asset(AppIcons.emptyProduct))
                 : DynamicHeightGrid(
                     shrinkWrap: true,
@@ -42,50 +44,55 @@ class ProductView extends GetView<ProductController> {
                     crossAxisSpacing: 10,
                     builder: (context, index) {
                       var data = controller.productList[index];
-                      return Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                        decoration: BoxDecoration(
-                          color: AppColors.iconBG,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Align(
-                              alignment: Alignment.center,
-                              child: Image.asset(
-                                data["image"],
-                                height: 100,
-                                width: 100,
+                      return GestureDetector(
+                        onTap: () {
+                          Get.toNamed(Routes.PRODUCT_DETAIL);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 10),
+                          decoration: BoxDecoration(
+                            color: AppColors.iconBG,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Align(
+                                alignment: Alignment.center,
+                                child: Image.asset(
+                                  data["image"],
+                                  height: 100,
+                                  width: 100,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 10),
-                            AppText(
-                              data["name"],
-                              fontFamily: FontFamily.medium,
-                              fontSize: 12,
-                            ),
-                            SizedBox(height: 5),
-                            Row(
-                              children: [
-                                AppText(
-                                  data["discounted_price"],
-                                  fontFamily: FontFamily.semiBold,
-                                  fontSize: 14,
-                                  color: AppColors.priceColor,
-                                ),
-                                SizedBox(width: 4),
-                                AppText(
-                                  data["price"],
-                                  fontFamily: FontFamily.medium,
-                                  fontSize: 10,
-                                  textDecoration: TextDecoration.lineThrough,
-                                  color: AppColors.discountedPriceColor,
-                                ),
-                              ],
-                            )
-                          ],
+                              SizedBox(height: 10),
+                              AppText(
+                                data["name"],
+                                fontFamily: FontFamily.medium,
+                                fontSize: 12,
+                              ),
+                              SizedBox(height: 5),
+                              Row(
+                                children: [
+                                  AppText(
+                                    data["discounted_price"],
+                                    fontFamily: FontFamily.semiBold,
+                                    fontSize: 14,
+                                    color: AppColors.priceColor,
+                                  ),
+                                  SizedBox(width: 4),
+                                  AppText(
+                                    data["price"],
+                                    fontFamily: FontFamily.medium,
+                                    fontSize: 10,
+                                    textDecoration: TextDecoration.lineThrough,
+                                    color: AppColors.discountedPriceColor,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       );
                     },

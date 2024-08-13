@@ -49,12 +49,14 @@ class DeliveryView extends GetView<DeliveryController> {
                         child: TextFormField(
                           controller: controller.normalDeliveryDaysController,
                           textAlign: TextAlign.center,
+                          maxLength: 2,
                           keyboardType:
                               TextInputType.numberWithOptions(decimal: true),
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.digitsOnly
                           ],
-                          decoration: InputDecoration(border: InputBorder.none),
+                          decoration: InputDecoration(
+                              border: InputBorder.none, counterText: ""),
                         ),
                       ),
                     ],
@@ -65,7 +67,7 @@ class DeliveryView extends GetView<DeliveryController> {
             ),
             SizedBox(height: responsiveHeight(15)),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20 ),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               width: double.infinity,
               decoration: CommonWidget.commonShadowWidget(radius: 10),
               child: Column(
@@ -126,7 +128,7 @@ class DeliveryView extends GetView<DeliveryController> {
                       FilteringTextInputFormatter.digitsOnly
                     ],
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   ),
                   SizedBox(height: responsiveHeight(15)),
                   AppText(
@@ -148,7 +150,7 @@ class DeliveryView extends GetView<DeliveryController> {
                       FilteringTextInputFormatter.digitsOnly
                     ],
                     contentPadding:
-                    EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   ),
                   35.verticalSpace,
                 ],

@@ -90,7 +90,7 @@ class OtpView extends GetView<LoginController> {
                         image: AppIcons.iconsRoundTick,
                         isOneButton: true,
                         singleButtonText: AppStrings.continueNew,
-                        onTap: () {
+                        commonOnTap: () {
                           if(Constants.vendor == Constants.selectUser){
                             Get.offAllNamed(Routes.DELIVERY);
                           } else{

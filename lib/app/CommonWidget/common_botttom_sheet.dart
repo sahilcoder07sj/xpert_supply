@@ -6,19 +6,27 @@ class CommonBottomSheet extends StatelessWidget {
   final String? title;
   final String? image;
   final String? subTitle;
+  final String? firstButtonText;
+  final String? secondButtonText;
   final String? singleButtonText;
   final Widget? widget;
   final Color? iconBgColor;
   final bool isOneButton;
-  final Function()? onTap;
+  final Function()? firstOnTap;
+  final Function()? secondOnTap;
+  final Function()? commonOnTap;
 
   const CommonBottomSheet({
     this.title,
     this.subTitle,
     this.image,
-    this.onTap,
+    this.firstOnTap,
+    this.secondOnTap,
     this.widget,
+    this.firstButtonText,
+    this.secondButtonText,
     this.singleButtonText,
+    this.commonOnTap,
     this.iconBgColor,
     this.isOneButton = false,
   });
@@ -81,8 +89,9 @@ class CommonBottomSheet extends StatelessWidget {
                           bgColor: AppColors.white,
                           borderColor: AppColors.primary,
                           fontColor: AppColors.primary,
-                          onTap: onTap,
-                          text: AppStrings.yes,
+                          onTap: firstOnTap,
+                          textSize: 15,
+                          text:firstButtonText ?? AppStrings.yes,
                         ),
                       ),
                       SizedBox(width: responsiveWidth(20.0)),
@@ -90,17 +99,18 @@ class CommonBottomSheet extends StatelessWidget {
                         child: CommonButton(
                           bgColor: AppColors.primary,
                           fontColor: AppColors.white,
-                          onTap: () {
+                          textSize: 15,
+                          onTap:secondOnTap ?? () {
                             Get.back();
                           },
-                          text: AppStrings.no,
+                          text:secondButtonText ?? AppStrings.no,
                         ),
                       )
                     ],
                   ) : CommonButton(
                     bgColor: AppColors.primary,
                     fontColor: AppColors.white,
-                    onTap: onTap,
+                    onTap: commonOnTap,
                     text: singleButtonText ?? "",
                   ),
                   widget ?? SizedBox()

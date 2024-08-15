@@ -29,7 +29,7 @@ class AddProductSheet extends StatelessWidget {
                 bgColor: AppColors.white,
                 onTap: () {
                   Get.back();
-                  Get.toNamed(Routes.DELIVERY);
+                  Get.toNamed(Routes.UPLOAD_FILE);
                 },
                 fontColor: AppColors.primary,
               ),

@@ -142,7 +142,7 @@ class CommonTextFormField extends StatelessWidget {
                 suffixIcon: suffixIcon,
                 counterText: "",
                 contentPadding:
-                    contentPadding ?? EdgeInsets.symmetric(vertical: 5),
+                    contentPadding ?? EdgeInsets.symmetric(vertical: 10,horizontal: 15),
                 hintText: hintText,
                 hintStyle: AppTextStyle(
                   fontFamily: hintFamily ?? FontFamily.light,

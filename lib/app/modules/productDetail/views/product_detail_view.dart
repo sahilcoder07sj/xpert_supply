@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:tbd_flutter/app/CommonWidget/camera_bottom_sheet.dart';
 import 'package:tbd_flutter/app/data/all.dart';
 
+import '../../../CommonWidget/common_botttom_sheet.dart';
 import '../controllers/product_detail_controller.dart';
 
 class ProductDetailView extends GetView<ProductDetailController> {
@@ -76,7 +78,10 @@ class ProductDetailView extends GetView<ProductDetailController> {
                     Spacer(),
                     if(Constants.selectUser == Constants.vendor)...[
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed(Routes.EDIT_PRODUCT);
+
+                        },
                         child: Container(
                           height: responsiveHeight(40),
                           width: responsiveWidth(40),
@@ -93,7 +98,18 @@ class ProductDetailView extends GetView<ProductDetailController> {
                       ),
                       SizedBox(width: 8),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Get.bottomSheet(
+                            CommonBottomSheet(
+                              firstButtonText: AppStrings.cancel,
+                              secondButtonText: AppStrings.delete,
+                              subTitle:
+                              AppStrings.areYouSureYouWantToDeleteThisProduct,
+                              image: AppIcons.iconsDeleteBig,
+                              iconBgColor: AppColors.red.withOpacity(0.1),
+                            ),
+                          );
+                        },
                         child: Container(
                           height: responsiveHeight(40),
                           width: responsiveWidth(40),

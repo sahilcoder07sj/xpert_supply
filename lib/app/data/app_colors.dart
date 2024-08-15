@@ -7,9 +7,12 @@ class AppColors{
   static const Color iconBG = Color(0xFFF3F5F7);
   static const Color bluePrimary = Color(0xFF086F9B);
   static const Color border = Color(0xFF979899);
+  static const Color transparent = Colors.transparent;
   static const Color priceColor = Color(0xFF9B5400);
   static const Color red = Color(0xFFFF324B);
   static const Color divider = Color(0xFFE6E8EC);
+    static const Color grey= Color(0xffB9B9B9);
+  // static const Color red = Color(0xFFFF324B);
   static const Color discountedPriceColor = Color(0xFFB8B8B8);
   static const Color white = Colors.white;
 }

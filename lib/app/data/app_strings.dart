@@ -52,10 +52,12 @@ class AppStrings{
   static const amount = "Amount";
   static const discount = "Discount";
   static const uploadImagesHere = "Upload Images here";
+  static const chooseAFileToUploadProducts = "Choose a file to upload products";
+  static const selectCsv = "Select .csv file";
   static const editProduct = "Edit Product";
   static const description = "Description";
   static const chooseAnAction = "Choose an Action";
-  static const captureOrSelectImage = "Capture or Select image";
+    static const captureOrSelectImage = "Capture or Select image";
   static const camera = "Camera";
   static const gallery = "Gallery";
   static const cancel = "Cancel";
@@ -83,6 +85,7 @@ class AppStrings{
   static const iAMLeavingBecause = "I’m leaving because...";
   static const deleteMyAccount = "Delete My Account";
   static const areYouSureYouWantToDeleteYourAccount = "Are you sure you want to\ndelete your account?";
+  static const areYouSureYouWantToDeleteThisProduct = "Are you sure you want to\ndelete this product?";
   static const yes = "Yes";
   static const no = "No";
   static const areYouSureYouWantToSignOutFromApp = "Are you sure you want to sign out\nfrom app?";
@@ -99,6 +102,7 @@ class AppStrings{
   static const days = "Days";
   static const charges = "Charges";
   static const note = "Note";
+    static const enterTheDataInto = "Enter the data into the file using the format mentioned above.";
   static const getQuote = "Get quote";
   static const placeOrder = "Place Order";
   static const houseNoBuildingName = "House No, Building Name";

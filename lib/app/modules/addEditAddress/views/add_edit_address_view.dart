@@ -52,6 +52,8 @@ class AddEditAddressView extends GetView<AddEditAddressController> {
                 controller: controller.pincodeController,
                 hintText: "100 001",
                 textInputAction: TextInputAction.done,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                maxLength: 6,
               ),
               20.verticalSpace,
             ],
@@ -59,9 +61,16 @@ class AddEditAddressView extends GetView<AddEditAddressController> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
-
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CommonButton(
+                text: controller.isEditAddress ? AppStrings.save : AppStrings.add,
+              onTap: () => Get.back(),
+            ),
+            SizedBox(height: MediaQuery.of(context).padding.bottom+10.0),
+          ],
         ),
       ),
     );

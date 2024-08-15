@@ -1,3 +1,4 @@
+import 'package:tbd_flutter/app/CommonWidget/common_botttom_sheet.dart';
 import 'package:tbd_flutter/app/modules/orderHistory/controllers/order_history_controller.dart';
 import '../../../data/all.dart';
 
@@ -29,16 +30,29 @@ class OrderHistoryView extends GetView<OrderHistoryController> {
                             padding: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Row(
                               children: [
-                                Container(
-                                  padding: EdgeInsets.all(5.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    color: AppColors.iconBG,
-                                  ),
-                                  child: SvgPicture.asset(
-                                      AppIcons.iconsDelivered,
-                                    color: AppColors.primary,
-                                    height: 40.0,
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.bottomSheet(
+                                      CommonBottomSheet(
+                                        subTitle: "Your order will be delivered tomorrow as you have placed it after 8:00 PM",
+                                        image: AppIcons.iconsOrderDeliveredBig,
+                                        isOneButton: true,
+                                        singleButtonText: AppStrings.ok,
+                                        onTap: () => Get.back(),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.all(5.0),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      color: AppColors.iconBG,
+                                    ),
+                                    child: SvgPicture.asset(
+                                        AppIcons.iconsDelivered,
+                                      color: AppColors.primary,
+                                      height: 40.0,
+                                    ),
                                   ),
                                 ),
                                 16.horizontalSpace,

@@ -34,35 +34,33 @@ class MyCartView extends GetView<MyCartController> {
                   ),
                   10.horizontalSpace,
                   Expanded(
-                    child: Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AppText(
-                            "Arabic Ginger",
-                            fontSize: 17.0,
-                            fontFamily: FontFamily.medium,
-                          ),
-                          Row(
-                            children: [
-                              AppText(
-                                "\$25",
-                                fontFamily: FontFamily.semiBold,
-                                fontSize: 15.0,
-                                color: AppColors.priceColor,
-                              ),
-                              SizedBox(width: 4),
-                              AppText(
-                                "\$446",
-                                fontFamily: FontFamily.medium,
-                                fontSize: 12,
-                                textDecoration: TextDecoration.lineThrough,
-                                color: AppColors.discountedPriceColor,
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppText(
+                          "Arabic Ginger",
+                          fontSize: 17.0,
+                          fontFamily: FontFamily.medium,
+                        ),
+                        Row(
+                          children: [
+                            AppText(
+                              "\$25",
+                              fontFamily: FontFamily.semiBold,
+                              fontSize: 15.0,
+                              color: AppColors.priceColor,
+                            ),
+                            SizedBox(width: 4),
+                            AppText(
+                              "\$446",
+                              fontFamily: FontFamily.medium,
+                              fontSize: 12,
+                              textDecoration: TextDecoration.lineThrough,
+                              color: AppColors.discountedPriceColor,
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                   ),
                   5.horizontalSpace,

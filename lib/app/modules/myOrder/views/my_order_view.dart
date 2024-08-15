@@ -48,35 +48,33 @@ class MyOrderView extends GetView<MyOrderController> {
                                 ),
                                 10.horizontalSpace,
                                 Expanded(
-                                  child: Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        AppText(
-                                          "Arabic Ginger",
-                                          fontSize: 17.0,
-                                          fontFamily: FontFamily.medium,
-                                        ),
-                                        Row(
-                                          children: [
-                                            AppText(
-                                              "\$25",
-                                              fontFamily: FontFamily.semiBold,
-                                              fontSize: 15.0,
-                                              color: AppColors.priceColor,
-                                            ),
-                                            SizedBox(width: 4),
-                                            AppText(
-                                              "\$446",
-                                              fontFamily: FontFamily.medium,
-                                              fontSize: 12,
-                                              textDecoration: TextDecoration.lineThrough,
-                                              color: AppColors.discountedPriceColor,
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      AppText(
+                                        "Arabic Ginger",
+                                        fontSize: 17.0,
+                                        fontFamily: FontFamily.medium,
+                                      ),
+                                      Row(
+                                        children: [
+                                          AppText(
+                                            "\$25",
+                                            fontFamily: FontFamily.semiBold,
+                                            fontSize: 15.0,
+                                            color: AppColors.priceColor,
+                                          ),
+                                          SizedBox(width: 4),
+                                          AppText(
+                                            "\$446",
+                                            fontFamily: FontFamily.medium,
+                                            fontSize: 12,
+                                            textDecoration: TextDecoration.lineThrough,
+                                            color: AppColors.discountedPriceColor,
+                                          ),
+                                        ],
+                                      )
+                                    ],
                                   ),
                                 ),
                                 5.horizontalSpace,
@@ -268,18 +266,19 @@ class MyOrderView extends GetView<MyOrderController> {
                           ),
                           Spacer(),
                           GestureDetector(
-                            onTap: () => controller.isFastDelivery.value = true,
+                            onTap: () => controller.isFastDelivery.value = false,
                             child: Obx(() => Container(
                               padding: EdgeInsets.all(2.0),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                    color: controller.isFastDelivery.value ? AppColors.primary : AppColors.border
+                                    color: !controller.isFastDelivery.value ? AppColors.primary : AppColors.border
                                 ),
                               ),
                               child: CircleAvatar(
                                 radius: 7.0,
-                                backgroundColor: controller.isFastDelivery.value ? AppColors.primary : Colors.transparent,
+                                backgroundColor: !
+                                controller.isFastDelivery.value ? AppColors.primary : Colors.transparent,
                               ),
                             )),
                           ),
@@ -325,18 +324,18 @@ class MyOrderView extends GetView<MyOrderController> {
                           ),
                           Spacer(),
                           GestureDetector(
-                            onTap: () => controller.isFastDelivery.value = false,
+                            onTap: () => controller.isFastDelivery.value = true,
                             child: Obx(() => Container(
                               padding: EdgeInsets.all(2.0),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                    color: !controller.isFastDelivery.value ? AppColors.primary : AppColors.border
+                                    color: controller.isFastDelivery.value ? AppColors.primary : AppColors.border
                                 ),
                               ),
                               child: CircleAvatar(
                                 radius: 7.0,
-                                backgroundColor: !controller.isFastDelivery.value ? AppColors.primary : Colors.transparent,
+                                backgroundColor: controller.isFastDelivery.value ? AppColors.primary : Colors.transparent,
                               ),
                             )),
                           ),
@@ -369,6 +368,7 @@ class MyOrderView extends GetView<MyOrderController> {
               15.verticalSpace,
               CommonButton(
                   text: AppStrings.placeOrder,
+                onTap: () => Get.toNamed(Routes.ORDER_CONFIRM),
               ),
               SizedBox(height: MediaQuery.of(context).padding.bottom+10.0),
             ],

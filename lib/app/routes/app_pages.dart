@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:tbd_flutter/app/modules/myOrder/views/order_confirm_view.dart';
 
 import '../modules/addEditAddress/bindings/add_edit_address_binding.dart';
 import '../modules/addEditAddress/views/add_edit_address_view.dart';
@@ -179,6 +180,10 @@ class AppPages {
       name: _Paths.MY_ORDER,
       page: () => const MyOrderView(),
       binding: MyOrderBinding(),
+    ),
+    GetPage(
+      name: _Paths.ORDER_CONFIRM,
+      page: () => const OrderConfirmView(),
     ),
     GetPage(
       name: _Paths.ADD_EDIT_ADDRESS,

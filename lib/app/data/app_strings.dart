@@ -117,7 +117,7 @@ class AppStrings{
   static const done = "Done";
   static const ok = "Ok";
   static const orderHistory = "Order History";
-  static const quate = "Quate";
+  static const quate = "Quote";
   static const enterVendorCode = "Enter Vendor Code";
   static const quantity = "Quantity";
   static const qty = "Qty";
@@ -126,4 +126,6 @@ class AppStrings{
   static const uploadFile = "Upload file";
   static const archive = "Archive";
   static const productDetails = "Product Details";
+  static const totalPrice = "Total price";
+  static const offerPrice = "Offer price";
 }

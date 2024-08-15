@@ -29,6 +29,7 @@ abstract class Routes {
   static const UPLOAD_FILE = _Paths.UPLOAD_FILE;
   static const MY_ORDER = _Paths.MY_ORDER;
   static const ADD_EDIT_ADDRESS = _Paths.ADD_EDIT_ADDRESS;
+  static const ORDER_CONFIRM = _Paths.ORDER_CONFIRM;
 }
 
 abstract class _Paths {
@@ -58,5 +59,6 @@ abstract class _Paths {
   static const CHANGE_PASSWORD = '/change-password';
   static const UPLOAD_FILE = '/upload-file';
   static const MY_ORDER = '/my-order';
+  static const ORDER_CONFIRM = '/order-confirm';
   static const ADD_EDIT_ADDRESS = '/add-edit-address';
 }

@@ -59,6 +59,8 @@ class AppIcons {
 
   static const String popup = 'assets/icons/popup.svg';
   static const String archive = 'assets/icons/archive.png';
+  static const String emailSmall = 'assets/icons/email_small.svg';
+  static const String nextPrice = 'assets/icons/next_price.svg';
 
 
 

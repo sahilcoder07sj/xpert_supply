@@ -1,4 +1,5 @@
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:tbd_flutter/app/CommonWidget/common_botttom_sheet.dart';
 import 'package:tbd_flutter/app/data/constants.dart';
 import 'package:tbd_flutter/app/modules/login/controllers/login_controller.dart';
 import '../../../data/all.dart';
@@ -34,6 +35,7 @@ class OtpView extends GetView<LoginController> {
                 length: 4,
                 appContext: context,
                 obscureText: false,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 animationType: AnimationType.fade,
                 keyboardType: TextInputType.phone,
                 cursorColor: AppColors.primary,
@@ -81,11 +83,22 @@ class OtpView extends GetView<LoginController> {
                 text: AppStrings.verify,
                 onTap: () {
                   if(Constants.isSignUp){
-                    if(Constants.vendor == Constants.selectUser){
-                      Get.offAllNamed(Routes.DELIVERY);
-                    } else{
-                      Get.offAllNamed(Routes.CONSUMER_PRODUCTS);
-                    }
+                    Get.bottomSheet(
+                      CommonBottomSheet(
+                        title: AppStrings.congratulations,
+                        subTitle: AppStrings.youHaveSuccessfullyCreatedYourAccount,
+                        image: AppIcons.iconsRoundTick,
+                        isOneButton: true,
+                        singleButtonText: AppStrings.continueNew,
+                        onTap: () {
+                          if(Constants.vendor == Constants.selectUser){
+                            Get.offAllNamed(Routes.DELIVERY);
+                          } else{
+                            Get.offAllNamed(Routes.CONSUMER_PRODUCTS);
+                          }
+                        },
+                      ),
+                    );
                   } else{
                     Get.toNamed(Routes.RESET_PASSWORD);
                   }

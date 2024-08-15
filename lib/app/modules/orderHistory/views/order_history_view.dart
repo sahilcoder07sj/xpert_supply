@@ -60,15 +60,15 @@ class OrderHistoryView extends GetView<OrderHistoryController> {
                                     ],
                                   ),
                                 ),
-                                CommonWidget.circularIconWidget(
+                                Obx(() => CommonWidget.circularIconWidget(
                                   radius: 15.0,
-                                  icon: AppIcons.iconsDownArrow,
-                                ),
+                                  icon: controller.selectIndex.value == index ? AppIcons.iconsUpArrow : AppIcons.iconsDownArrow,
+                                )),
                                 10.horizontalSpace,
                               ],
                             ),
                           ),
-                          Column(
+                          Obx(() => controller.selectIndex.value == index ? Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               15.verticalSpace,
@@ -86,7 +86,7 @@ class OrderHistoryView extends GetView<OrderHistoryController> {
                                     ),
                                     6.horizontalSpace,
                                     AppText(
-                                        "10 Furnival Street, EC4A 1AB London, UK",
+                                      "10 Furnival Street, EC4A 1AB London, UK",
                                       fontSize: 12.0,
                                     )
                                   ],
@@ -121,13 +121,13 @@ class OrderHistoryView extends GetView<OrderHistoryController> {
                                 child: Row(
                                   children: [
                                     AppText(
-                                        AppStrings.note + " : ",
+                                      AppStrings.note + " : ",
                                       fontSize: 15.0,
                                       fontFamily: FontFamily.medium,
                                     ),
                                     Expanded(
                                       child: AppText(
-                                          "Lorem Ipsum is simply dummy text",
+                                        "Lorem Ipsum is simply dummy text",
                                         fontSize: 13.0,
                                       ),
                                     ),
@@ -136,26 +136,62 @@ class OrderHistoryView extends GetView<OrderHistoryController> {
                               ),
                               10.verticalSpace,
                               buildDivider(),
-                              10.verticalSpace,
                               Column(
                                 children: [
                                   for(int i = 0 ; i < 2 ; i++)
-                                    Row(
+                                    Column(
                                       children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(5.0),
-                                            color: AppColors.iconBG
+                                        Padding(
+                                          padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 10.0),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                padding: EdgeInsets.all(5.0),
+                                                height: 50.0,
+                                                width: 50.0,
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(5.0),
+                                                    color: AppColors.iconBG
+                                                ),
+                                                child: Image.asset("assets/images/papaiyu.png"),
+                                              ),
+                                              10.horizontalSpace,
+                                              Expanded(
+                                                child: AppText(
+                                                  "Banana",
+                                                  fontSize: 14.0,
+                                                  fontFamily: FontFamily.medium,
+                                                ),
+                                              ),
+                                              Column(
+                                                children: [
+                                                  AppText(
+                                                    AppStrings.quantity,
+                                                    fontSize: 10.0,
+                                                  ),
+                                                  2.verticalSpace,
+                                                  AppText(
+                                                    "01",
+                                                    fontSize: 15.0,
+                                                    fontFamily: FontFamily.medium,
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
                                           ),
-                                          child: Image.asset("name"),
-                                        )
+                                        ),
+                                        // 10.verticalSpace,
+                                        if(i != 1)...[
+                                          10.verticalSpace,
+                                          buildDivider()
+                                        ]
                                       ],
                                     )
                                 ],
                               ),
-                              10.verticalSpace,
+                              // 10.verticalSpace,
                             ],
-                          ),
+                          ) : SizedBox()),
                         ],
                       ),
                     ),
@@ -163,6 +199,7 @@ class OrderHistoryView extends GetView<OrderHistoryController> {
               },),
             )
           ],
+
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:tbd_flutter/app/CommonWidget/common_botttom_sheet.dart';
 import 'package:tbd_flutter/app/data/all.dart';
 
 class MyProfileController extends GetxController {
@@ -30,6 +31,13 @@ class MyProfileController extends GetxController {
         Get.toNamed(Routes.DELETE_ACCOUNT);
         break;
       case AppStrings.signOut:
+        Get.bottomSheet(
+          CommonBottomSheet(
+            title: AppStrings.signOut,
+            subTitle: AppStrings.areYouSureYouWantToSignOutFromApp,
+            image: AppIcons.iconsLogoutBig,
+          ),
+        );
         break;
     }
   }

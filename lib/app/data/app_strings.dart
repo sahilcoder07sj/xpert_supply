@@ -82,12 +82,12 @@ class AppStrings{
   static const noOneReplies = "No one replies";
   static const iAMLeavingBecause = "I’m leaving because...";
   static const deleteMyAccount = "Delete My Account";
-  static const areYouSureYouWantToDeleteYourAccount = "Are you sure you want to delete your account?";
+  static const areYouSureYouWantToDeleteYourAccount = "Are you sure you want to\ndelete your account?";
   static const yes = "Yes";
   static const no = "No";
-  static const areYouSureYouWantToSignOutFromApp = "Are you sure you want to sign out from app?";
+  static const areYouSureYouWantToSignOutFromApp = "Are you sure you want to sign out\nfrom app?";
   static const congratulations = "Congratulations";
-  static const youHaveSuccessfullyCreatedYourAccount = "You have successfully created your account";
+  static const youHaveSuccessfullyCreatedYourAccount = "You have successfully created\nyour account";
   static const products = "Products";
   static const apply = "Apply";
   static const addToCart = "Add to Cart";
@@ -115,5 +115,8 @@ class AppStrings{
   static const orderHistory = "Order History";
   static const quate = "Quate";
   static const enterVendorCode = "Enter Vendor Code";
+  static const quantity = "Quantity";
+  static const other = "Other";
+  static const continueNew = "Continue";
   static const uploadFile = "Upload file";
 }

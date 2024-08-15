@@ -27,6 +27,8 @@ abstract class Routes {
   static const DELETE_ACCOUNT = _Paths.DELETE_ACCOUNT;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
   static const UPLOAD_FILE = _Paths.UPLOAD_FILE;
+  static const MY_ORDER = _Paths.MY_ORDER;
+  static const ADD_EDIT_ADDRESS = _Paths.ADD_EDIT_ADDRESS;
 }
 
 abstract class _Paths {
@@ -55,4 +57,6 @@ abstract class _Paths {
   static const DELETE_ACCOUNT = '/delete-account';
   static const CHANGE_PASSWORD = '/change-password';
   static const UPLOAD_FILE = '/upload-file';
+  static const MY_ORDER = '/my-order';
+  static const ADD_EDIT_ADDRESS = '/add-edit-address';
 }

@@ -21,11 +21,14 @@ class CommonWidget{
     );
   }
 
-  static circularIconWidget({Color? backgroundColor,required String icon, double? radius}){
-    return CircleAvatar(
-      radius: radius ?? 22.0,
-      backgroundColor: backgroundColor ?? AppColors.iconBG,
-      child: SvgPicture.asset(icon),
+  static circularIconWidget({Color? backgroundColor,required String icon, double? radius, void Function()? onTap}){
+    return GestureDetector(
+      onTap: onTap,
+      child: CircleAvatar(
+        radius: radius ?? 22.0,
+        backgroundColor: backgroundColor ?? AppColors.iconBG,
+        child: SvgPicture.asset(icon),
+      ),
     );
   }
 

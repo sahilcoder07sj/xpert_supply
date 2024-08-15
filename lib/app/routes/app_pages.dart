@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/addEditAddress/bindings/add_edit_address_binding.dart';
+import '../modules/addEditAddress/views/add_edit_address_view.dart';
 import '../modules/addEditCategory/bindings/add_edit_category_binding.dart';
 import '../modules/addEditCategory/views/add_edit_category_view.dart';
 import '../modules/addProduct/bindings/add_product_binding.dart';
@@ -27,6 +29,8 @@ import '../modules/management/bindings/management_binding.dart';
 import '../modules/management/views/management_view.dart';
 import '../modules/myCart/bindings/my_cart_binding.dart';
 import '../modules/myCart/views/my_cart_view.dart';
+import '../modules/myOrder/bindings/my_order_binding.dart';
+import '../modules/myOrder/views/my_order_view.dart';
 import '../modules/myProfile/bindings/my_profile_binding.dart';
 import '../modules/myProfile/views/my_profile_view.dart';
 import '../modules/orderHistory/bindings/order_history_binding.dart';
@@ -170,6 +174,16 @@ class AppPages {
       name: _Paths.UPLOAD_FILE,
       page: () => const UploadFileView(),
       binding: UploadFileBinding(),
+    ),
+    GetPage(
+      name: _Paths.MY_ORDER,
+      page: () => const MyOrderView(),
+      binding: MyOrderBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_EDIT_ADDRESS,
+      page: () => const AddEditAddressView(),
+      binding: AddEditAddressBinding(),
     ),
   ];
 }

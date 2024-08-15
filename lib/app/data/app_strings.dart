@@ -116,7 +116,10 @@ class AppStrings{
   static const quate = "Quate";
   static const enterVendorCode = "Enter Vendor Code";
   static const quantity = "Quantity";
+  static const qty = "Qty";
   static const other = "Other";
   static const continueNew = "Continue";
   static const uploadFile = "Upload file";
+  static const archive = "Archive";
+  static const productDetails = "Product Details";
 }

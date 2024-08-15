@@ -11,7 +11,7 @@ class ProductDetailView extends GetView<ProductDetailController> {
   @override
   Widget build(BuildContext context) {
     return CommonScreen(
-      title: "Product Details",
+      title: AppStrings.productDetails,
       extendBodyBehindAppBar: true,
       appBarBackgroundColor: Colors.transparent,
       body: ListView(
@@ -37,11 +37,11 @@ class ProductDetailView extends GetView<ProductDetailController> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 24),
+                24.verticalSpace,
                 Row(
                   children: [
                     Column(
@@ -74,47 +74,83 @@ class ProductDetailView extends GetView<ProductDetailController> {
                       ],
                     ),
                     Spacer(),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        height: responsiveHeight(40),
-                        width: responsiveWidth(40),
-                        decoration: BoxDecoration(
-                          color: AppColors.primary.withOpacity(0.1),
-                          shape: BoxShape.circle,
+                    if(Constants.selectUser == Constants.vendor)...[
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          height: responsiveHeight(40),
+                          width: responsiveWidth(40),
+                          decoration: BoxDecoration(
+                            color: AppColors.primary.withOpacity(0.1),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                              child: SvgPicture.asset(
+                                AppIcons.iconsEditDeliveryAddress,
+                                color: AppColors.primary,
+                              )),
                         ),
-                        child: Center(
-                            child: SvgPicture.asset(
-                          AppIcons.iconsEditDeliveryAddress,
-                          color: AppColors.primary,
-                        )),
                       ),
-                    ),
-                    SizedBox(width: 8),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        height: responsiveHeight(40),
-                        width: responsiveWidth(40),
-                        decoration: BoxDecoration(
-                          color: AppColors.red.withOpacity(0.1),
-                          shape: BoxShape.circle,
+                      SizedBox(width: 8),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          height: responsiveHeight(40),
+                          width: responsiveWidth(40),
+                          decoration: BoxDecoration(
+                            color: AppColors.red.withOpacity(0.1),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                              child: SvgPicture.asset(
+                                AppIcons.iconsDelete,
+                                color: AppColors.red,
+                              )),
                         ),
-                        child: Center(
-                            child: SvgPicture.asset(
-                          AppIcons.iconsDelete,
-                          color: AppColors.red,
-                        )),
                       ),
-                    ),
+                    ],
                   ],
                 ),
-                SizedBox(height: 10),
+                20.verticalSpace,
+                AppText(
+                    "Ginger is a flowering plant whose rhizome, ginger root or ginger, is widely used as a spice and a folk medicine.",
+                  fontSize: 14.0,
+                ),
+                10.verticalSpace,
+                AppText(
+                  "Apples are one of the healthiest fruits. Rich in vitamin C and dietary fiber which keep our digestive and immune system healthy. Protects from Alzheimers, type 2 diabetes and cancer. It is a natural teeth whitener and prevent bad breath.s.",
+                  fontSize: 14.0,
+                ),
               ],
             ),
           )
         ],
       ),
+      bottomNavigationBar: Constants.selectUser == Constants.consumer ? Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: CommonButton(
+                      text: AppStrings.addToCart,
+                    onTap: () => Get.toNamed(Routes.MY_CART),
+                  ),
+                ),
+                10.horizontalSpace,
+                Expanded(
+                  child: CommonButton(
+                      text: AppStrings.orderNow,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: MediaQuery.of(context).padding.bottom + 10.0),
+          ],
+        ),
+      ) : null,
     );
   }
 }

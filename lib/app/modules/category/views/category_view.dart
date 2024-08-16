@@ -1,6 +1,5 @@
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:tbd_flutter/app/data/all.dart';
-import 'package:tbd_flutter/app/data/responsive.dart';
 import '../controllers/category_controller.dart';
 
 class CategoryView extends GetView<CategoryController> {
@@ -9,7 +8,6 @@ class CategoryView extends GetView<CategoryController> {
   @override
   Widget build(BuildContext context) {
     return CommonScreen(
-      isLeading: false,
       title: AppStrings.category,
       actions: [
         GestureDetector(

@@ -6,7 +6,7 @@ class QuateView extends GetView<QuateController> {
   @override
   Widget build(BuildContext context) {
     return CommonScreen(
-      title: AppStrings.quate,
+      title: Constants.selectUser == Constants.vendor ? AppStrings.quoteList : AppStrings.quate,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
@@ -121,65 +121,67 @@ class QuateView extends GetView<QuateController> {
                                   ],
                                 ),
                               ),
-                              15.verticalSpace,
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                                child: Row(
-                                  children: [
-                                    Column(
-                                      children: [
-                                        AppText(
+                              if(Constants.selectUser == Constants.consumer)...[
+                                15.verticalSpace,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                  child: Row(
+                                    children: [
+                                      Column(
+                                        children: [
+                                          AppText(
                                             AppStrings.totalPrice,
-                                          fontSize: 12.0,
-                                        ),
-                                        5.verticalSpace,
-                                        Container(
-                                          alignment: Alignment.center,
-                                          width: 80.0,
-                                          padding: EdgeInsets.symmetric(vertical: 5.0),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10.0),
-                                            color: AppColors.border.withOpacity(0.1),
-                                            border: Border.all(color: AppColors.border.withOpacity(0.2)),
+                                            fontSize: 12.0,
                                           ),
-                                          child: AppText(
-                                            "\$1000",
-                                            fontFamily: FontFamily.medium,
-                                            fontSize: 15.0,
+                                          5.verticalSpace,
+                                          Container(
+                                            alignment: Alignment.center,
+                                            width: 80.0,
+                                            padding: EdgeInsets.symmetric(vertical: 5.0),
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10.0),
+                                              color: AppColors.border.withOpacity(0.1),
+                                              border: Border.all(color: AppColors.border.withOpacity(0.2)),
+                                            ),
+                                            child: AppText(
+                                              "\$1000",
+                                              fontFamily: FontFamily.medium,
+                                              fontSize: 15.0,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Spacer(),
-                                    SvgPicture.asset(AppIcons.nextPrice),
-                                    Spacer(),
-                                    Column(
-                                      children: [
-                                        AppText(
+                                        ],
+                                      ),
+                                      Spacer(),
+                                      SvgPicture.asset(AppIcons.nextPrice),
+                                      Spacer(),
+                                      Column(
+                                        children: [
+                                          AppText(
                                             AppStrings.offerPrice,
-                                          fontSize: 12.0,
-                                        ),
-                                        5.verticalSpace,
-                                        Container(
-                                          alignment: Alignment.center,
-                                          width: 80.0,
-                                          padding: EdgeInsets.symmetric(vertical: 5.0),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10.0),
-                                            color: AppColors.border.withOpacity(0.1),
-                                            border: Border.all(color: AppColors.border.withOpacity(0.2)),
+                                            fontSize: 12.0,
                                           ),
-                                          child: AppText(
-                                            "\$700",
-                                            fontFamily: FontFamily.medium,
-                                            fontSize: 15.0,
+                                          5.verticalSpace,
+                                          Container(
+                                            alignment: Alignment.center,
+                                            width: 80.0,
+                                            padding: EdgeInsets.symmetric(vertical: 5.0),
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10.0),
+                                              color: AppColors.border.withOpacity(0.1),
+                                              border: Border.all(color: AppColors.border.withOpacity(0.2)),
+                                            ),
+                                            child: AppText(
+                                              "\$700",
+                                              fontFamily: FontFamily.medium,
+                                              fontSize: 15.0,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
+                              ],
                               10.verticalSpace,
                               buildDivider(),
                               10.verticalSpace,
@@ -256,7 +258,34 @@ class QuateView extends GetView<QuateController> {
                                     )
                                 ],
                               ),
-                              // 10.verticalSpace,
+                              if(Constants.vendor == Constants.selectUser)...[
+                                10.verticalSpace,
+                                buildDivider(),
+                                20.verticalSpace,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: CommonButton(
+                                          text: AppStrings.rejectQuate,
+                                          bgColor: AppColors.white,
+                                          fontColor: AppColors.primary,
+                                        ),
+                                      ),
+                                      15.horizontalSpace,
+                                      Expanded(
+                                        child: CommonButton(
+                                          text: AppStrings.sendOffer,
+                                          bgColor: AppColors.white,
+                                          fontColor: AppColors.primary,
+                                          onTap: () => controller.sendOfferDialogue(),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ],
                           ) : SizedBox()),
                         ],

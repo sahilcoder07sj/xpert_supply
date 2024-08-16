@@ -1,23 +1,23 @@
-import 'package:get/get.dart';
+import 'package:file_picker/file_picker.dart';
+
+import '../../../data/all.dart';
 
 class UploadFileController extends GetxController {
-  //TODO: Implement UploadFileController
 
-  final count = 0.obs;
   @override
   void onInit() {
+    precacheImage(AssetImage(AppIcons.sampleFile), Get.context!);
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['csv'],
+    );
 
-  @override
-  void onClose() {
-    super.onClose();
+    if(result != null){
+      print("file : ${result.files.first.path}");
+    }
   }
-
-  void increment() => count.value++;
 }

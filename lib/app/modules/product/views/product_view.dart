@@ -91,50 +91,56 @@ class ProductView extends GetView<ProductController> {
                               ),
                               if(Constants.selectUser == Constants.vendor)Positioned(
                                 right: 0.0,
-                                child: PopupMenuButton<dynamic>(
-                                  itemBuilder: (BuildContext context) {
-                                    return [
-                                      PopupMenuItem(
-                                        height: 30.0,
-                                        padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                height: 25.0,
-                                                width: 25.0,
-                                                child: Image.asset(AppIcons.archive),
-                                              ),
-                                              5.horizontalSpace,
-                                              Padding(
-                                                padding: const EdgeInsets.only(top: 3.0),
-                                                child: AppText(
-                                                    AppStrings.archive,
-                                                  fontSize: 14.0,
-                                                  fontFamily: FontFamily.medium,
+                                child: Theme(
+                                  data: Theme.of(context).copyWith(
+                                    highlightColor: Colors.transparent,
+                                    splashColor: Colors.transparent,
+                                  ),
+                                  child: PopupMenuButton<dynamic>(
+                                    itemBuilder: (BuildContext context) {
+                                      return [
+                                        PopupMenuItem(
+                                          height: 30.0,
+                                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  height: 25.0,
+                                                  width: 25.0,
+                                                  child: Image.asset(AppIcons.archive),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                      )
-                                    ];
-                                  },
-                                  onSelected: (dynamic value) {
-                                    // Handle the selected option
-                                    print('Selected: $value');
-                                  },
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(16.0),
-                                    )),
-                                  color: AppColors.white,
-                                  child: Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(color: AppColors.iconBG, width: 1.5),
-                                        color: AppColors.white,
-                                        shape: BoxShape.circle
+                                                5.horizontalSpace,
+                                                Padding(
+                                                  padding: const EdgeInsets.only(top: 3.0),
+                                                  child: AppText(
+                                                      AppStrings.archive,
+                                                    fontSize: 14.0,
+                                                    fontFamily: FontFamily.medium,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                        )
+                                      ];
+                                    },
+                                    onSelected: (dynamic value) {
+                                      // Handle the selected option
+                                      print('Selected: $value');
+                                    },
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(16.0),
+                                      )),
+                                    color: AppColors.white,
+                                    child: Container(
+                                      padding: EdgeInsets.all(5.0),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(color: AppColors.iconBG, width: 1.5),
+                                          color: AppColors.white,
+                                          shape: BoxShape.circle
+                                      ),
+                                      child: SvgPicture.asset(AppIcons.popup),
                                     ),
-                                    child: SvgPicture.asset(AppIcons.popup),
                                   ),
                                 ),
                               )

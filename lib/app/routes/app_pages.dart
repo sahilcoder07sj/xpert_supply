@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:tbd_flutter/app/modules/myOrder/views/order_confirm_view.dart';
 
 import '../modules/addEditAddress/bindings/add_edit_address_binding.dart';
 import '../modules/addEditAddress/views/add_edit_address_view.dart';
@@ -7,6 +6,8 @@ import '../modules/addEditCategory/bindings/add_edit_category_binding.dart';
 import '../modules/addEditCategory/views/add_edit_category_view.dart';
 import '../modules/addProduct/bindings/add_product_binding.dart';
 import '../modules/addProduct/views/add_product_view.dart';
+import '../modules/archived/bindings/archived_binding.dart';
+import '../modules/archived/views/archived_view.dart';
 import '../modules/category/bindings/category_binding.dart';
 import '../modules/category/views/category_view.dart';
 import '../modules/changePassword/bindings/change_password_binding.dart';
@@ -32,10 +33,13 @@ import '../modules/myCart/bindings/my_cart_binding.dart';
 import '../modules/myCart/views/my_cart_view.dart';
 import '../modules/myOrder/bindings/my_order_binding.dart';
 import '../modules/myOrder/views/my_order_view.dart';
+import '../modules/myOrder/views/order_confirm_view.dart';
 import '../modules/myProfile/bindings/my_profile_binding.dart';
 import '../modules/myProfile/views/my_profile_view.dart';
 import '../modules/orderHistory/bindings/order_history_binding.dart';
 import '../modules/orderHistory/views/order_history_view.dart';
+import '../modules/orderList/bindings/order_list_binding.dart';
+import '../modules/orderList/views/order_list_view.dart';
 import '../modules/product/bindings/product_binding.dart';
 import '../modules/product/views/product_view.dart';
 import '../modules/productDetail/bindings/product_detail_binding.dart';
@@ -189,6 +193,16 @@ class AppPages {
       name: _Paths.ADD_EDIT_ADDRESS,
       page: () => const AddEditAddressView(),
       binding: AddEditAddressBinding(),
+    ),
+    GetPage(
+      name: _Paths.ORDER_LIST,
+      page: () => const OrderListView(),
+      binding: OrderListBinding(),
+    ),
+    GetPage(
+      name: _Paths.ARCHIVED,
+      page: () => const ArchivedView(),
+      binding: ArchivedBinding(),
     ),
   ];
 }

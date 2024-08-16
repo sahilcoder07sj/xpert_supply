@@ -51,6 +51,7 @@ class AppIcons {
   static const String productVendor = 'assets/icons/products_vendor.svg';
   static const String moreVert = 'assets/icons/more_vert.svg';
   static const String sampleFile = 'assets/images/sample_file.png';
+  static const String unarchive = 'assets/icons/unarchive.png';
   static const String uploadCsv = 'assets/icons/upload_csv.svg';
 
 

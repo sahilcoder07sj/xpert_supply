@@ -5,6 +5,7 @@ class EditProfileController extends GetxController {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController companyNameController = TextEditingController();
 
   @override
   void onInit() {

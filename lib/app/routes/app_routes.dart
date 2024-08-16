@@ -30,6 +30,8 @@ abstract class Routes {
   static const MY_ORDER = _Paths.MY_ORDER;
   static const ADD_EDIT_ADDRESS = _Paths.ADD_EDIT_ADDRESS;
   static const ORDER_CONFIRM = _Paths.ORDER_CONFIRM;
+  static const ORDER_LIST = _Paths.ORDER_LIST;
+  static const ARCHIVED = _Paths.ARCHIVED;
 }
 
 abstract class _Paths {
@@ -61,4 +63,6 @@ abstract class _Paths {
   static const MY_ORDER = '/my-order';
   static const ORDER_CONFIRM = '/order-confirm';
   static const ADD_EDIT_ADDRESS = '/add-edit-address';
+  static const ORDER_LIST = '/order-list';
+  static const ARCHIVED = '/archived';
 }

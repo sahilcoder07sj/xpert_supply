@@ -8,8 +8,8 @@ class DeliveryView extends GetView<DeliveryController> {
   @override
   Widget build(BuildContext context) {
     return CommonScreen(
-      title: AppStrings.delivery,
-      isLeading: false,
+      title: controller.isUpdate ?  AppStrings.editDelivery : AppStrings.delivery,
+      isLeading: controller.isUpdate,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
@@ -38,8 +38,8 @@ class DeliveryView extends GetView<DeliveryController> {
                       ),
                       SizedBox(width: responsiveWidth(5)),
                       Container(
-                        height: responsiveHeight(45),
-                        width: responsiveWidth(45),
+                        height: responsiveHeight(40),
+                        width: responsiveWidth(40),
                         decoration: BoxDecoration(
                             border: Border.all(
                               color: AppColors.border.withOpacity(0.1),
@@ -47,6 +47,7 @@ class DeliveryView extends GetView<DeliveryController> {
                             borderRadius: BorderRadius.circular(11.0),
                             color: AppColors.iconBG),
                         child: TextFormField(
+                          cursorColor: AppColors.primary,
                           controller: controller.normalDeliveryDaysController,
                           textAlign: TextAlign.center,
                           maxLength: 2,
@@ -167,7 +168,11 @@ class DeliveryView extends GetView<DeliveryController> {
             CommonButton(
               text: AppStrings.next,
               onTap: () {
-                Get.offAllNamed(Routes.CATEGORY);
+                if(controller.isUpdate){
+                  Get.back();
+                } else{
+                  Get.offAllNamed(Routes.MANAGEMENT);
+                }
               },
             ),
             SizedBox(height: MediaQuery.of(context).padding.bottom + 10.0),

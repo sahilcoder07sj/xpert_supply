@@ -1,10 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
-import 'package:tbd_flutter/app/CommonWidget/screen.dart';
-
 import '../../../data/all.dart';
 import '../controllers/my_profile_controller.dart';
 
@@ -19,8 +12,8 @@ class MyProfileView extends GetView<MyProfileController> {
         itemCount: controller.myProfileList.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () => controller.onTapIndex(controller.myProfileList[index]),
-            child: Container(
+            onTap: () => controller.onTapIndex(controller.myProfileList[index].title ?? ""),
+            child: controller.myProfileList[index].isCheck?.value == true ? Container(
               padding: EdgeInsets.all(15.0),
               margin: EdgeInsets.only(bottom: 14.0),
               decoration: CommonWidget.commonShadowWidget(),
@@ -28,14 +21,14 @@ class MyProfileView extends GetView<MyProfileController> {
                 children: [
                   Expanded(
                     child: AppText(
-                        controller.myProfileList[index],
+                        controller.myProfileList[index].title ?? "",
                       fontSize: 15.0,
                     ),
                   ),
                   SvgPicture.asset(AppIcons.iconsRightArrow)
                 ],
               ),
-            ),
+            ) : SizedBox(),
           );
       },),
     );

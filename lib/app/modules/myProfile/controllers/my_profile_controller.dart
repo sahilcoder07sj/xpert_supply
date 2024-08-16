@@ -3,12 +3,14 @@ import 'package:tbd_flutter/app/data/all.dart';
 
 class MyProfileController extends GetxController {
 
-  List<String> myProfileList = [
-    AppStrings.editProfile,
-    AppStrings.orderHistory,
-    AppStrings.quate,
-    AppStrings.deleteAccount,
-    AppStrings.signOut,
+  List<CommonModel> myProfileList = [
+    CommonModel(title: AppStrings.editProfile, isCheck: true.obs),
+    CommonModel(title: AppStrings.editDelivery, isCheck: Constants.selectUser == Constants.consumer ? false.obs : true.obs),
+    CommonModel(title: AppStrings.orderHistory, isCheck: Constants.selectUser == Constants.consumer ? true.obs : false.obs),
+    CommonModel(title: AppStrings.quate, isCheck: Constants.selectUser == Constants.consumer ? true.obs : false.obs),
+    CommonModel(title: AppStrings.archived, isCheck: Constants.selectUser == Constants.consumer ? false.obs : true.obs),
+    CommonModel(title: AppStrings.deleteAccount, isCheck: true.obs),
+    CommonModel(title: AppStrings.signOut, isCheck: true.obs),
   ];
 
   @override
@@ -21,8 +23,14 @@ class MyProfileController extends GetxController {
       case AppStrings.editProfile:
         Get.toNamed(Routes.EDIT_PROFILE);
         break;
+      case AppStrings.editDelivery:
+        Get.toNamed(Routes.DELIVERY, arguments: {"is_check" : true});
+        break;
       case AppStrings.orderHistory:
         Get.toNamed(Routes.ORDER_HISTORY);
+        break;
+      case AppStrings.archived:
+        Get.toNamed(Routes.ARCHIVED);
         break;
       case AppStrings.quate:
         Get.toNamed(Routes.QUATE);

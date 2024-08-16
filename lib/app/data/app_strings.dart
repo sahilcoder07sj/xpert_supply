@@ -64,6 +64,7 @@ class AppStrings{
   static const areYouSureYouWantToDelete = "Are you sure you want to delete this product?";
   static const delete = "Delete";
   static const orderList = "Order List";
+  static const quoteList = "Quote List";
   static const delivered = "Delivered";
   static const orderId = "Order id";
   static const deliveryDate = "Delivery Date";
@@ -125,6 +126,8 @@ class AppStrings{
   static const continueNew = "Continue";
   static const uploadFile = "Upload file";
   static const archive = "Archive";
+  static const unarchive = "Unarchive";
+  static const archived = "Archived";
   static const productDetails = "Product Details";
   static const totalPrice = "Total price";
   static const offerPrice = "Offer price";

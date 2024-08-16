@@ -1,13 +1,41 @@
 import 'package:tbd_flutter/app/CommonWidget/common_botttom_sheet.dart';
-import 'package:tbd_flutter/app/modules/orderHistory/controllers/order_history_controller.dart';
+import 'package:tbd_flutter/app/modules/orderList/controllers/order_list_controller.dart';
 import '../../../data/all.dart';
 
-class OrderHistoryView extends GetView<OrderHistoryController> {
-  const OrderHistoryView({Key? key}) : super(key: key);
+class OrderListView extends GetView<OrderListController> {
+  const OrderListView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return CommonScreen(
-      title: AppStrings.orderHistory,
+      title: AppStrings.orderList,
+      actions: [
+        Theme(
+          data: Theme.of(context).copyWith(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+          ),
+          child: PopupMenuButton<dynamic>(
+            itemBuilder: (BuildContext context) {
+              return [
+                buildPopupMenuItem(text: AppStrings.fastDelivery),
+                buildPopupMenuItem(text: AppStrings.normalDelivery),
+                buildPopupMenuItem(text: AppStrings.bothDelivery, isDivider: false),
+              ];
+            },
+            position: PopupMenuPosition.under,
+            onSelected: (dynamic value) {
+              print('Selected: $value');
+            },
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(16.0),
+                )),
+            color: AppColors.white,
+            child: CommonWidget.circularIconWidget(icon: AppIcons.popup),
+          ),
+        ),
+        10.horizontalSpace,
+      ],
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
@@ -30,46 +58,21 @@ class OrderHistoryView extends GetView<OrderHistoryController> {
                             padding: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Row(
                               children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.bottomSheet(
-                                      CommonBottomSheet(
-                                        subTitle: "Your order will be delivered tomorrow as you have placed it after 8:00 PM",
-                                        image: AppIcons.iconsOrderDeliveredBig,
-                                        isOneButton: true,
-                                        singleButtonText: AppStrings.ok,
-                                        commonOnTap: () => Get.back(),
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      color: AppColors.iconBG,
-                                    ),
-                                    child: SvgPicture.asset(
-                                        AppIcons.iconsDelivered,
-                                      color: AppColors.primary,
-                                      height: 40.0,
-                                    ),
-                                  ),
-                                ),
-                                16.horizontalSpace,
+                                10.horizontalSpace,
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       AppText(
-                                          AppStrings.delivered,
-                                        fontSize: 15.0,
+                                        "Meet Kakadiya",
+                                        fontSize: 16.0,
                                         fontFamily: FontFamily.medium,
                                       ),
                                       AppText(
-                                          AppStrings.orderId + " : BA1224",
-                                        fontSize: 12.0,
-                                        fontFamily: FontFamily.medium,
-                                        color: AppColors.discountedPriceColor,
+                                        "\$25",
+                                        fontFamily: FontFamily.semiBold,
+                                        fontSize: 14,
+                                        color: AppColors.priceColor,
                                       ),
                                     ],
                                   ),
@@ -86,6 +89,70 @@ class OrderHistoryView extends GetView<OrderHistoryController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               15.verticalSpace,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(6.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5.0),
+                                        color: AppColors.primary,
+                                      ),
+                                      child: Transform.scale(
+                                        scale: 1.1,
+                                          child: SvgPicture.asset(AppIcons.iconsDelivered),
+                                      ),
+                                    ),
+                                    6.horizontalSpace,
+                                    DropdownButton<String>(
+                                      value: controller.dropdownValue.value,
+                                      icon: SvgPicture.asset(AppIcons.iconsDownArrow),
+                                      dropdownColor: AppColors.white,
+                                      underline: SizedBox(),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      onChanged: (String? newValue) {
+                                        controller.dropdownValue.value = newValue ?? "";
+                                      },
+                                      items: <String>['Pending', 'Shipped', 'Delivered']
+                                          .map<DropdownMenuItem<String>>((String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: AppText(
+                                            value,
+                                            fontSize: 12.0,
+                                            fontFamily: FontFamily.medium,
+                                          ),
+                                        );
+                                      }).toList(),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(6.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5.0),
+                                        color: AppColors.iconBG,
+                                      ),
+                                      child: Transform.scale(
+                                        scale: 1.1,
+                                          child: SvgPicture.asset(AppIcons.iconsOrderId),
+                                      ),
+                                    ),
+                                    6.horizontalSpace,
+                                    AppText(
+                                      AppStrings.orderId+" : BA1255",
+                                      fontSize: 12.0,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              10.verticalSpace,
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: Row(
@@ -210,7 +277,7 @@ class OrderHistoryView extends GetView<OrderHistoryController> {
                       ),
                     ),
                   );
-              },),
+                },),
             )
           ],
 
@@ -225,5 +292,29 @@ class OrderHistoryView extends GetView<OrderHistoryController> {
       width: double.infinity,
       color: AppColors.divider,
     );
+  }
+
+  PopupMenuItem<dynamic> buildPopupMenuItem({required String text, bool isDivider = true}) {
+    return PopupMenuItem(
+        padding: EdgeInsets.only(left: 10.0, right: 10.0),
+        height: isDivider ? 40.0 : 30.0,
+        child: Center(
+          child: Column(
+            children: [
+              AppText(
+                text,
+                fontSize: 14.0,
+                fontFamily: FontFamily.medium,
+              ),
+              if(isDivider)Container(
+                margin: EdgeInsets.only(top: 6.0),
+                height: 1,
+                width: double.infinity,
+                color: AppColors.iconBG,
+              ),
+            ],
+          ),
+        ),
+      );
   }
 }

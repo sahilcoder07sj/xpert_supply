@@ -25,7 +25,7 @@ class CommonWidget{
     return GestureDetector(
       onTap: onTap,
       child: CircleAvatar(
-        radius: radius ?? 22.0,
+        radius: radius ?? 20.0,
         backgroundColor: backgroundColor ?? AppColors.iconBG,
         child: SvgPicture.asset(icon),
       ),

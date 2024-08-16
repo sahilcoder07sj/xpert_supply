@@ -1,5 +1,3 @@
-import 'package:tbd_flutter/app/data/responsive.dart';
-
 import '../../../data/all.dart';
 import '../controllers/management_controller.dart';
 
@@ -14,7 +12,10 @@ class ManagementView extends GetView<ManagementController> {
       actions: [
         CommonWidget.circularIconWidget(icon: AppIcons.iconsNotification),
         10.horizontalSpace,
-        CommonWidget.circularIconWidget(icon: AppIcons.iconsUser),
+        GestureDetector(
+          onTap: () => Get.toNamed(Routes.MY_PROFILE),
+          child: CommonWidget.circularIconWidget(icon: AppIcons.iconsUser),
+        ),
         15.horizontalSpace,
       ],
       body: Padding(
@@ -28,54 +29,60 @@ class ManagementView extends GetView<ManagementController> {
               alignment: Alignment.centerLeft,
             ),
             SizedBox(height: responsiveHeight(20)),
-            SizedBox(
-              width: double.infinity,
-              height: responsiveHeight(190),
-              child: DecoratedBox(
-                decoration: CommonWidget.commonShadowWidget(),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CommonWidget.circularIconWidget(
-                      icon: AppIcons.iconsProductManager,
-                      radius: responsiveHeight(45),
-                    ),
-                    AppText(
-                      AppStrings.productManagement,
-                      fontSize: 18,
-                      fontFamily: FontFamily.medium,
-                    ),
-                    CommonWidget.circularIconWidget(
-                      radius: responsiveHeight(18.0),
-                      icon: AppIcons.iconsRightArrow,
-                    ),
-                  ],
+            GestureDetector(
+              onTap: () => Get.toNamed(Routes.CATEGORY),
+              child: SizedBox(
+                width: double.infinity,
+                height: responsiveHeight(190),
+                child: DecoratedBox(
+                  decoration: CommonWidget.commonShadowWidget(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CommonWidget.circularIconWidget(
+                        icon: AppIcons.iconsProductManager,
+                        radius: responsiveHeight(45),
+                      ),
+                      AppText(
+                        AppStrings.productManagement,
+                        fontSize: 18,
+                        fontFamily: FontFamily.medium,
+                      ),
+                      CommonWidget.circularIconWidget(
+                        radius: responsiveHeight(18.0),
+                        icon: AppIcons.iconsRightArrow,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
             SizedBox(height: responsiveHeight(20)),
-            SizedBox(
-              height: responsiveHeight(190),
-              width: double.infinity,
-              child: DecoratedBox(
-                decoration: CommonWidget.commonShadowWidget(),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CommonWidget.circularIconWidget(
-                      icon: AppIcons.iconsOrderManagement,
-                      radius: responsiveHeight(45),
-                    ),
-                    AppText(
-                      AppStrings.orderManagement,
-                      fontSize: 18,
-                      fontFamily: FontFamily.medium,
-                    ),
-                    CommonWidget.circularIconWidget(
-                      radius: responsiveHeight(18),
-                      icon: AppIcons.iconsRightArrow,
-                    ),
-                  ],
+            GestureDetector(
+              onTap: () => Get.toNamed(Routes.ORDER_LIST),
+              child: SizedBox(
+                height: responsiveHeight(190),
+                width: double.infinity,
+                child: DecoratedBox(
+                  decoration: CommonWidget.commonShadowWidget(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CommonWidget.circularIconWidget(
+                        icon: AppIcons.iconsOrderManagement,
+                        radius: responsiveHeight(45),
+                      ),
+                      AppText(
+                        AppStrings.orderManagement,
+                        fontSize: 18,
+                        fontFamily: FontFamily.medium,
+                      ),
+                      CommonWidget.circularIconWidget(
+                        radius: responsiveHeight(18),
+                        icon: AppIcons.iconsRightArrow,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -91,7 +98,7 @@ class ManagementView extends GetView<ManagementController> {
               text: AppStrings.quoteRequest,
               bgColor: AppColors.white,
               onTap: () {
-                Get.toNamed(Routes.DELIVERY);
+                Get.toNamed(Routes.QUATE);
               },
               fontColor: AppColors.primary,
             ),

@@ -25,8 +25,16 @@ class EditProfileView extends GetView<EditProfileController> {
               hintText: AppStrings.email,
               prefixIcon: AppIcons.iconsEmail,
               keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.done,
             ),
+            if(Constants.selectUser == Constants.vendor)...[
+              15.verticalSpace,
+              CommonTextFormField(
+                controller: controller.companyNameController,
+                hintText: AppStrings.businessName,
+                prefixIcon: AppIcons.iconsBusiness,
+                textInputAction: TextInputAction.done,
+              ),
+            ],
             35.verticalSpace,
             CommonButton(
                 text: AppStrings.changePassword,

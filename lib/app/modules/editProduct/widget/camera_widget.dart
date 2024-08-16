@@ -6,11 +6,13 @@ import 'package:tbd_flutter/app/data/all.dart';
 import 'package:tbd_flutter/app/data/utils.dart';
 
 class CommonImageWidget extends StatelessWidget {
+  final String? fileImage;
   final String? image;
   final Function()? cameraOnTap;
   final Function()? galleryOnTap;
   CommonImageWidget({
     this.image,
+    this.fileImage,
     this.cameraOnTap,
     this.galleryOnTap,
   });
@@ -24,32 +26,36 @@ class CommonImageWidget extends StatelessWidget {
           height: responsiveHeight(130),
           width: responsiveWidth(130),
           child: Container(
-            padding: EdgeInsets.all(10),
             height: responsiveHeight(90),
             width: responsiveWidth(90),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
                 color: AppColors.white,
-                width: 1.5,
+                width: 5.0,
               ),
+              color: AppColors.iconBG,
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0x19000000),
+                  blurRadius: 9.40,
+                  offset: Offset(0, 0),
+                  spreadRadius: 0,
+                )
+              ],
             ),
             child: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                // color: AppColors.orange.withOpacity(0.2),
               ),
               child: ClipOval(
-                child: Utils.isValidationEmpty(image)
-                    ? Icon(
-                  Icons.person,
-                  // color: AppColors.orange,
-                  size: 50,
-                )
-                    : Image.file(
-                  File(image!),
+                child: image != "" ? Image.asset(
+                  image ?? "",
                   fit: BoxFit.cover,
-                ),
+                ) : fileImage != "" ? Image.file(
+                  File(fileImage ?? ""),
+                  fit: BoxFit.cover,
+                ) : SizedBox(),
               ),
             ),
           ),
@@ -60,6 +66,7 @@ class CommonImageWidget extends StatelessWidget {
             onTap: () {
               Utils.hideKeyboard();
               Get.bottomSheet(
+                isScrollControlled: true,
                 CameraGallerySheet(
                   cameraOnTap: cameraOnTap,
                   galleryOnTap: galleryOnTap,

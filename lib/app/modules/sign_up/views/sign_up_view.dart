@@ -1,3 +1,4 @@
+import 'package:tbd_flutter/app/CommonWidget/dialogue.dart';
 import 'package:tbd_flutter/app/data/constants.dart';
 import 'package:tbd_flutter/app/modules/login/controllers/login_controller.dart';
 import 'package:tbd_flutter/app/modules/sign_up/controllers/sign_up_controller.dart';
@@ -83,14 +84,20 @@ class SignUpView extends GetView<SignUpController> {
                 18.verticalSpace,
                 Row(
                   children: [
-                    DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        border: Border.all(color: AppColors.primary),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(3.0),
-                        child: SvgPicture.asset(AppIcons.iconsTick),
+                    GestureDetector(
+                      onTap: () => controller.isAgreePrivacyPolicy.value = !controller.isAgreePrivacyPolicy.value,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          border: Border.all(color: AppColors.primary),
+                        ),
+                        child: Obx(() => Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: SvgPicture.asset(
+                            AppIcons.iconsTick,
+                            color: !controller.isAgreePrivacyPolicy.value ? AppColors.transparent : null,
+                          ),
+                        )),
                       ),
                     ),
                     10.horizontalSpace,
@@ -108,8 +115,9 @@ class SignUpView extends GetView<SignUpController> {
                 CommonButton(
                   text: AppStrings.signUp,
                   onTap: () {
-                    Constants.isSignUp = true;
-                    Get.toNamed(Routes.OTP, arguments: {"is_signup" : true});
+                    if(controller.validation()){
+                      controller.sendOtpApi();
+                    }
                   },
                 ),
                 10.verticalSpace,

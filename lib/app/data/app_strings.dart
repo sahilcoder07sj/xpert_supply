@@ -131,4 +131,14 @@ class AppStrings{
   static const productDetails = "Product Details";
   static const totalPrice = "Total price";
   static const offerPrice = "Offer price";
+
+  static const enterBusinessName = "Please enter business name";
+  static const enterName = "Please enter name";
+  static const enterEmail = "Please enter email";
+  static const enterValidEmail = "Please valid enter email";
+  static const enterPassword = "Please enter password";
+  static const enterConfirmPassword = "Please enter confirm password";
+  static const IAgreeTermsPrivacy = "Please accept privacy policy and terms & conditions";
+  static const passwordValidation = "Password must be more than 8 characters long including lower case, upper case, and a number";
+  static const passwordNotMatch = "Password and confirm password does not match";
 }

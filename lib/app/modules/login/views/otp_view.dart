@@ -32,7 +32,7 @@ class OtpView extends GetView<LoginController> {
               ),
               27.verticalSpace,
               PinCodeTextField(
-                length: 4,
+                length: 6,
                 appContext: context,
                 obscureText: false,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -83,22 +83,7 @@ class OtpView extends GetView<LoginController> {
                 text: AppStrings.verify,
                 onTap: () {
                   if(Constants.isSignUp){
-                    Get.bottomSheet(
-                      CommonBottomSheet(
-                        title: AppStrings.congratulations,
-                        subTitle: AppStrings.youHaveSuccessfullyCreatedYourAccount,
-                        image: AppIcons.iconsRoundTick,
-                        isOneButton: true,
-                        singleButtonText: AppStrings.continueNew,
-                        commonOnTap: () {
-                          if(Constants.vendor == Constants.selectUser){
-                            Get.offAllNamed(Routes.DELIVERY);
-                          } else{
-                            Get.offAllNamed(Routes.CONSUMER_PRODUCTS);
-                          }
-                        },
-                      ),
-                    );
+                    controller.sendOtpApi();
                   } else{
                     Get.toNamed(Routes.RESET_PASSWORD);
                   }

@@ -6,7 +6,7 @@ import '../widget/camera_widget.dart';
 
 class EditProductView extends GetView<EditProductController> {
   const EditProductView({Key? key}) : super(key: key);
-
+/// 2850102
   @override
   Widget build(BuildContext context) {
     return CommonScreen(

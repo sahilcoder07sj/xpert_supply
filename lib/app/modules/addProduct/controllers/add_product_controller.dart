@@ -5,6 +5,7 @@ class AddProductController extends GetxController {
   TextEditingController productNameController = TextEditingController();
   TextEditingController productAmountController = TextEditingController();
     TextEditingController productDiscountController = TextEditingController();
+    TextEditingController productDescriptionController = TextEditingController();
 
   final count = 0.obs;
   @override

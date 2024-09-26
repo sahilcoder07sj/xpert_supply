@@ -1,11 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-
-import 'package:get/get.dart';
-import 'package:tbd_flutter/app/CommonWidget/screen.dart';
 import 'package:tbd_flutter/app/data/all.dart';
-import 'package:tbd_flutter/app/data/responsive.dart';
-
 import '../controllers/category_controller.dart';
 
 class CategoryView extends GetView<CategoryController> {

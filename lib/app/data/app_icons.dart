@@ -48,11 +48,20 @@ class AppIcons {
   static const String iconsUser = 'assets/icons/user.svg';
   static const String iconsVendor = 'assets/icons/vendor.svg';
   static const String emptyProduct = 'assets/icons/empty_product.svg';
+  static const String productVendor = 'assets/icons/products_vendor.svg';
+  static const String moreVert = 'assets/icons/more_vert.svg';
+  static const String sampleFile = 'assets/images/sample_file.png';
+  static const String unarchive = 'assets/icons/unarchive.png';
+  static const String uploadCsv = 'assets/icons/upload_csv.svg';
 
 
 
 
 
+  static const String popup = 'assets/icons/popup.svg';
+  static const String archive = 'assets/icons/archive.png';
+  static const String emailSmall = 'assets/icons/email_small.svg';
+  static const String nextPrice = 'assets/icons/next_price.svg';
 
 
 

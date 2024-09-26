@@ -1,4 +1,5 @@
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:tbd_flutter/app/CommonWidget/common_botttom_sheet.dart';
 import 'package:tbd_flutter/app/data/constants.dart';
 import 'package:tbd_flutter/app/modules/login/controllers/login_controller.dart';
 import '../../../data/all.dart';
@@ -31,20 +32,23 @@ class OtpView extends GetView<LoginController> {
               ),
               27.verticalSpace,
               PinCodeTextField(
-                length: 4,
+                length: 6,
                 appContext: context,
                 obscureText: false,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 animationType: AnimationType.fade,
                 keyboardType: TextInputType.phone,
                 cursorColor: AppColors.primary,
+                controller: controller.otpController,
                 textStyle: AppTextStyle(
                   fontSize: 20.0,
                   fontFamily: FontFamily.medium,
                 ),
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.box,
-                  fieldWidth: 70,
-                  fieldHeight: 60,
+                  fieldWidth: 50,
+                  fieldHeight: 50,
+
                   borderWidth: 1,
                   borderRadius: BorderRadius.circular(12.0),
                   activeBoxShadow: [
@@ -72,14 +76,23 @@ class OtpView extends GetView<LoginController> {
                   selectedColor: AppColors.white,
                 ),
                 enableActiveFill: true,
-                onChanged: (value) {
-                  controller.otp = value;
-                },
+
               ),
               45.verticalSpace,
               CommonButton(
                 text: AppStrings.verify,
-                onTap: () => Constants.isSignUp ? Get.offAllNamed(Routes.MANAGEMENT) : Get.toNamed(Routes.RESET_PASSWORD),
+                onTap: () {
+
+                  if (controller.otpController.text.isEmpty) {
+                    CommonDialogue.alertActionDialogApp(
+                        message: AppStrings.otpEmail);
+                  } else if (int.parse(controller.otpController.text) < 6) {
+                    CommonDialogue.alertActionDialogApp(
+                        message: AppStrings.otpValidation);
+                  } else {
+                    controller.verifyOTPApi();
+                  }
+                },
               ),
               20.verticalSpace,
             ],

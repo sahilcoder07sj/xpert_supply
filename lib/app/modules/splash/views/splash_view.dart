@@ -8,23 +8,30 @@ import '../controllers/splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {
   const SplashView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Utils.darkStatusBar();
-    Get.put(SplashController());
-    return CommonScreen(
-      backgroundColor: AppColors.primary,
-      isAppbar: false,
-      body: Center(
-        child: CircleAvatar(
-          radius: 90.0,
-          backgroundColor: AppColors.white.withOpacity(0.2),
-          child: CircleAvatar(
-            radius: 80.0,
-            backgroundColor: AppColors.white,
+
+    return GetBuilder<SplashController>(
+      assignId: true,
+      init: SplashController(),
+      builder: (controller) {
+        return CommonScreen(
+          backgroundColor: AppColors.primary,
+          isAppbar: false,
+          body: Center(
+            child: CircleAvatar(
+              radius: 90.0,
+              backgroundColor: AppColors.white.withOpacity(0.2),
+              child: CircleAvatar(
+                radius: 80.0,
+                backgroundColor: AppColors.white,
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

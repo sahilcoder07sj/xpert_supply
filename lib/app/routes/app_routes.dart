@@ -18,6 +18,20 @@ abstract class Routes {
   static const PRODUCT_DETAIL = _Paths.PRODUCT_DETAIL;
   static const PRODUCT = _Paths.PRODUCT;
   static const EDIT_PRODUCT = _Paths.EDIT_PRODUCT;
+  static const CONSUMER_PRODUCTS = _Paths.CONSUMER_PRODUCTS;
+  static const MY_CART = _Paths.MY_CART;
+  static const MY_PROFILE = _Paths.MY_PROFILE;
+  static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
+  static const ORDER_HISTORY = _Paths.ORDER_HISTORY;
+  static const QUATE = _Paths.QUATE;
+  static const DELETE_ACCOUNT = _Paths.DELETE_ACCOUNT;
+  static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
+  static const UPLOAD_FILE = _Paths.UPLOAD_FILE;
+  static const MY_ORDER = _Paths.MY_ORDER;
+  static const ADD_EDIT_ADDRESS = _Paths.ADD_EDIT_ADDRESS;
+  static const ORDER_CONFIRM = _Paths.ORDER_CONFIRM;
+  static const ORDER_LIST = _Paths.ORDER_LIST;
+  static const ARCHIVED = _Paths.ARCHIVED;
 }
 
 abstract class _Paths {
@@ -37,4 +51,18 @@ abstract class _Paths {
   static const PRODUCT_DETAIL = '/product-detail';
   static const PRODUCT = '/product';
   static const EDIT_PRODUCT = '/edit-product';
+  static const CONSUMER_PRODUCTS = '/consumer-products';
+  static const MY_CART = '/my-cart';
+  static const MY_PROFILE = '/my-profile';
+  static const EDIT_PROFILE = '/edit-profile';
+  static const ORDER_HISTORY = '/order-history';
+  static const QUATE = '/quate';
+  static const DELETE_ACCOUNT = '/delete-account';
+  static const CHANGE_PASSWORD = '/change-password';
+  static const UPLOAD_FILE = '/upload-file';
+  static const MY_ORDER = '/my-order';
+  static const ORDER_CONFIRM = '/order-confirm';
+  static const ADD_EDIT_ADDRESS = '/add-edit-address';
+  static const ORDER_LIST = '/order-list';
+  static const ARCHIVED = '/archived';
 }

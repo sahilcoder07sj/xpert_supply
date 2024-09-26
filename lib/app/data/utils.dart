@@ -65,7 +65,6 @@ class Utils {
   }
 
   static showSnackBar({
-    required BuildContext context,
     required String message,
   }) {
     Get.snackbar(

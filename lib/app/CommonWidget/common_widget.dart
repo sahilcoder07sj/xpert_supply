@@ -21,20 +21,23 @@ class CommonWidget{
     );
   }
 
-  static circularIconWidget({Color? backgroundColor,required String icon, double? radius}){
-    return CircleAvatar(
-      radius: radius ?? 22.0,
-      backgroundColor: backgroundColor ??AppColors.iconBG,
-      child: SvgPicture.asset(icon),
+  static circularIconWidget({Color? backgroundColor,required String icon, double? radius, void Function()? onTap}){
+    return GestureDetector(
+      onTap: onTap,
+      child: CircleAvatar(
+        radius: radius ?? 20.0,
+        backgroundColor: backgroundColor ?? AppColors.iconBG,
+        child: SvgPicture.asset(icon),
+      ),
     );
   }
 
 
-  static commonShadowWidget({double? radius}){
+  static commonShadowWidget({double? radius, BorderSide? borderSide}){
     return ShapeDecoration(
       color: Colors.white,
       shape: RoundedRectangleBorder(
-        side: BorderSide(width: 1, color: Color(0xFFF2F2F6)),
+        side: borderSide ?? BorderSide(width: 1, color: Color(0xFFF2F2F6)),
         borderRadius: BorderRadius.circular(radius ?? 12),
       ),
       shadows: [

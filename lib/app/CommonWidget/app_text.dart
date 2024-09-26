@@ -59,7 +59,7 @@ TextStyle AppTextStyle({
   return TextStyle(
     color: color ?? AppColors.primary,
     fontFamily: fontFamily ?? FontFamily.regular,
-    fontSize: fontSize ?? 18.0,
+    fontSize: responsiveText(fontSize ?? 18.0),
     letterSpacing: letterSpacing,
     decoration: textDecoration,
     overflow: overflow,

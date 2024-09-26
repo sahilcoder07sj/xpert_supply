@@ -4,116 +4,118 @@ import '../../../data/all.dart';
 
 class DeliveryView extends GetView<DeliveryController> {
   const DeliveryView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CommonScreen(
-      title: AppStrings.delivery,
-      isLeading: false,
+      title: controller.isUpdate ?  AppStrings.editDelivery : AppStrings.delivery,
+      isLeading: controller.isUpdate,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: [
-            20.verticalSpace,
+            SizedBox(height: responsiveHeight(10)),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 22.0),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               width: double.infinity,
-              decoration: CommonWidget.commonShadowWidget(
-                radius: 15.0
-              ),
+              decoration: CommonWidget.commonShadowWidget(radius: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  10.verticalSpace,
+                  SizedBox(height: responsiveHeight(10)),
                   AppText(
-                      AppStrings.normalDelivery,
-                    fontSize: 20.0,
+                    AppStrings.normalDelivery,
+                    fontSize: 18,
                     fontFamily: FontFamily.medium,
                   ),
-                  14.verticalSpace,
+                  SizedBox(height: responsiveHeight(15)),
                   Row(
                     children: [
                       AppText(
-                          AppStrings.deliveryDays+":",
+                        AppStrings.deliveryDays + ":",
                         fontFamily: FontFamily.regular,
-                        fontSize: 16.0,
+                        fontSize: 17,
                       ),
-                      5.horizontalSpace,
+                      SizedBox(width: responsiveWidth(5)),
                       Container(
-                        height: 45.0,
-                        width: 45.0,
+                        height: responsiveHeight(40),
+                        width: responsiveWidth(40),
                         decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.border.withOpacity(0.1),
-                          ),
-                          borderRadius: BorderRadius.circular(11.0),
-                          color: AppColors.iconBG
-                        ),
+                            border: Border.all(
+                              color: AppColors.border.withOpacity(0.1),
+                            ),
+                            borderRadius: BorderRadius.circular(11.0),
+                            color: AppColors.iconBG),
                         child: TextFormField(
+                          cursorColor: AppColors.primary,
                           controller: controller.normalDeliveryDaysController,
                           textAlign: TextAlign.center,
-                          keyboardType: TextInputType.numberWithOptions(decimal: true),
+                          maxLength: 2,
+                          keyboardType:
+                              TextInputType.numberWithOptions(decimal: true),
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.digitsOnly
                           ],
                           decoration: InputDecoration(
-                            border: InputBorder.none
-                          ),
+                              border: InputBorder.none, counterText: ""),
                         ),
                       ),
                     ],
                   ),
-                  12.verticalSpace,
+                  SizedBox(height: responsiveHeight(15)),
                 ],
               ),
             ),
-            12.verticalSpace,
+            SizedBox(height: responsiveHeight(15)),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 22.0),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               width: double.infinity,
-              decoration: CommonWidget.commonShadowWidget(
-                  radius: 15.0
-              ),
+              decoration: CommonWidget.commonShadowWidget(radius: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  10.verticalSpace,
+                  SizedBox(height: responsiveHeight(10)),
                   Row(
                     children: [
                       Expanded(
                         child: AppText(
                           AppStrings.fastDelivery,
-                          fontSize: 20.0,
+                          fontSize: 18,
                           fontFamily: FontFamily.medium,
                         ),
                       ),
-                      Obx(() => SizedBox(
-                        width: 50.0,
-                        height: 40.0,
-                        child: FittedBox(
-                          fit: BoxFit.fill,
-                          child: Switch(
-                            focusColor: AppColors.primary,
+                      Obx(
+                        () => SizedBox(
+                          width: responsiveWidth(50.0),
+                          height: responsiveHeight(40.0),
+                          child: FittedBox(
+                            fit: BoxFit.fill,
+                            child: Switch(
+                              focusColor: AppColors.primary,
                               activeColor: Colors.black,
-                              inactiveTrackColor: AppColors.primary.withOpacity(0.3),
-                              trackOutlineColor: WidgetStatePropertyAll(Colors.transparent  ),
-                              thumbColor: WidgetStatePropertyAll(AppColors.white),
+                              inactiveTrackColor:
+                                  AppColors.primary.withOpacity(0.3),
+                              trackOutlineColor:
+                                  WidgetStatePropertyAll(Colors.transparent),
+                              thumbColor:
+                                  WidgetStatePropertyAll(AppColors.white),
                               value: controller.isFastDelivery.value,
                               onChanged: (value) {
                                 controller.isFastDelivery.value = value;
                               },
                             ),
+                          ),
                         ),
-                      ),
                       )
                     ],
                   ),
-                  14.verticalSpace,
+                  SizedBox(height: responsiveHeight(15)),
                   AppText(
-                      AppStrings.deliveryDays,
-                    fontSize: 16.0,
+                    AppStrings.deliveryDays,
+                    fontSize: 14,
                     fontFamily: FontFamily.medium,
                   ),
-                  7.verticalSpace,
+                  SizedBox(height: responsiveHeight(5)),
                   CommonTextFormField(
                     controller: controller.fastDeliveryDaysController,
                     border: customOutlineInputBorder(
@@ -121,19 +123,21 @@ class DeliveryView extends GetView<DeliveryController> {
                     ),
                     fillColor: AppColors.iconBG,
                     isShadow: false,
-                    keyboardType: TextInputType.numberWithOptions(decimal: true),
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
                     inputFormatters: <TextInputFormatter>[
                       FilteringTextInputFormatter.digitsOnly
                     ],
-                    contentPadding: EdgeInsets.only(left: 20.0, top: 15.0, bottom: 15.0),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   ),
-                  12.verticalSpace,
+                  SizedBox(height: responsiveHeight(15)),
                   AppText(
                     AppStrings.deliveryCharges,
-                    fontSize: 16.0,
+                    fontSize: 14,
                     fontFamily: FontFamily.medium,
                   ),
-                  7.verticalSpace,
+                  SizedBox(height: responsiveHeight(5)),
                   CommonTextFormField(
                     controller: controller.fastDeliveryChargesController,
                     border: customOutlineInputBorder(
@@ -141,11 +145,13 @@ class DeliveryView extends GetView<DeliveryController> {
                     ),
                     fillColor: AppColors.iconBG,
                     isShadow: false,
-                    keyboardType: TextInputType.numberWithOptions(decimal: true),
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
                     inputFormatters: <TextInputFormatter>[
                       FilteringTextInputFormatter.digitsOnly
                     ],
-                    contentPadding: EdgeInsets.only(left: 20.0, top: 15.0, bottom: 15.0),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   ),
                   35.verticalSpace,
                 ],
@@ -160,10 +166,14 @@ class DeliveryView extends GetView<DeliveryController> {
           mainAxisSize: MainAxisSize.min,
           children: [
             CommonButton(
-                text: AppStrings.next,
+              text: AppStrings.next,
               onTap: () {
-                Get.offAllNamed(Routes.CATEGORY);
-              } ,
+                if(controller.isUpdate){
+                  Get.back();
+                } else{
+                  Get.offAllNamed(Routes.MANAGEMENT);
+                }
+              },
             ),
             SizedBox(height: MediaQuery.of(context).padding.bottom + 10.0),
           ],

@@ -39,6 +39,7 @@ class OtpView extends GetView<LoginController> {
                 animationType: AnimationType.fade,
                 keyboardType: TextInputType.phone,
                 cursorColor: AppColors.primary,
+                controller: controller.otpController,
                 textStyle: AppTextStyle(
                   fontSize: 20.0,
                   fontFamily: FontFamily.medium,
@@ -47,6 +48,7 @@ class OtpView extends GetView<LoginController> {
                   shape: PinCodeFieldShape.box,
                   fieldWidth: 50,
                   fieldHeight: 50,
+
                   borderWidth: 1,
                   borderRadius: BorderRadius.circular(12.0),
                   activeBoxShadow: [
@@ -74,18 +76,21 @@ class OtpView extends GetView<LoginController> {
                   selectedColor: AppColors.white,
                 ),
                 enableActiveFill: true,
-                onChanged: (value) {
-                  controller.otp = value;
-                },
+
               ),
               45.verticalSpace,
               CommonButton(
                 text: AppStrings.verify,
                 onTap: () {
-                  if(Constants.isSignUp){
-                    controller.sendOtpApi();
-                  } else{
-                    Get.toNamed(Routes.RESET_PASSWORD);
+
+                  if (controller.otpController.text.isEmpty) {
+                    CommonDialogue.alertActionDialogApp(
+                        message: AppStrings.otpEmail);
+                  } else if (int.parse(controller.otpController.text) < 6) {
+                    CommonDialogue.alertActionDialogApp(
+                        message: AppStrings.otpValidation);
+                  } else {
+                    controller.verifyOTPApi();
                   }
                 },
               ),

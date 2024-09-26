@@ -12,6 +12,7 @@ dependencies:
   flutter_svg:
   flutter_slidable: ^3.1.1
   pin_code_fields: ^8.0.1
+  get_storage: ^2.1.1
   fluttertoast: ^8.2.6
   dotted_border: ^2.1.0
   file_picker: ^8.1.1

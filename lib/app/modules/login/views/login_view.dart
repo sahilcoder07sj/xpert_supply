@@ -64,10 +64,8 @@ class LoginView extends GetView<LoginController> {
                 CommonButton(
                   text: AppStrings.signIn,
                   onTap: () {
-                    if(Constants.vendor == Constants.selectUser){
-                      Get.offAllNamed(Routes.MANAGEMENT);
-                    } else{
-                      Get.offAllNamed(Routes.CONSUMER_PRODUCTS);
+                    if(controller.validation()){
+                      controller.loginApi();
                     }
                   },
                 ),

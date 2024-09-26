@@ -90,11 +90,15 @@ class HttpUtil {
           try {
             int errCode =
                 error.response != null ? error.response!.statusCode! : 00;
+
             switch (errCode) {
               case 400:
                 return ErrorEntity(
                     code: errCode, message: error.response!.data["message"]);
               case 401:
+                return ErrorEntity(
+                    code: errCode, message: error.response!.data["message"]);
+              case 409:
                 return ErrorEntity(
                     code: errCode, message: error.response!.data["message"]);
               case 403:
@@ -164,28 +168,23 @@ class HttpUtil {
     String cacheKey = '',
     bool cacheDisk = false,
   }) async {
-    Options requestOptions = Options(
-      headers: {
-        "Authorization": "Bearer ${token}",
-      },
-    );
-    // requestOptions.extra ??= {};
-    // requestOptions.extra!.addAll({
-    //   "refresh": refresh,
-    //   "noCache": noCache,
-    //   "list": list,
-    //   "cacheKey": cacheKey,
-    //   "cacheDisk": cacheDisk,
-    //
-    // });
+    try{
+      Options requestOptions = Options(
+        headers: {
+          "Authorization": "Bearer ${token}",
+        },
+      );
 
-    var response = await dio.get(
-      path,
-      queryParameters: queryParameters,
-      options: requestOptions,
-      cancelToken: cancelToken,
-    );
-    return response.data;
+      var response = await dio.get(
+        path,
+        queryParameters: queryParameters,
+        options: requestOptions,
+        cancelToken: cancelToken,
+      );
+      return response.data;
+    }catch(e){
+      print("apiname--${path}---error--${e}");
+    }
   }
 
   /// restful post
@@ -197,19 +196,21 @@ class HttpUtil {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
-    print(token);
-    print("tokentokentokentokentokentokentoken");
-    Options requestOptions =
-        options ?? Options(headers: {"Authorization": "Bearer ${token}"});
+    try{
+      Options requestOptions =
+          options ?? Options(headers: {"Authorization": "Bearer ${token}"});
 
-    var response = await dio.post(
-      path,
-      data: withOutFormData == null ? data : jsonEncode(withOutFormData),
-      queryParameters: queryParameters,
-      options: requestOptions,
-      cancelToken: cancelToken,
-    );
-    return response.data;
+      var response = await dio.post(
+        path,
+        data: withOutFormData == null ? data : jsonEncode(withOutFormData),
+        queryParameters: queryParameters,
+        options: requestOptions,
+        cancelToken: cancelToken,
+      );
+      return response.data;
+    }catch(e){
+      print("apiname--${path}---error--${e}");
+    }
   }
 
   /// restful put

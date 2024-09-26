@@ -115,7 +115,7 @@ class SignUpView extends GetView<SignUpController> {
                 CommonButton(
                   text: AppStrings.signUp,
                   onTap: () {
-                    if(controller.validation()){
+                    if(controller.validation(userType: Constants.consumer)){
                       controller.sendOtpApi();
                     }
                   },

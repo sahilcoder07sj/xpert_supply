@@ -135,8 +135,10 @@ class AppStrings{
   static const enterBusinessName = "Please enter business name";
   static const enterName = "Please enter name";
   static const enterEmail = "Please enter email";
+  static const otpEmail = "Please enter otp";
   static const enterValidEmail = "Please valid enter email";
   static const enterPassword = "Please enter password";
+  static const otpValidation = "OTP must be 6 digits long";
   static const enterConfirmPassword = "Please enter confirm password";
   static const IAgreeTermsPrivacy = "Please accept privacy policy and terms & conditions";
   static const passwordValidation = "Password must be more than 8 characters long including lower case, upper case, and a number";

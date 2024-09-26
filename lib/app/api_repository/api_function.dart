@@ -15,24 +15,28 @@ class APIFunction {
     bool isGet = false,
     bool isLoading = true,
   }) async {
-    if (isGet != true && params != null) {
-      log("params -------->>> ${params.fields}");
-      log("params -------->>> ${params.files}");
-    }
-    if (isGet == true) {
-      var response = await HttpUtil(token!, isLoading, context).get(
+    try{
+      if (isGet != true && params != null) {
+        log("params -------->>> ${params.fields}");
+        log("params -------->>> ${params.files}");
+      }
+      if (isGet == true) {
+        var response = await HttpUtil(token!, isLoading, context).get(
+          apiName,
+          token: token,
+        );
+        return response;
+      }
+
+      var response = await HttpUtil(token!, isLoading, context).post(
         apiName,
+        data: params,
         token: token,
+        withOutFormData: withOutFormData,
       );
       return response;
+    }catch (e){
+      print("apiname--${apiName}---error--${e}");
     }
-
-    var response = await HttpUtil(token!, isLoading, context).post(
-      apiName,
-      data: params,
-      token: token,
-      withOutFormData: withOutFormData,
-    );
-    return response;
   }
 }

@@ -12,16 +12,14 @@ class SplashController extends GetxController {
 
   next() {
     Future.delayed(Duration(seconds: kDebugMode ? 1 : 3)).then((value) {
-      print(
-          "GetStorageData().userData---->>>>>${GetStorageData().readObject(GetStorageData().userData)["vendor"]}");
-      if (GetStorageData().readObject(GetStorageData().userData) != null) {
-        if (GetStorageData()
-                .readObject(GetStorageData().userData)["vendor_no"] !=
-            null) {
+      if (GetStorageData().containKey(GetStorageData().userData)) {
+        if (GetStorageData().readObject(GetStorageData().userData)["vendor_no"] != null) {
           Get.offAllNamed(Routes.MANAGEMENT);
         } else {
           Get.offAllNamed(Routes.CONSUMER_PRODUCTS);
         }
+      } else{
+        Get.offAllNamed(Routes.SELECT_USER);
       }
     });
   }

@@ -92,7 +92,7 @@ class LoginController extends GetxController {
       await GetStorageData()
           .saveString(GetStorageData().token, loginUserModel.token);
       await GetStorageData()
-          .saveObject(GetStorageData().userData, loginUserModel.data!.toJson());
+          .saveObject(GetStorageData().userData, loginUserModel.data?.toJson());
       if (Constants.vendor == Constants.selectUser) {
         Get.offAllNamed(Routes.MANAGEMENT);
       } else {

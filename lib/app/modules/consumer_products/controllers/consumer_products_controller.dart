@@ -9,6 +9,8 @@ import '../../../data/all.dart';
 class ConsumerProductsController extends GetxController {
   TextEditingController vendorCodeController = TextEditingController();
 
+  bool isAddVendor = false;
+
   @override
   void onInit() {
     print(

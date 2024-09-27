@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:tbd_flutter/app/api_repository/get_storage.dart';
+import 'package:tbd_flutter/app/data/all.dart';
 import 'package:tbd_flutter/app/routes/app_pages.dart';
 
 class SplashController extends GetxController {
@@ -19,7 +20,9 @@ class SplashController extends GetxController {
                 .readObject(GetStorageData().userData)["vendor_no"] !=
             null) {
           Get.offAllNamed(Routes.MANAGEMENT);
+          Constants.selectUser = Constants.vendor;
         } else {
+          Constants.selectUser = Constants.consumer;
           Get.offAllNamed(Routes.CONSUMER_PRODUCTS);
         }
       }

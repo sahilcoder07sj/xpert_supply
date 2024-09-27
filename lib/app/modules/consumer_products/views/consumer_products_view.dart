@@ -14,6 +14,20 @@ class ConsumerProductsView extends GetView<ConsumerProductsController> {
         return CommonScreen(
           isLeading: false,
           title: AppStrings.products,
+          floatingActionButton: !controller.isAddVendor
+              ? GestureDetector(
+                  onTap: () {
+                    controller.isAddVendor = true;
+                    controller.update();
+                  },
+                  child: Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                        color: AppColors.primary, shape: BoxShape.circle),
+                  ),
+                )
+              : SizedBox(),
           actions: [
             GestureDetector(
               onTap: () => Get.toNamed(Routes.MY_CART),
@@ -34,47 +48,70 @@ class ConsumerProductsView extends GetView<ConsumerProductsController> {
           ],
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: ListView.builder(
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () => Get.toNamed(Routes.PRODUCT),
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.all(15.0),
-                    margin: EdgeInsets.only(bottom: 10.0),
-                    decoration: CommonWidget.commonShadowWidget(
-                      radius: 15.0,
-                    ),
-                    child: Row(
+            child: controller.isAddVendor
+                ? Center(
+                    child: Column(
                       children: [
-                        Expanded(
-                          child: AppText(
-                            "Fruit",
-                            fontSize: 15.0,
-                            color: AppColors.primary,
+                        10.verticalSpace,
+                        SvgPicture.asset(AppIcons.productVendor),
+                        CommonTextFormField(
+                          controller: controller.vendorCodeController,
+                          hintText: AppStrings.enterVendorCode,
+                          contentPadding:
+                              EdgeInsets.fromLTRB(20.0, 12.0, 20.0, 12.0),
+                          border: customOutlineInputBorder(
+                            borderColor: AppColors.border.withOpacity(0.1),
                           ),
+                          fillColor: AppColors.iconBG,
+                          isShadow: false,
                         ),
-                        SvgPicture.asset(AppIcons.iconsRightArrow)
                       ],
                     ),
+                  )
+                : ListView.builder(
+                    itemCount: 3,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () => Get.toNamed(Routes.PRODUCT),
+                        child: Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.all(15.0),
+                          margin: EdgeInsets.only(bottom: 10.0),
+                          decoration: CommonWidget.commonShadowWidget(
+                            radius: 15.0,
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: AppText(
+                                  "Fruit",
+                                  fontSize: 15.0,
+                                  color: AppColors.primary,
+                                ),
+                              ),
+                              SvgPicture.asset(AppIcons.iconsRightArrow)
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
 
           /// bottom button
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CommonButton(text: AppStrings.apply),
-                SizedBox(height: MediaQuery.of(context).padding.bottom + 10.0),
-              ],
-            ),
-          ),
+          bottomNavigationBar: controller.isAddVendor
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CommonButton(text: AppStrings.apply),
+                      SizedBox(
+                          height: MediaQuery.of(context).padding.bottom + 10.0),
+                    ],
+                  ),
+                )
+              : SizedBox(),
         );
       },
     );
@@ -83,22 +120,5 @@ class ConsumerProductsView extends GetView<ConsumerProductsController> {
 
 /// enter vendor code
 /*
-Center(
-          child: Column(
-            children: [
-              10.verticalSpace,
-              SvgPicture.asset(AppIcons.productVendor),
-              CommonTextFormField(
-                controller: controller.vendorCodeController,
-                hintText: AppStrings.enterVendorCode,
-                contentPadding: EdgeInsets.fromLTRB(20.0, 12.0, 20.0, 12.0),
-                border: customOutlineInputBorder(
-                  borderColor: AppColors.border.withOpacity(0.1),
-                ),
-                fillColor: AppColors.iconBG,
-                isShadow: false,
-              ),
-            ],
-          ),
-        )
+
  */

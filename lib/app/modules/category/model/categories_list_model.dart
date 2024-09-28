@@ -1,7 +1,7 @@
 class CategoryListModel {
   final int? status;
   final String? message;
-  final CategoryListData? data;
+  final List<CategoryData>? data;
 
   CategoryListModel({
     this.status,
@@ -12,13 +12,16 @@ class CategoryListModel {
   CategoryListModel.fromJson(Map<String, dynamic> json)
       : status = json['status'] as int?,
         message = json['message'] as String?,
-        data = (json['data'] as Map<String,dynamic>?) != null ? CategoryListData.fromJson(json['data'] as Map<String,dynamic>) : null;
+        data = (json['data'] as List?)
+            ?.map(
+                (dynamic e) => CategoryData.fromJson(e as Map<String, dynamic>))
+            .toList();
 
   Map<String, dynamic> toJson() => {
-    'status' : status,
-    'message' : message,
-    'data' : data?.toJson()
-  };
+        'status': status,
+        'message': message,
+        'data': data?.map((e) => e.toJson()).toList(),
+      };
 }
 
 class CategoryListData {
@@ -54,12 +57,17 @@ class CategoryListData {
 
   CategoryListData.fromJson(Map<String, dynamic> json)
       : currentPage = json['current_page'] as int?,
-        data = (json['data'] as List?)?.map((dynamic e) => CategoryData.fromJson(e as Map<String,dynamic>)).toList(),
+        data = (json['data'] as List?)
+            ?.map(
+                (dynamic e) => CategoryData.fromJson(e as Map<String, dynamic>))
+            .toList(),
         firstPageUrl = json['first_page_url'] as String?,
         from = json['from'] as int?,
         lastPage = json['last_page'] as int?,
         lastPageUrl = json['last_page_url'] as String?,
-        links = (json['links'] as List?)?.map((dynamic e) => LinksData.fromJson(e as Map<String,dynamic>)).toList(),
+        links = (json['links'] as List?)
+            ?.map((dynamic e) => LinksData.fromJson(e as Map<String, dynamic>))
+            .toList(),
         nextPageUrl = json['next_page_url'],
         path = json['path'] as String?,
         perPage = json['per_page'] as int?,
@@ -68,20 +76,20 @@ class CategoryListData {
         total = json['total'] as int?;
 
   Map<String, dynamic> toJson() => {
-    'current_page' : currentPage,
-    'data' : data?.map((e) => e.toJson()).toList(),
-    'first_page_url' : firstPageUrl,
-    'from' : from,
-    'last_page' : lastPage,
-    'last_page_url' : lastPageUrl,
-    'links' : links?.map((e) => e.toJson()).toList(),
-    'next_page_url' : nextPageUrl,
-    'path' : path,
-    'per_page' : perPage,
-    'prev_page_url' : prevPageUrl,
-    'to' : to,
-    'total' : total
-  };
+        'current_page': currentPage,
+        'data': data?.map((e) => e.toJson()).toList(),
+        'first_page_url': firstPageUrl,
+        'from': from,
+        'last_page': lastPage,
+        'last_page_url': lastPageUrl,
+        'links': links?.map((e) => e.toJson()).toList(),
+        'next_page_url': nextPageUrl,
+        'path': path,
+        'per_page': perPage,
+        'prev_page_url': prevPageUrl,
+        'to': to,
+        'total': total
+      };
 }
 
 class CategoryData {
@@ -113,14 +121,14 @@ class CategoryData {
         deletedAt = json['deleted_at'];
 
   Map<String, dynamic> toJson() => {
-    'id' : id,
-    'name' : name,
-    'status' : status,
-    'vendor_id' : vendorId,
-    'created_at' : createdAt,
-    'updated_at' : updatedAt,
-    'deleted_at' : deletedAt
-  };
+        'id': id,
+        'name': name,
+        'status': status,
+        'vendor_id': vendorId,
+        'created_at': createdAt,
+        'updated_at': updatedAt,
+        'deleted_at': deletedAt
+      };
 }
 
 class LinksData {
@@ -139,9 +147,6 @@ class LinksData {
         label = json['label'] as String?,
         active = json['active'] as bool?;
 
-  Map<String, dynamic> toJson() => {
-    'url' : url,
-    'label' : label,
-    'active' : active
-  };
+  Map<String, dynamic> toJson() =>
+      {'url': url, 'label': label, 'active': active};
 }

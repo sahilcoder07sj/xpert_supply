@@ -2,6 +2,7 @@ class AppStrings{
 
   static const appName = "";
   static const vendor = "Vendor";
+  static const addVendor = "Add Vendor";
   static const consumer = "Consumer";
   static const signInToYourAccount = "Sign In to your account";
   static const pleaseSignInToContinue = "Please Sign In to continue";
@@ -85,6 +86,8 @@ class AppStrings{
   static const noOneReplies = "No one replies";
   static const iAMLeavingBecause = "I’m leaving because...";
   static const deleteMyAccount = "Delete My Account";
+  static const deleteAddress = "Delete Address";
+  static const areYouSureYouWantToDeleteAddress = "Are you sure you want to\ndelete address?";
   static const areYouSureYouWantToDeleteYourAccount = "Are you sure you want to\ndelete your account?";
   static const areYouSureYouWantToDeleteThisProduct = "Are you sure you want to\ndelete this product?";
   static const yes = "Yes";
@@ -138,6 +141,7 @@ class AppStrings{
   static const otpEmail = "Please enter otp";
   static const enterValidEmail = "Please valid enter email";
   static const enterPassword = "Please enter password";
+  static const pleaseEnterCurrentPassword= "Please enter current password";
   static const otpValidation = "OTP must be 6 digits long";
   static const enterConfirmPassword = "Please enter confirm password";
   static const IAgreeTermsPrivacy = "Please accept privacy policy and terms & conditions";

@@ -1,3 +1,5 @@
+import 'package:tbd_flutter/app/modules/vendor_list/model/product_list_model.dart';
+
 class ProductListModel {
   final int? status;
   final String? message;
@@ -53,45 +55,6 @@ class ProductListData {
     'current_page' : currentPage,
     'last_page' : lastPage,
     'per_page' : perPage
-  };
-}
-
-class ProductsData {
-  final int? productId;
-  final String? name;
-  final int? amount;
-  final dynamic discount;
-  final String? description;
-  final String? imageUrl;
-  final List<ImagesData>? images;
-
-  ProductsData({
-    this.productId,
-    this.name,
-    this.amount,
-    this.discount,
-    this.description,
-    this.imageUrl,
-    this.images,
-  });
-
-  ProductsData.fromJson(Map<String, dynamic> json)
-      : productId = json['product_id'] as int?,
-        name = json['name'] as String?,
-        amount = json['amount'] as int?,
-        discount = json['discount'],
-        description = json['description'] as String?,
-        imageUrl = json['image_url'] as String?,
-        images = (json['images'] as List?)?.map((dynamic e) => ImagesData.fromJson(e as Map<String,dynamic>)).toList();
-
-  Map<String, dynamic> toJson() => {
-    'product_id' : productId,
-    'name' : name,
-    'amount' : amount,
-    'discount' : discount,
-    'description' : description,
-    'image_url' : imageUrl,
-    'images' : images?.map((e) => e.toJson()).toList()
   };
 }
 

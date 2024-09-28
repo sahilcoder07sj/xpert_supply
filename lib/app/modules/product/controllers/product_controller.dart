@@ -1,53 +1,52 @@
+import 'package:tbd_flutter/app/api_repository/api_function.dart';
+import 'package:tbd_flutter/app/api_repository/get_storage.dart';
 
-
-import 'package:get/get.dart';
+import '../../../data/all.dart';
+import '../../vendor_list/model/product_list_model.dart';
 
 class ProductController extends GetxController {
-
+  List<ProductsData> productsList = [];
+  String noData = "";
+  String categoriesId = "";
+  String categoriesName = "";
 
   @override
   void onInit() {
+    if (Get.arguments != null) {
+      categoriesId = Get.arguments["categories_id"].toString();
+      categoriesName = Get.arguments["categories_name"];
+      getProductApi(categoryId: categoriesId);
+    }
     super.onInit();
   }
 
-  String noDatFound =  "";
+  String noDatFound = "";
 
-  List productList = [
-    {
-      "name": "Arabic Ginger",
-      "price": "\$25",
-      "discounted_price": "\$25",
-      "image": "assets/images/aadu.png",
-    },
-    {
-      "name": "Organic Carrots",
-      "price": "\$25",
-      "discounted_price": "\$25",
-      "image": "assets/images/gajar.png",
-    },
-    {
-      "name": "Fresh Lettuce",
-      "price": "\$25",
-      "discounted_price": "\$25",
-      "image": "assets/images/kobi.png",
-    },
-    {
-      "name": "Fresh Broccoli",
-      "price": "\$25",
-      "discounted_price": "\$25",
-      "image": "assets/images/lili_kobi.png",
-    },
-    {
-      "name": "Bell Pepper Red",
-      "price": "\$25",
-      "discounted_price": "\$25",
-      "image": "assets/images/marcha.png",
-    },
-    {
-      "name": "Butternut Squash ",
-      "price": "\$25",
-      "discounted_price": "\$25",
-      "image": "assets/images/papaiyu.png",
-    },
-  ];
+  getProductApi({String? categoryId}) async {
+    FormData formData = FormData.fromMap({
+      "category_id": categoryId,
+    });
+    try {
+      final data = await APIFunction().apiCall(
+        apiName: Constants().productList,
+        context: Get.context!,
+        params: formData,
+        token: GetStorageData().readString(GetStorageData().token),
+      );
+      ProductListModel productListModel = ProductListModel.fromJson(data);
+      if (productListModel.status == 1) {
+        if (productListModel.data!.products!.isNotEmpty) {
+          productsList = productListModel.data!.products ?? [];
+        } else {
+          noDatFound = "No product found!";
+        }
+        update();
+      } else {
+        CommonDialogue.alertActionDialogApp(message: productListModel.message);
+      }
+    } catch (e) {
+      noDatFound = "No product found!";
+      update();
+    }
+  }
 }

@@ -5,6 +5,7 @@ class CommonScreen extends StatelessWidget {
   final Widget? body;
   final bool isLeading;
   final String? title;
+  final Function()? leadingOnTap;
   final Widget? bottomNavigationBar;
   final Widget? floatingActionButton;
   final bool automaticallyImplyLeading;
@@ -17,6 +18,7 @@ class CommonScreen extends StatelessWidget {
     super.key,
     this.isAppbar = true,
     this.body,
+    this.leadingOnTap,
     this.isLeading = true,
     this.bottomNavigationBar,
     this.floatingActionButton,
@@ -48,7 +50,7 @@ class CommonScreen extends StatelessWidget {
                   : null,
               leading: isLeading
                   ? GestureDetector(
-                      onTap: () => Get.back(),
+                      onTap:leadingOnTap ?? () => Get.back(),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 15.0),
                         child: CircleAvatar(

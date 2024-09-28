@@ -13,9 +13,7 @@ class SplashController extends GetxController {
 
   next() {
     Future.delayed(Duration(seconds: kDebugMode ? 1 : 3)).then((value) {
-      print(
-          "GetStorageData().userData---->>>>>${GetStorageData().readObject(GetStorageData().userData)["vendor"]}");
-      if (GetStorageData().readObject(GetStorageData().userData) != null) {
+        if (GetStorageData().readObject(GetStorageData().userData) != null) {
         if (GetStorageData()
                 .readObject(GetStorageData().userData)["vendor_no"] !=
             null) {

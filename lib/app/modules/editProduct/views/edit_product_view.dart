@@ -6,7 +6,6 @@ import '../widget/camera_widget.dart';
 
 class EditProductView extends GetView<EditProductController> {
   const EditProductView({Key? key}) : super(key: key);
-/// 2850102
   @override
   Widget build(BuildContext context) {
     return CommonScreen(
@@ -15,7 +14,7 @@ class EditProductView extends GetView<EditProductController> {
         padding: EdgeInsets.symmetric(horizontal: 15),
         children: [
           Obx(() => CommonImageWidget(
-            image: controller.selectImage.value != "" ? "" : "assets/images/aadu.png",
+            image: controller.selectImage.value != "" ? "" : controller.singleProductDetails.value?.data?.imageUrl ?? "",
             fileImage: controller.selectImage.value,
             cameraOnTap: () async {
               XFile? file = await PickImage.pickImageCamera();
@@ -46,6 +45,7 @@ class EditProductView extends GetView<EditProductController> {
             title: AppStrings.amount,
             keyboardType: TextInputType.numberWithOptions(decimal: true),
             contentPadding: EdgeInsets.all(14.0),
+            maxLength: 3,
           ),
           10.verticalSpace,
           CommonTextFormField(
@@ -53,13 +53,14 @@ class EditProductView extends GetView<EditProductController> {
             title: AppStrings.discount,
             keyboardType: TextInputType.numberWithOptions(decimal: true),
             contentPadding: EdgeInsets.all(14.0),
+            maxLength: 3,
           ),
           10.verticalSpace,
           CommonTextFormField(
             controller: controller.descriptionNameController,
             hintText: AppStrings.description,
             title: AppStrings.description,
-            textInputAction: TextInputAction.next,
+            textInputAction: TextInputAction.done,
             contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             maxLines: 5,
           ),
@@ -72,7 +73,7 @@ class EditProductView extends GetView<EditProductController> {
           children: [
             CommonButton(
                 text: AppStrings.save,
-              onTap: () => Get.back(),
+              onTap: () => controller.updateProduct(),
             ),
             SizedBox(height: MediaQuery.of(context).padding.bottom+10.0),
           ],

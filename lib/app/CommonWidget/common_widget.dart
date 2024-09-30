@@ -2,6 +2,15 @@ import '../data/all.dart';
 
 class CommonWidget{
 
+  static noDataFoundWidget(){
+    return Center(
+      child: AppText(
+        "No data found",
+        fontSize: 16.0,
+      ),
+    );
+  }
+
   static roundIconWidget({required String imageName}){
     return Container(
       padding: EdgeInsets.all(30.0),
@@ -51,4 +60,60 @@ class CommonWidget{
     );
   }
 
+}
+
+
+class CommonNetworkImage extends StatelessWidget {
+  final String imageUrl;
+  final double? width;
+  final double? height;
+  final BoxFit? fit;
+  final Widget? placeholder;
+  final Widget? errorWidget;
+
+  const CommonNetworkImage({
+    Key? key,
+    required this.imageUrl,
+    this.width,
+    this.height,
+    this.fit = BoxFit.cover,
+    this.placeholder,
+    this.errorWidget,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.network(
+      imageUrl,
+      width: width,
+      height: height,
+      fit: fit,
+      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+        if (loadingProgress == null) return child;
+        return SizedBox(
+          height: height,
+          width: width,
+          child: placeholder ??
+              Center(
+                child: CircularProgressIndicator(
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
+                      : null,
+                  strokeWidth: 1.0,
+                ),
+              ),
+        );
+      },
+      errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+        return SizedBox(
+          height: height,
+          width: width,
+          child: errorWidget ??
+              Center(
+                child: Icon(Icons.error),
+              ),
+        );
+      },
+    );
+  }
 }

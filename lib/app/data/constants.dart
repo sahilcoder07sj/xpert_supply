@@ -24,5 +24,19 @@ class Constants {
 
 /// vendor api customer
   String  categories = "api/customer/category/get";
+  static String delivery = "api/vendor/delivery";
+  static String getProfile = "api/vendor/get-profile";
+  static String getCategory = "api/vendor/category/get";
+  static String addCategory = "api/vendor/category/add";
+  static String updateCategory = "api/vendor/category/update";
+  static String deleteCategory = "api/vendor/category/delete";
+  static String addProduct = "api/vendor/product/add";
+  static String getProduct = "api/vendor/product/get";
+  static String deleteProduct = "api/vendor/product/delete";
+  static String updateProduct = "api/vendor/product/update";
+  static String getOrder = "api/vendor/order/get";
+  static String orderUpdateStatus = "api/vendor/order/update-status";
+  static String getQuoteHistory = "api/vendor/quote-history";
+  static String manageOffer = "api/vendor/manage-offer";
   // String  categories = "api/category/get";
 }

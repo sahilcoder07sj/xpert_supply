@@ -14,6 +14,10 @@ class CategoryView extends GetView<CategoryController> {
           onTap: () {
             Get.toNamed(Routes.ADD_EDIT_CATEGORY, arguments: {
               "is_edit": false,
+            })?.then((value) {
+              if(value != null){
+                controller.getCategoryList(isLoader: false);
+              }
             });
           },
           child: CommonWidget.circularIconWidget(
@@ -24,9 +28,9 @@ class CategoryView extends GetView<CategoryController> {
         ),
         SizedBox(width: 10)
       ], 
-      body: ListView.separated(
+      body: Obx(() => controller.getCategory.value != null ? controller.categoryList.isNotEmpty ? ListView.separated(
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-        itemCount: 5,
+        itemCount: controller.categoryList.length,
         itemBuilder: (context, index) {
           return Slidable(
             endActionPane: ActionPane(
@@ -40,6 +44,8 @@ class CategoryView extends GetView<CategoryController> {
                     onTap: () {
                       Get.toNamed(Routes.ADD_EDIT_CATEGORY, arguments: {
                         "is_edit": true,
+                        "data" : controller.categoryList[index],
+                        "index" : index,
                       });
                     },
                     child: Container(
@@ -50,9 +56,9 @@ class CategoryView extends GetView<CategoryController> {
                       ),
                       child: Center(
                           child: SvgPicture.asset(
-                        AppIcons.iconsEditDeliveryAddress,
-                        color: AppColors.white,
-                      )),
+                            AppIcons.iconsEditDeliveryAddress,
+                            color: AppColors.white,
+                          )),
                     ),
                   ),
                 ),
@@ -60,7 +66,7 @@ class CategoryView extends GetView<CategoryController> {
                 Expanded(
                   flex: 1,
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () => controller.deleteCategory(id: controller.categoryList[index].id ?? 0, index: index),
                     child: Container(
                       height: responsiveHeight(50),
                       decoration: BoxDecoration(
@@ -69,8 +75,8 @@ class CategoryView extends GetView<CategoryController> {
                       ),
                       child: Center(
                           child: SvgPicture.asset(
-                        AppIcons.iconsDelete,
-                      )),
+                            AppIcons.iconsDelete,
+                          )),
                     ),
                   ),
                 ),
@@ -78,7 +84,7 @@ class CategoryView extends GetView<CategoryController> {
             ),
             child: GestureDetector(
               onTap: () {
-                Get.toNamed(Routes.PRODUCT);
+                Get.toNamed(Routes.PRODUCT, arguments: {"cat_data" : controller.categoryList[index]});
               },
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 15),
@@ -97,7 +103,7 @@ class CategoryView extends GetView<CategoryController> {
                 child: Row(
                   children: [
                     AppText(
-                      "Raj",
+                      controller.categoryList[index].name ?? "",
                     )
                   ],
                 ),
@@ -108,7 +114,8 @@ class CategoryView extends GetView<CategoryController> {
         separatorBuilder: (context, index) => SizedBox(
           height: 10,
         ),
-      ),
+      )
+          : CommonWidget.noDataFoundWidget() : SizedBox()),
     );
   }
 }

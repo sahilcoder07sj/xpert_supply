@@ -40,6 +40,7 @@ class AppStrings{
   static const normalDelivery = "Normal Delivery";
   static const deliveryDays = "Delivery Days";
   static const fastDelivery = "Fast Delivery";
+  static const notification = "Notification";
   static const deliveryCharges = "Delivery Charges";
   static const next = "Next";
   static const category = "Category";
@@ -143,4 +144,14 @@ class AppStrings{
   static const IAgreeTermsPrivacy = "Please accept privacy policy and terms & conditions";
   static const passwordValidation = "Password must be more than 8 characters long including lower case, upper case, and a number";
   static const passwordNotMatch = "Password and confirm password does not match";
+
+  static const enterDeliveryDays = "Please enter normal delivery days";
+  static const enterFastDeliveryDays = "Please enter fast delivery days";
+  static const enterFastDeliveryCharges = "Please enter fast delivery charges";
+
+  static const pleaseEnterProductName = "Please enter product name";
+  static const pleaseEnterAmount = "Please enter amount";
+  static const pleaseEnterDiscount = "Please enter discount";
+  static const pleaseEnterDescription = "Please enter description";
+  static const pleaseSelectProductImage = "Please select product image";
 }

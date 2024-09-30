@@ -1,6 +1,8 @@
+import 'package:tbd_flutter/app/modules/product/controllers/product_controller.dart';
+
 import '../../../data/all.dart';
 
-class AddProductSheet extends StatelessWidget {
+class AddProductSheet extends GetView<ProductController> {
   const AddProductSheet({super.key});
 
   @override
@@ -39,7 +41,11 @@ class AddProductSheet extends StatelessWidget {
                 bgColor: AppColors.primary,
                 onTap: () {
                   Get.back();
-                  Get.toNamed(Routes.ADD_PRODUCT);
+                  Get.toNamed(Routes.ADD_PRODUCT, arguments: {"cat_id" : controller.getCategoryData?.id})?.then((value) {
+                    if(value != null){
+                      controller.getProduct(isLoading: false, isReset: true);
+                    }
+                  });
                 },
                 // fontColor: AppColors.primary,
               ),

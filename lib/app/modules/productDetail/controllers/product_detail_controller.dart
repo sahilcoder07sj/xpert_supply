@@ -1,23 +1,61 @@
-import 'package:get/get.dart';
+import 'package:tbd_flutter/app/modules/category/model/get_category_model.dart';
+import 'package:tbd_flutter/app/modules/product/model/get_product_model.dart';
+import 'package:tbd_flutter/app/modules/productDetail/model/single_product_details.dart';
+import '../../../data/all.dart';
+import '../../../data/utils.dart';
 
 class ProductDetailController extends GetxController {
-  //TODO: Implement ProductDetailController
 
-  final count = 0.obs;
+  Rxn<Products> products = Rxn<Products>();
+  Rxn<SingleProductDetails> singleProductDetails = Rxn<SingleProductDetails>();
+  GetCategoryData? getCategoryData;
+
   @override
   void onInit() {
     super.onInit();
+    if(Get.arguments != null){
+      products.value = Get.arguments["details"];
+      getCategoryData = Get.arguments["category_details"];
+      getProduct();
+    }
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  deleteProduct() async {
+    Get.back();
+    FormData formData = FormData.fromMap({
+      "id" : products.value?.productId ?? 0,
+    });
+    final data = await APIFunction().apiCall(
+      apiName: Constants.deleteProduct,
+      context: Get.context!,
+      params: formData,
+      token: GetStorageData().readString(GetStorageData().token),
+    );
+
+    if(data["status"] == 1){
+      Get.back(result: "delete");
+      Utils.flutterToast(data["message"]);
+    } else{
+      CommonDialogue.alertActionDialogApp(message: data["message"]);
+    }
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
+  getProduct() async {
+    FormData formData = FormData.fromMap({
+      "category_id" : getCategoryData?.id ?? 0,
+      "id" : products.value?.productId ?? 0,
+    });
 
-  void increment() => count.value++;
+    final data = await APIFunction().apiCall(
+      apiName: Constants.getProduct,
+      context: Get.context!,
+      params: formData,
+      token: GetStorageData().readString(GetStorageData().token),
+    );
+
+    SingleProductDetails model = SingleProductDetails.fromJson(data);
+    if(model.status == 1){
+      singleProductDetails.value = model;
+    }
+  }
 }

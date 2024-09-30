@@ -1,9 +1,9 @@
 import 'dart:io';
-
 import 'package:tbd_flutter/app/CommonWidget/common_botttom_sheet.dart';
 import 'package:tbd_flutter/app/api_repository/api_function.dart';
 import 'package:tbd_flutter/app/api_repository/get_storage.dart';
 import 'package:tbd_flutter/app/data/utils.dart';
+import 'package:tbd_flutter/app/modules/sign_up/controllers/sign_up_controller.dart';
 import '../../../data/all.dart';
 import '../model/login_user_model.dart';
 
@@ -41,7 +41,7 @@ class LoginController extends GetxController {
       apiName: Constants().verifyOTP,
       context: Get.context!,
       params: formData,
-      token: Constants.token,
+      token: GetStorageData().readString(GetStorageData().token),
     );
     LoginUserModel loginUserModel = LoginUserModel.fromJson(data);
     if (loginUserModel.status == 1) {
@@ -60,10 +60,13 @@ class LoginController extends GetxController {
               } else {
                 Get.offAllNamed(Routes.CONSUMER_PRODUCTS);
               }
+              Get.delete<LoginController>(force: true);
+              Get.delete<SignUpController>(force: true);
             },
           ),
         );
       } else {
+        await GetStorageData().saveString(GetStorageData().token, data["token"]);
         Get.toNamed(Routes.RESET_PASSWORD);
       }
       update();
@@ -91,10 +94,14 @@ class LoginController extends GetxController {
     if (loginUserModel.status == 1) {
       await GetStorageData()
           .saveString(GetStorageData().token, loginUserModel.token);
-      await GetStorageData()
-          .saveObject(GetStorageData().userData, loginUserModel.data?.toJson());
+      await GetStorageData().saveObject(GetStorageData().userData, loginUserModel.data?.toJson());
       if (Constants.vendor == Constants.selectUser) {
-        Get.offAllNamed(Routes.MANAGEMENT);
+        print("loginUserModel -----> ${loginUserModel.data?.normalDeliveryDays}");
+        if(loginUserModel.data?.normalDeliveryDays == null){
+          Get.offAllNamed(Routes.DELIVERY);
+        } else{
+          Get.offAllNamed(Routes.MANAGEMENT);
+        }
       } else {
         Get.offAllNamed(Routes.CONSUMER_PRODUCTS);
       }
@@ -137,12 +144,11 @@ class LoginController extends GetxController {
       apiName: Constants().forgotPassword,
       context: Get.context!,
       params: formData,
-      token: Constants.token,
     );
     LoginUserModel loginUserModel = LoginUserModel.fromJson(data);
     if (loginUserModel.status == 1) {
+      await GetStorageData().saveString(GetStorageData().token, loginUserModel.token);
       Constants.isSignUp = false;
-      update();
       Get.toNamed(
         Routes.OTP,
         arguments: {
@@ -187,20 +193,13 @@ class LoginController extends GetxController {
       apiName: Constants().resetPassword,
       context: Get.context!,
       params: formData,
-      token: Constants.token,
+      token: GetStorageData().readString(GetStorageData().token),
     );
     LoginUserModel loginUserModel = LoginUserModel.fromJson(data);
     if (loginUserModel.status == 1) {
-      Constants.isSignUp = false;
-      update();
-      Get.toNamed(
-        Routes.OTP,
-        arguments: {
-          "email": forgotEmailController.text,
-        },
-      );
-      Get.put(LoginController()).onInit();
       Utils.flutterToast(loginUserModel.message);
+      GetStorageData().removeData(GetStorageData().token);
+      Get.offAllNamed(Routes.LOGIN);
     } else {
       CommonDialogue.alertActionDialogApp(message: loginUserModel.message);
     }

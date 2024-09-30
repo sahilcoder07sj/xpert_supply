@@ -10,7 +10,10 @@ class ManagementView extends GetView<ManagementController> {
       isLeading: false,
       title: AppStrings.management,
       actions: [
-        CommonWidget.circularIconWidget(icon: AppIcons.iconsNotification),
+        CommonWidget.circularIconWidget(
+            icon: AppIcons.iconsNotification,
+          onTap: () => Get.toNamed(Routes.NOTIFICATION),
+        ),
         10.horizontalSpace,
         GestureDetector(
           onTap: () => Get.toNamed(Routes.MY_PROFILE),
@@ -23,11 +26,11 @@ class ManagementView extends GetView<ManagementController> {
         child: Column(
           children: [
             SizedBox(height: responsiveHeight(15)),
-            CommonButton(
-              text: "    " + AppStrings.yourVendorCode + " 16547",
+            Obx(() => CommonButton(
+              text: "    " + AppStrings.yourVendorCode + " ${controller.vendorModel.value?.vendorNo ?? ""}",
               textSize: 15.0,
               alignment: Alignment.centerLeft,
-            ),
+            )),
             SizedBox(height: responsiveHeight(20)),
             GestureDetector(
               onTap: () => Get.toNamed(Routes.CATEGORY),

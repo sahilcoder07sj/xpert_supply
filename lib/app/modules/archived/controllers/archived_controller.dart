@@ -1,4 +1,7 @@
-import 'package:get/get.dart';
+
+import 'package:tbd_flutter/app/modules/editProduct/model/edit_product_model.dart';
+
+import '../../../data/all.dart';
 
 class ArchivedController extends GetxController {
 
@@ -28,5 +31,27 @@ class ArchivedController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+  }
+
+  unArchivedProduct({required int productId, required int categoryId}) async {
+    FormData formData = FormData.fromMap({
+      "category_id" : categoryId,
+      "id" : productId,
+      "status" : 0,
+    });
+
+    final data = await APIFunction().apiCall(
+      apiName: Constants.updateProduct,
+      context: Get.context!,
+      params: formData,
+      token: GetStorageData().readString(GetStorageData().token),
+    );
+
+    EditProduct model = EditProduct.fromJson(data);
+    if(model.status == 1){
+      // getProductList.removeAt(index);
+    } else{
+      CommonDialogue.alertActionDialogApp(message: data["message"]);
+    }
   }
 }

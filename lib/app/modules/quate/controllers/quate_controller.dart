@@ -1,18 +1,26 @@
 import 'dart:ui';
-
 import 'package:tbd_flutter/app/data/all.dart';
+import 'package:tbd_flutter/app/data/utils.dart';
+import 'package:tbd_flutter/app/modules/quate/model/get_quote_model.dart';
+import 'package:tbd_flutter/app/modules/quate/model/manage_order_model.dart';
 
 class QuateController extends GetxController {
 
-  RxInt selectIndex = 10.obs;
   TextEditingController amountController = TextEditingController();
+  RxList<QuoteData> quoteList = RxList();
+  RxBool isPaginationLoading = false.obs;
+  ScrollController scrollController = ScrollController();
+  Rxn<GetQuote> getQuoteModel = Rxn<GetQuote>();
+  RxString errorMessage = "".obs;
 
   @override
   void onInit() {
     super.onInit();
+    scrollController.addListener(onScroll);
+    getQuote();
   }
 
-  sendOfferDialogue() {
+  sendOfferDialogue({required int quoteId}) {
     showDialog(
       context: Get.context!,
       builder: (context) => BackdropFilter(
@@ -41,7 +49,7 @@ class QuateController extends GetxController {
                 25.verticalSpace,
                 CommonButton(
                     text: AppStrings.send,
-                  onTap: () => Get.back(),
+                  onTap: () => manageQuote(quoteId: quoteId, isSend: true, offerPrice: int.parse(amountController.text)),
                 )
               ],
             ),
@@ -49,6 +57,79 @@ class QuateController extends GetxController {
         ),
       ),
     );
+  }
+
+  void onScroll() {
+    if (scrollController.position.extentAfter <= 0 && quoteList.length < (getQuoteModel.value?.pagination?.total ?? 0) && !isPaginationLoading.value) {
+      isPaginationLoading.value = true;
+      currentPage++;
+      getQuote(isLoading: false);
+    }
+  }
+
+  int currentPage = 1;
+  getQuote({bool isLoading = true}) async {
+    errorMessage.value = "";
+    try{
+      FormData formData = FormData.fromMap({
+        "page" : currentPage,
+        "limit" : 10,
+        "id" : "",
+        // "status" : "",
+      });
+      final data = await APIFunction().apiCall(
+        apiName: Constants.getQuoteHistory,
+        context: Get.context!,
+        params: formData,
+        isLoading: isLoading,
+        token: GetStorageData().readString(GetStorageData().token),
+      );
+
+      GetQuote model = GetQuote.fromJson(data);
+      if(model.status == 1){
+        quoteList.addAll(model.data ?? []);
+        isPaginationLoading.value = false;
+      } else{
+        errorMessage.value = "No data found";
+        CommonDialogue.alertActionDialogApp(message: model.message);
+      }
+    } catch(e){
+      errorMessage.value = "No data found";
+      print("error : $e");
+    }
+  }
+
+  manageQuote({int? offerPrice, required quoteId, required bool isSend, int? index}) async {
+    try{
+      FormData formData = FormData.fromMap({
+        "quote_id" : quoteId,
+        "action" : isSend ? "send_offer" : "cancel_offer",
+        // "message" : "",
+      });
+
+      if(offerPrice != null){
+        formData.fields.add(MapEntry("offer_price", offerPrice.toString()));
+      }
+      final data = await APIFunction().apiCall(
+        apiName: Constants.manageOffer,
+        context: Get.context!,
+        params: formData,
+        token: GetStorageData().readString(GetStorageData().token),
+      );
+
+      ManageOrder model = ManageOrder.fromJson(data);
+      if(model.status == 1){
+        if(model.data?.status == "canceled"){
+          quoteList.removeAt(index!);
+        }
+        amountController.clear();
+        Utils.flutterToast(model.message);
+      } else{
+        CommonDialogue.alertActionDialogApp(message: model.message);
+      }
+    } catch(e){
+      print("error : $e");
+    }
   }
 }
 

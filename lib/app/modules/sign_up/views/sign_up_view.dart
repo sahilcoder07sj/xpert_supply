@@ -8,7 +8,9 @@ class SignUpView extends GetView<SignUpController> {
   const SignUpView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return CommonScreen(
+    return GetBuilder<SignUpController>(
+      init: SignUpController(),
+      builder: (controller) => CommonScreen(
       isAppbar: false,
       body: Center(
         child: SingleChildScrollView(
@@ -140,6 +142,6 @@ class SignUpView extends GetView<SignUpController> {
           ],
         ),
       ),
-    );
+    ));
   }
 }

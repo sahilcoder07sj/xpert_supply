@@ -27,6 +27,7 @@ abstract class Routes {
   static const DELETE_ACCOUNT = _Paths.DELETE_ACCOUNT;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
   static const UPLOAD_FILE = _Paths.UPLOAD_FILE;
+  static const VENDOR_CATEGORIES = _Paths.VENDOR_CATEGORIES;
   static const MY_ORDER = _Paths.MY_ORDER;
   static const ADD_EDIT_ADDRESS = _Paths.ADD_EDIT_ADDRESS;
   static const ORDER_CONFIRM = _Paths.ORDER_CONFIRM;
@@ -53,6 +54,7 @@ abstract class _Paths {
   static const PRODUCT = '/product';
   static const EDIT_PRODUCT = '/edit-product';
   static const CONSUMER_PRODUCTS = '/consumer-products';
+  static const VENDOR_CATEGORIES = '/vendor-categories';
   static const MY_CART = '/my-cart';
   static const MY_PROFILE = '/my-profile';
   static const EDIT_PROFILE = '/edit-profile';

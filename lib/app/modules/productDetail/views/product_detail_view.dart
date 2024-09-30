@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:tbd_flutter/app/CommonWidget/camera_bottom_sheet.dart';
+import 'package:tbd_flutter/app/CommonWidget/custom_image_view.dart';
 import 'package:tbd_flutter/app/data/all.dart';
 
 import '../../../CommonWidget/common_botttom_sheet.dart';

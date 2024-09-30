@@ -1,4 +1,9 @@
 import 'package:get/get.dart';
+import 'package:tbd_flutter/app/modules/vendor_categories_list/bindings/vendor_categories_list_binding.dart';
+import 'package:tbd_flutter/app/modules/vendor_categories_list/views/vendor_categories_list_view.dart';
+import 'package:tbd_flutter/app/modules/vendor_list/bindings/vendor_list_binding.dart';
+import 'package:tbd_flutter/app/modules/vendor_list/controllers/vendor_list_controller.dart';
+import 'package:tbd_flutter/app/modules/vendor_list/views/vendor_list_view.dart';
 
 import '../modules/addEditAddress/bindings/add_edit_address_binding.dart';
 import '../modules/addEditAddress/views/add_edit_address_view.dart';
@@ -12,8 +17,7 @@ import '../modules/category/bindings/category_binding.dart';
 import '../modules/category/views/category_view.dart';
 import '../modules/changePassword/bindings/change_password_binding.dart';
 import '../modules/changePassword/views/change_password_view.dart';
-import '../modules/consumer_products/bindings/consumer_products_binding.dart';
-import '../modules/consumer_products/views/consumer_products_view.dart';
+
 import '../modules/deleteAccount/bindings/delete_account_binding.dart';
 import '../modules/deleteAccount/views/delete_account_view.dart';
 import '../modules/delivery/bindings/delivery_binding.dart';
@@ -139,8 +143,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CONSUMER_PRODUCTS,
-      page: () => const ConsumerProductsView(),
-      binding: ConsumerProductsBinding(),
+      page: () => const VendorListView(),
+      binding: VendorListBinding(),
+    ),    GetPage(
+      name: _Paths.VENDOR_CATEGORIES,
+      page: () => const VendorCategoriesListView(),
+      binding: VendorCategoriesListBinding(),
     ),
     GetPage(
       name: _Paths.MY_CART,

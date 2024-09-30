@@ -1,7 +1,10 @@
+import 'package:tbd_flutter/app/CommonWidget/custom_image_view.dart';
 import 'package:tbd_flutter/app/data/all.dart';
 import 'package:tbd_flutter/app/data/dynamic_height_grid.dart';
 import 'package:tbd_flutter/app/modules/addProduct/widget/add_product_sheet.dart';
 import 'package:tbd_flutter/app/modules/product/model/get_product_model.dart';
+import 'package:tbd_flutter/app/modules/vendor_categories_list/model/product_list_model.dart';
+import 'package:tbd_flutter/app/modules/vendor_list/model/product_list_model.dart';
 import '../controllers/product_controller.dart';
 
 class ProductView extends GetView<ProductController> {
@@ -76,7 +79,7 @@ class ProductView extends GetView<ProductController> {
                                   ),
                                   SizedBox(height: 10),
                                   AppText(
-                                    data.name ?? "",
+                                    data["name"],
                                     fontFamily: FontFamily.medium,
                                     fontSize: 12,
                                   ),

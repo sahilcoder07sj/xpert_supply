@@ -1,5 +1,4 @@
 class Constants {
-
   static const nameRegX = r'^(?=.*[a-zA-Z])[\s\S]{2,}$';
   static const phoneRegX = r'^\+?(\d{1,4})?\s?[-.\s]?(\d+[-.\s]?){6,}$';
   static const dateRegX =
@@ -25,8 +24,8 @@ class Constants {
   String changePassword = "api/$selectUser/change-password";
   String updateProfile = "api/$selectUser/update-profile";
 
-/// vendor api customer
-  String  categories = "api/customer/category/get";
+  /// vendor api customer
+  String categories = "api/customer/category/get";
   static String delivery = "api/vendor/delivery";
   static String getProfile = "api/vendor/get-profile";
   static String getCategory = "api/vendor/category/get";
@@ -41,7 +40,7 @@ class Constants {
   static String orderUpdateStatus = "api/vendor/order/update-status";
   static String getQuoteHistory = "api/vendor/quote-history";
   static String manageOffer = "api/vendor/manage-offer";
-  // String  categories = "api/category/get";
+
   /// vendor api customer
 
   String vendorHistory = "api/$selectUser/vendor-history/get";
@@ -63,6 +62,6 @@ class Constants {
   String getDelivery = "api/customer/get-delivery";
 
   /// order
-    String orderHistory = "api/customer/order-history";
-    String quoteHistory = "api/customer/quote-history";
+  String orderHistory = "api/customer/order-history";
+  String quoteHistory = "api/customer/quote-history";
 }

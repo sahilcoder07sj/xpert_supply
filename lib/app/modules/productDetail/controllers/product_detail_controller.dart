@@ -12,16 +12,16 @@ import '../../../data/all.dart';
 import '../../../data/utils.dart';
 
 class ProductDetailController extends GetxController {
-  ProductsData? productsData;
+
 
   Rxn<Products> products = Rxn<Products>();
   Rxn<SingleProductDetails> singleProductDetails = Rxn<SingleProductDetails>();
-  GetCategoryData? getCategoryData;
+  CategoryData? getCategoryData;
 
   @override
   void onInit() {
     super.onInit();
-    if(Get.arguments != null){
+    if (Get.arguments != null) {
       products.value = Get.arguments["details"];
       getCategoryData = Get.arguments["category_details"];
       getProduct();
@@ -31,7 +31,7 @@ class ProductDetailController extends GetxController {
   /// Add vendor
   addToCartApi() async {
     FormData formData = FormData.fromMap({
-      "product_id": productsData!.productId,
+      "product_id": products.value!.productId,
       "quantity": '1',
     });
     final data = await APIFunction().apiCall(
@@ -46,10 +46,12 @@ class ProductDetailController extends GetxController {
     } else {
       CommonDialogue.alertActionDialogApp(message: addToCartModel.message);
     }
+  }
+
   deleteProduct() async {
     Get.back();
     FormData formData = FormData.fromMap({
-      "id" : products.value?.productId ?? 0,
+      "id": products.value?.productId ?? 0,
     });
     final data = await APIFunction().apiCall(
       apiName: Constants.deleteProduct,
@@ -58,18 +60,18 @@ class ProductDetailController extends GetxController {
       token: GetStorageData().readString(GetStorageData().token),
     );
 
-    if(data["status"] == 1){
+    if (data["status"] == 1) {
       Get.back(result: "delete");
       Utils.flutterToast(data["message"]);
-    } else{
+    } else {
       CommonDialogue.alertActionDialogApp(message: data["message"]);
     }
   }
 
   getProduct() async {
     FormData formData = FormData.fromMap({
-      "category_id" : getCategoryData?.id ?? 0,
-      "id" : products.value?.productId ?? 0,
+      "category_id": getCategoryData?.id ?? 0,
+      "id": products.value?.productId ?? 0,
     });
 
     final data = await APIFunction().apiCall(
@@ -80,10 +82,8 @@ class ProductDetailController extends GetxController {
     );
 
     SingleProductDetails model = SingleProductDetails.fromJson(data);
-    if(model.status == 1){
+    if (model.status == 1) {
       singleProductDetails.value = model;
     }
   }
-
-  void increment() => count.value++;
 }

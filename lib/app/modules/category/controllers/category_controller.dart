@@ -1,12 +1,13 @@
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:tbd_flutter/app/data/utils.dart';
+import 'package:tbd_flutter/app/modules/category/model/categories_list_model.dart';
 import 'package:tbd_flutter/app/modules/category/model/get_category_model.dart';
 
 import '../../../data/all.dart';
 
 class CategoryController extends GetxController with SingleGetTickerProviderMixin{
 
-  RxList<GetCategoryData> categoryList = RxList<GetCategoryData>();
+  RxList<CategoryData> categoryList = RxList<CategoryData>();
   Rxn<GetCategory> getCategory = Rxn<GetCategory>();
 
   @override

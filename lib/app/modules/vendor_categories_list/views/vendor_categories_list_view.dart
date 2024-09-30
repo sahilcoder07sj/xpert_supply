@@ -48,8 +48,8 @@ class VendorCategoriesListView extends GetView<VendorCategoriesListController> {
                   onTap: () => Get.toNamed(
                     Routes.PRODUCT,
                     arguments: {
-                      "categories_id":data.id,
-                      "categories_name":data.name,
+                      "cat_data":data,
+                      // "categories_name":data.name,
                     }
                   ),
                   child: Container(

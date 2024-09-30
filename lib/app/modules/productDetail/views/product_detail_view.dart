@@ -17,160 +17,182 @@ class ProductDetailView extends GetView<ProductDetailController> {
       title: AppStrings.productDetails,
       extendBodyBehindAppBar: true,
       appBarBackgroundColor: Colors.transparent,
-      body: Obx(() => controller.singleProductDetails.value != null ? ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          Container(
-            height: 300,
-            padding: EdgeInsets.only(top: AppBar().preferredSize.height),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: AppColors.iconBG,
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(130),
-              ),
-            ),
-            child: Center(
-              child: CommonNetworkImage(
-                imageUrl: controller.singleProductDetails.value?.data?.imageUrl ?? "",
-                height: 150,
-                width: 150,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body: Obx(() => controller.singleProductDetails.value != null
+          ? ListView(
+              padding: EdgeInsets.zero,
               children: [
-                24.verticalSpace,
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AppText(
-                          controller.singleProductDetails.value?.data?.name ?? "",
-                          fontFamily: FontFamily.medium,
-                          fontSize: 24,
-                        ),
-                        SizedBox(height: 3),
-                        Row(
-                          children: [
-                            if(controller.singleProductDetails.value?.data?.discount != null && controller.singleProductDetails.value?.data?.discount != 0)...[
+                Container(
+                  height: 300,
+                  padding: EdgeInsets.only(top: AppBar().preferredSize.height),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: AppColors.iconBG,
+                    borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(130),
+                    ),
+                  ),
+                  child: Center(
+                    child: CommonNetworkImage(
+                      imageUrl: controller
+                              .singleProductDetails.value?.data?.imageUrl ??
+                          "",
+                      height: 150,
+                      width: 150,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      24.verticalSpace,
+                      Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
                               AppText(
-                                "\$${controller.singleProductDetails.value?.data?.discount ?? 0}",
-                                fontFamily: FontFamily.semiBold,
-                                fontSize: 18,
-                                color: AppColors.priceColor,
+                                controller.singleProductDetails.value?.data
+                                        ?.name ??
+                                    "",
+                                fontFamily: FontFamily.medium,
+                                fontSize: 24,
                               ),
-                              SizedBox(width: 4),
+                              SizedBox(height: 3),
+                              Row(
+                                children: [
+                                  if (controller.singleProductDetails.value
+                                              ?.data?.discount !=
+                                          null &&
+                                      controller.singleProductDetails.value
+                                              ?.data?.discount !=
+                                          0) ...[
+                                    AppText(
+                                      "\$${controller.singleProductDetails.value?.data?.discount ?? 0}",
+                                      fontFamily: FontFamily.semiBold,
+                                      fontSize: 18,
+                                      color: AppColors.priceColor,
+                                    ),
+                                    SizedBox(width: 4),
+                                  ],
+                                  AppText(
+                                    "\$${controller.singleProductDetails.value?.data?.amount ?? 0}",
+                                    fontFamily: FontFamily.medium,
+                                    fontSize: 14,
+                                    textDecoration: TextDecoration.lineThrough,
+                                    color: AppColors.discountedPriceColor,
+                                  ),
+                                ],
+                              )
                             ],
-                            AppText(
-                              "\$${controller.singleProductDetails.value?.data?.amount ?? 0}",
-                              fontFamily: FontFamily.medium,
-                              fontSize: 14,
-                              textDecoration: TextDecoration.lineThrough,
-                              color: AppColors.discountedPriceColor,
+                          ),
+                          Spacer(),
+                          if (Constants.selectUser == Constants.vendor) ...[
+                            GestureDetector(
+                              onTap: () {
+                                Get.toNamed(Routes.EDIT_PRODUCT, arguments: {
+                                  "details":
+                                      controller.singleProductDetails.value
+                                })?.then((value) {
+                                  if (value != null) {
+                                    controller.getProduct();
+                                  }
+                                });
+                              },
+                              child: Container(
+                                height: responsiveHeight(40),
+                                width: responsiveWidth(40),
+                                decoration: BoxDecoration(
+                                  color: AppColors.primary.withOpacity(0.1),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                    child: SvgPicture.asset(
+                                  AppIcons.iconsEditDeliveryAddress,
+                                  color: AppColors.primary,
+                                )),
+                              ),
+                            ),
+                            SizedBox(width: 8),
+                            GestureDetector(
+                              onTap: () {
+                                Get.bottomSheet(
+                                  CommonBottomSheet(
+                                    firstButtonText: AppStrings.cancel,
+                                    secondButtonText: AppStrings.delete,
+                                    subTitle: AppStrings
+                                        .areYouSureYouWantToDeleteThisProduct,
+                                    image: AppIcons.iconsDeleteBig,
+                                    iconBgColor: AppColors.red.withOpacity(0.1),
+                                    firstOnTap: () => Get.back(),
+                                    secondOnTap: () =>
+                                        controller.deleteProduct(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                height: responsiveHeight(40),
+                                width: responsiveWidth(40),
+                                decoration: BoxDecoration(
+                                  color: AppColors.red.withOpacity(0.1),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                    child: SvgPicture.asset(
+                                  AppIcons.iconsDelete,
+                                  color: AppColors.red,
+                                )),
+                              ),
                             ),
                           ],
-                        )
-                      ],
-                    ),
-                    Spacer(),
-                    if(Constants.selectUser == Constants.vendor)...[
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed(Routes.EDIT_PRODUCT, arguments: {"details" : controller.singleProductDetails.value})?.then((value) {
-                            if(value != null){
-                              controller.getProduct();
-                            }
-                          });
-                        },
-                        child: Container(
-                          height: responsiveHeight(40),
-                          width: responsiveWidth(40),
-                          decoration: BoxDecoration(
-                            color: AppColors.primary.withOpacity(0.1),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                              child: SvgPicture.asset(
-                                AppIcons.iconsEditDeliveryAddress,
-                                color: AppColors.primary,
-                              )),
+                        ],
+                      ),
+                      20.verticalSpace,
+                      AppText(
+                        controller.singleProductDetails.value?.data
+                                ?.description ??
+                            "",
+                        fontSize: 14.0,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            )
+          : SizedBox()),
+      bottomNavigationBar: Constants.selectUser == Constants.consumer
+          ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CommonButton(
+                          text: AppStrings.addToCart,
+                          onTap: () {
+                            controller.addToCartApi();
+                          },
                         ),
                       ),
-                      SizedBox(width: 8),
-                      GestureDetector(
-                        onTap: () {
-                          Get.bottomSheet(
-                            CommonBottomSheet(
-                              firstButtonText: AppStrings.cancel,
-                              secondButtonText: AppStrings.delete,
-                              subTitle:
-                              AppStrings.areYouSureYouWantToDeleteThisProduct,
-                              image: AppIcons.iconsDeleteBig,
-                              iconBgColor: AppColors.red.withOpacity(0.1),
-                              firstOnTap: () => Get.back(),
-                              secondOnTap: () => controller.deleteProduct(),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          height: responsiveHeight(40),
-                          width: responsiveWidth(40),
-                          decoration: BoxDecoration(
-                            color: AppColors.red.withOpacity(0.1),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                              child: SvgPicture.asset(
-                                AppIcons.iconsDelete,
-                                color: AppColors.red,
-                              )),
+                      10.horizontalSpace,
+                      Expanded(
+                        child: CommonButton(
+                          text: AppStrings.orderNow,
+                          onTap: () => Get.toNamed(Routes.MY_ORDER),
                         ),
                       ),
                     ],
-                  ],
-                ),
-                20.verticalSpace,
-                AppText(
-                  controller.singleProductDetails.value?.data?.description ?? "",
-                  fontSize: 14.0,
-                ),
-              ],
-            ),
-          )
-        ],
-      ) : SizedBox()),
-      bottomNavigationBar: Constants.selectUser == Constants.consumer ? Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: CommonButton(
-                      text: AppStrings.addToCart,
-                    onTap: () => Get.toNamed(Routes.MY_CART),
                   ),
-                ),
-                10.horizontalSpace,
-                Expanded(
-                  child: CommonButton(
-                      text: AppStrings.orderNow,
-                    onTap: () => Get.toNamed(Routes.MY_ORDER),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: MediaQuery.of(context).padding.bottom + 10.0),
-          ],
-        ),
-      ) : null,
+                  SizedBox(
+                      height: MediaQuery.of(context).padding.bottom + 10.0),
+                ],
+              ),
+            )
+          : null,
     );
   }
 }

@@ -8,7 +8,8 @@ class GetProduct {
   GetProduct.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? new GetProductData.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? new GetProductData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -30,13 +31,14 @@ class GetProductData {
   int? lastPage;
   int? perPage;
 
-  GetProductData(
-      {this.categoryId,
-        this.products,
-        this.total,
-        this.currentPage,
-        this.lastPage,
-        this.perPage});
+  GetProductData({
+    this.categoryId,
+    this.products,
+    this.total,
+    this.currentPage,
+    this.lastPage,
+    this.perPage,
+  });
 
   GetProductData.fromJson(Map<String, dynamic> json) {
     categoryId = json['category_id'];
@@ -77,12 +79,12 @@ class Products {
 
   Products(
       {this.productId,
-        this.name,
-        this.amount,
-        this.discount,
-        this.description,
-        this.imageUrl,
-        this.images});
+      this.name,
+      this.amount,
+      this.discount,
+      this.description,
+      this.imageUrl,
+      this.images});
 
   Products.fromJson(Map<String, dynamic> json) {
     productId = json['product_id'];
@@ -124,11 +126,11 @@ class Images {
 
   Images(
       {this.id,
-        this.productId,
-        this.imageUrl,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt});
+      this.productId,
+      this.imageUrl,
+      this.createdAt,
+      this.updatedAt,
+      this.deletedAt});
 
   Images.fromJson(Map<String, dynamic> json) {
     id = json['id'];

@@ -94,7 +94,7 @@ class CategoryListData {
 
 class CategoryData {
   final int? id;
-  final String? name;
+   String? name;
   final bool? status;
   final int? vendorId;
   final String? createdAt;

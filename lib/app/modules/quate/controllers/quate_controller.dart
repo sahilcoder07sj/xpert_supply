@@ -156,17 +156,17 @@ class QuateController extends GetxController {
           quoteHistoryData = orderHistoryModel.data ?? [];
 
         } else {
-          noData = "No product found in cart";
+          errorMessage.value = "No product found in cart";
         }
         update();
       } else {
-        noData = "No product found in cart";
+        errorMessage.value = "No product found in cart";
 
         update();
         CommonDialogue.alertActionDialogApp(message: orderHistoryModel.message);
       }
     } catch (e) {
-      noData = "No product found in cart";
+      errorMessage.value = "No product found in cart";
       update();
     }
   }

@@ -43,7 +43,7 @@ class Constants {
   static String manageOffer = "api/vendor/manage-offer";
   // String  categories = "api/category/get";
   /// vendor api customer
-  String categories = "api/customer/category/get";
+
   String vendorHistory = "api/$selectUser/vendor-history/get";
   String productList = "api/vendor/product/get";
 

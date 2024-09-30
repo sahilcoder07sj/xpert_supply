@@ -1,5 +1,6 @@
 import 'package:tbd_flutter/app/modules/addEditCategory/model/add_category_model.dart';
 import 'package:tbd_flutter/app/modules/category/controllers/category_controller.dart';
+import 'package:tbd_flutter/app/modules/category/model/categories_list_model.dart';
 import 'package:tbd_flutter/app/modules/category/model/get_category_model.dart';
 
 import '../../../data/all.dart';
@@ -7,7 +8,7 @@ import '../../../data/all.dart';
 class AddEditCategoryController extends GetxController {
 
   TextEditingController categoryController = TextEditingController();
-  GetCategoryData? getCategoryData;
+  CategoryData? getCategoryData;
   bool isEdit = false;
   int index = 0;
 

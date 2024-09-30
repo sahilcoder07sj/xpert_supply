@@ -152,6 +152,7 @@ class DeliveryView extends GetView<DeliveryController> {
                     ],
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    textInputAction: TextInputAction.done,
                   ),
                   35.verticalSpace,
                 ],
@@ -168,11 +169,7 @@ class DeliveryView extends GetView<DeliveryController> {
             CommonButton(
               text: AppStrings.next,
               onTap: () {
-                if(controller.isUpdate){
-                  Get.back();
-                } else{
-                  Get.offAllNamed(Routes.MANAGEMENT);
-                }
+                controller.addDelivery();
               },
             ),
             SizedBox(height: MediaQuery.of(context).padding.bottom + 10.0),

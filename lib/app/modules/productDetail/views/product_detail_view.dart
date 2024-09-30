@@ -16,7 +16,7 @@ class ProductDetailView extends GetView<ProductDetailController> {
       title: AppStrings.productDetails,
       extendBodyBehindAppBar: true,
       appBarBackgroundColor: Colors.transparent,
-      body: ListView(
+      body: Obx(() => controller.singleProductDetails.value != null ? ListView(
         padding: EdgeInsets.zero,
         children: [
           Container(
@@ -30,8 +30,8 @@ class ProductDetailView extends GetView<ProductDetailController> {
               ),
             ),
             child: Center(
-              child: Image.asset(
-                "assets/images/aadu.png",
+              child: CommonNetworkImage(
+                imageUrl: controller.singleProductDetails.value?.data?.imageUrl ?? "",
                 height: 150,
                 width: 150,
                 fit: BoxFit.cover,
@@ -50,22 +50,24 @@ class ProductDetailView extends GetView<ProductDetailController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AppText(
-                          "Arabic Ginger",
+                          controller.singleProductDetails.value?.data?.name ?? "",
                           fontFamily: FontFamily.medium,
                           fontSize: 24,
                         ),
                         SizedBox(height: 3),
                         Row(
                           children: [
+                            if(controller.singleProductDetails.value?.data?.discount != null && controller.singleProductDetails.value?.data?.discount != 0)...[
+                              AppText(
+                                "\$${controller.singleProductDetails.value?.data?.discount ?? 0}",
+                                fontFamily: FontFamily.semiBold,
+                                fontSize: 18,
+                                color: AppColors.priceColor,
+                              ),
+                              SizedBox(width: 4),
+                            ],
                             AppText(
-                              "\$25",
-                              fontFamily: FontFamily.semiBold,
-                              fontSize: 18,
-                              color: AppColors.priceColor,
-                            ),
-                            SizedBox(width: 4),
-                            AppText(
-                              "\$446",
+                              "\$${controller.singleProductDetails.value?.data?.amount ?? 0}",
                               fontFamily: FontFamily.medium,
                               fontSize: 14,
                               textDecoration: TextDecoration.lineThrough,
@@ -79,8 +81,11 @@ class ProductDetailView extends GetView<ProductDetailController> {
                     if(Constants.selectUser == Constants.vendor)...[
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed(Routes.EDIT_PRODUCT);
-
+                          Get.toNamed(Routes.EDIT_PRODUCT, arguments: {"details" : controller.singleProductDetails.value})?.then((value) {
+                            if(value != null){
+                              controller.getProduct();
+                            }
+                          });
                         },
                         child: Container(
                           height: responsiveHeight(40),
@@ -107,6 +112,8 @@ class ProductDetailView extends GetView<ProductDetailController> {
                               AppStrings.areYouSureYouWantToDeleteThisProduct,
                               image: AppIcons.iconsDeleteBig,
                               iconBgColor: AppColors.red.withOpacity(0.1),
+                              firstOnTap: () => Get.back(),
+                              secondOnTap: () => controller.deleteProduct(),
                             ),
                           );
                         },
@@ -129,19 +136,14 @@ class ProductDetailView extends GetView<ProductDetailController> {
                 ),
                 20.verticalSpace,
                 AppText(
-                    "Ginger is a flowering plant whose rhizome, ginger root or ginger, is widely used as a spice and a folk medicine.",
-                  fontSize: 14.0,
-                ),
-                10.verticalSpace,
-                AppText(
-                  "Apples are one of the healthiest fruits. Rich in vitamin C and dietary fiber which keep our digestive and immune system healthy. Protects from Alzheimers, type 2 diabetes and cancer. It is a natural teeth whitener and prevent bad breath.s.",
+                  controller.singleProductDetails.value?.data?.description ?? "",
                   fontSize: 14.0,
                 ),
               ],
             ),
           )
         ],
-      ),
+      ) : SizedBox()),
       bottomNavigationBar: Constants.selectUser == Constants.consumer ? Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(

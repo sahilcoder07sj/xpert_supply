@@ -1,53 +1,90 @@
+import 'package:tbd_flutter/app/modules/category/model/get_category_model.dart';
+import 'package:tbd_flutter/app/modules/editProduct/model/edit_product_model.dart';
+import 'package:tbd_flutter/app/modules/product/model/get_product_model.dart';
 
-
-import 'package:get/get.dart';
+import '../../../data/all.dart';
 
 class ProductController extends GetxController {
 
+  RxList<Products> getProductList = RxList();
+  ScrollController scrollController = ScrollController();
+  Rxn<GetProduct> getCategory = Rxn<GetProduct>();
+  RxBool isPaginationLoading = false.obs;
+  int selectIndex = 0;
+  GetCategoryData? getCategoryData;
 
   @override
   void onInit() {
     super.onInit();
+    scrollController.addListener(onScroll);
+    if(Get.arguments != null){
+      getCategoryData = Get.arguments["cat_data"];
+    }
+    getProduct();
   }
 
-  String noDatFound =  "";
+  void onScroll() {
+    // if (scrollController.position.extentAfter <= 0 && getProductList.length < (getCategory.value?.data?.total ?? 0) && !isPaginationLoading.value) {
+    if (scrollController.position.extentAfter <= 0 && !isDataLoaded && !isPaginationLoading.value) {
+      isPaginationLoading.value = true;
+      pageLimit++;
+      getProduct(isLoading: false);
+    }
+  }
 
-  List productList = [
-    {
-      "name": "Arabic Ginger",
-      "price": "\$25",
-      "discounted_price": "\$25",
-      "image": "assets/images/aadu.png",
-    },
-    {
-      "name": "Organic Carrots",
-      "price": "\$25",
-      "discounted_price": "\$25",
-      "image": "assets/images/gajar.png",
-    },
-    {
-      "name": "Fresh Lettuce",
-      "price": "\$25",
-      "discounted_price": "\$25",
-      "image": "assets/images/kobi.png",
-    },
-    {
-      "name": "Fresh Broccoli",
-      "price": "\$25",
-      "discounted_price": "\$25",
-      "image": "assets/images/lili_kobi.png",
-    },
-    {
-      "name": "Bell Pepper Red",
-      "price": "\$25",
-      "discounted_price": "\$25",
-      "image": "assets/images/marcha.png",
-    },
-    {
-      "name": "Butternut Squash ",
-      "price": "\$25",
-      "discounted_price": "\$25",
-      "image": "assets/images/papaiyu.png",
-    },
-  ];
+  int pageLimit = 1;
+  bool isDataLoaded = false;
+  getProduct({bool isLoading = true, bool isReset = false}) async {
+    if(isReset)pageLimit = 1;
+    FormData formData = FormData.fromMap({
+      "category_id" : getCategoryData?.id ?? 0,
+      "page" : pageLimit,
+      "limit" : 10,
+    });
+
+    final data = await APIFunction().apiCall(
+      apiName: Constants.getProduct,
+      context: Get.context!,
+      params: formData,
+      isLoading: isLoading,
+      token: GetStorageData().readString(GetStorageData().token),
+    );
+
+    GetProduct model = GetProduct.fromJson(data);
+    if(model.status == 1){
+      getCategory.value = model;
+      if(isReset)getProductList.clear();
+      if(model.data?.products != null && model.data!.products!.isNotEmpty){
+        getProductList.addAll(model.data?.products ?? []);
+        if(getProductList.length == (getCategory.value?.data?.total ?? 0)){
+          isDataLoaded = true;
+        }
+        isPaginationLoading.value = false;
+      }
+    } else{
+      CommonDialogue.alertActionDialogApp(message: model.message);
+    }
+  }
+
+  addArchive({required int productId, required int index}) async {
+    FormData formData = FormData.fromMap({
+      "category_id" : getCategory.value?.data?.categoryId ?? "",
+      "id" : productId,
+      "status" : 1,
+    });
+
+    final data = await APIFunction().apiCall(
+      apiName: Constants.updateProduct,
+      context: Get.context!,
+      params: formData,
+      token: GetStorageData().readString(GetStorageData().token),
+    );
+
+    EditProduct model = EditProduct.fromJson(data);
+    if(model.status == 1){
+      getProductList.removeAt(index);
+    } else{
+      CommonDialogue.alertActionDialogApp(message: data["message"]);
+    }
+  }
 }

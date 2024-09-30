@@ -39,6 +39,10 @@ class LoginUserData {
   final String? deleteReason;
   final String? emailVerifiedAt;
   final String? deletedAt;
+  int? normalDeliveryDays;
+  int? fastDeliveryDays;
+  int? fastDeliveryCharges;
+  bool? isFastDelivery;
   final String? businessName;
   final int? id;
 
@@ -57,6 +61,10 @@ class LoginUserData {
     this.updatedAt,
     this.createdAt,
     this.deletedAt,
+    this.normalDeliveryDays,
+    this.fastDeliveryDays,
+    this.fastDeliveryCharges,
+    this.isFastDelivery,
     this.id,
   });
 
@@ -75,6 +83,10 @@ class LoginUserData {
         rememberToken = json['remember_token'] as String?,
         createdAt = json['created_at'] as String?,
         deletedAt = json['deleted_at'] as String?,
+        normalDeliveryDays = json['normal_delivery_days'] as int?,
+        fastDeliveryDays = json['fast_delivery_days'] as int?,
+        fastDeliveryCharges = json['fast_delivery_charges'] as int?,
+        isFastDelivery = json['is_fast_delivery'] as bool?,
         id = json['id'] as int?;
 
   Map<String, dynamic> toJson() => {
@@ -92,6 +104,10 @@ class LoginUserData {
     'created_at' : createdAt,
     'business_name' : businessName,
     'deleted_at' : deletedAt,
+    'normal_delivery_days' : normalDeliveryDays,
+    'fast_delivery_days' : fastDeliveryDays,
+    'fast_delivery_charges' : fastDeliveryCharges,
+    'is_fast_delivery' : isFastDelivery,
     'id' : id
   };
 }

@@ -17,4 +17,6 @@ export 'package:dio_cookie_manager/dio_cookie_manager.dart';
 export 'package:cookie_jar/cookie_jar.dart';
 export 'package:tbd_flutter/app/CommonWidget/dialogue.dart';
 export 'package:dio/dio.dart';
+export 'package:tbd_flutter/app/api_repository/api_function.dart';
+export 'package:tbd_flutter/app/api_repository/get_storage.dart';
 export 'package:get/get.dart' hide Response, FormData, MultipartFile, ScreenType;

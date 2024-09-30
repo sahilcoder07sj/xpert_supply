@@ -25,6 +25,7 @@ class HttpUtil {
       receiveTimeout: 10000,
       headers: {
         'token': token,
+        "Accept":"application/json",
       },
       contentType: 'application/json; charset=utf-8',
       responseType: ResponseType.json,

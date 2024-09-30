@@ -49,7 +49,7 @@ class CommonImageWidget extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: ClipOval(
-                child: image != "" ? Image.asset(
+                child: image != "" ? Image.network(
                   image ?? "",
                   fit: BoxFit.cover,
                 ) : fileImage != "" ? Image.file(

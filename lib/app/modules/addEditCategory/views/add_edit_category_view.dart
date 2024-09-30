@@ -35,7 +35,15 @@ class AddEditCategoryView extends GetView<AddEditCategoryController> {
               CommonButton(
                   text: controller.isEdit
                       ? AppStrings.save
-                      : AppStrings.addCategory)
+                      : AppStrings.addCategory,
+                onTap: () {
+                  if(controller.isEdit){
+                    controller.editCategory();
+                  } else{
+                    controller.addCategory();
+                  }
+                },
+              )
             ],
           ),
         );

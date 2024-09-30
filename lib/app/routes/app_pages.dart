@@ -36,6 +36,8 @@ import '../modules/myOrder/views/my_order_view.dart';
 import '../modules/myOrder/views/order_confirm_view.dart';
 import '../modules/myProfile/bindings/my_profile_binding.dart';
 import '../modules/myProfile/views/my_profile_view.dart';
+import '../modules/notification/bindings/notification_binding.dart';
+import '../modules/notification/views/notification_view.dart';
 import '../modules/orderHistory/bindings/order_history_binding.dart';
 import '../modules/orderHistory/views/order_history_view.dart';
 import '../modules/orderList/bindings/order_list_binding.dart';
@@ -203,6 +205,11 @@ class AppPages {
       name: _Paths.ARCHIVED,
       page: () => const ArchivedView(),
       binding: ArchivedBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFICATION,
+      page: () => const NotificationView(),
+      binding: NotificationBinding(),
     ),
   ];
 }

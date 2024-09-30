@@ -32,6 +32,7 @@ abstract class Routes {
   static const ORDER_CONFIRM = _Paths.ORDER_CONFIRM;
   static const ORDER_LIST = _Paths.ORDER_LIST;
   static const ARCHIVED = _Paths.ARCHIVED;
+  static const NOTIFICATION = _Paths.NOTIFICATION;
 }
 
 abstract class _Paths {
@@ -65,4 +66,5 @@ abstract class _Paths {
   static const ADD_EDIT_ADDRESS = '/add-edit-address';
   static const ORDER_LIST = '/order-list';
   static const ARCHIVED = '/archived';
+  static const NOTIFICATION = '/notification';
 }

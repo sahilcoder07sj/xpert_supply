@@ -115,19 +115,15 @@ class QuateController extends GetxController {
     }
   }
 
-  manageQuote(
-      {int? offerPrice,
-      required quoteId,
-      required bool isSend,
-      int? index}) async {
-    try {
+  manageQuote({int? offerPrice, required quoteId, required bool isSend, int? index}) async {
+    try{
       FormData formData = FormData.fromMap({
-        "quote_id": quoteId,
-        "action": isSend ? "send_offer" : "cancel_offer",
+        "quote_id" : quoteId,
+        "action" : isSend ? "send_offer" : "cancel_offer",
         // "message" : "",
       });
 
-      if (offerPrice != null) {
+      if(offerPrice != null){
         formData.fields.add(MapEntry("offer_price", offerPrice.toString()));
       }
       final data = await APIFunction().apiCall(
@@ -138,45 +134,53 @@ class QuateController extends GetxController {
       );
 
       ManageOrder model = ManageOrder.fromJson(data);
-      if (model.status == 1) {
-        if (model.data?.status == "canceled") {
+      if(model.status == 1){
+        if(model.data?.status == "canceled"){
           quoteList.removeAt(index!);
         }
         amountController.clear();
         Utils.flutterToast(model.message);
-      } else {
+      } else{
         CommonDialogue.alertActionDialogApp(message: model.message);
       }
-    } catch (e) {
+    } catch(e){
       print("error : $e");
     }
   }
 
-  getQuoteHistoryApi() async {
-    errorMessage.value = "";
+  getQuoteHistoryApi({bool isLoading = true}) async {
+    FormData formData = FormData.fromMap({
+      "page" : currentPage,
+      "limit" : 10,
+    });
     try {
-      FormData formData = FormData.fromMap({});
       final data = await APIFunction().apiCall(
         apiName: Constants().quoteHistory,
         context: Get.context!,
         params: formData,
+        isLoading: isLoading,
         token: GetStorageData().readString(GetStorageData().token),
       );
+      QuoteHistoryModel orderHistoryModel = QuoteHistoryModel.fromJson(data);
+      if (orderHistoryModel.status == 1) {
 
-      QuoteHistoryModel model = QuoteHistoryModel.fromJson(data);
-      if (model.status == 1) {
-        quoteHistoryData.value = model.data ?? [];
+        if (orderHistoryModel.data!.isNotEmpty) {
+          quoteHistoryData = orderHistoryModel.data ?? [];
 
+        } else {
+          errorMessage.value = "No product found in cart";
+        }
+        isPaginationLoading.value = false;
+        update();
       } else {
-        errorMessage.value = "No data found";
+        errorMessage.value = "No product found in cart";
 
-        CommonDialogue.alertActionDialogApp(message: model.message);
+        update();
+        CommonDialogue.alertActionDialogApp(message: orderHistoryModel.message);
       }
-      update();
     } catch (e) {
-      errorMessage.value = "No data found";
+      errorMessage.value = "No product found in cart";
       update();
-      print("error : $e");
     }
   }
 }

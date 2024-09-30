@@ -44,7 +44,10 @@ class ProductController extends GetxController {
 
   getProduct({bool isLoading = true, bool isReset = false}) async {
     noData.value = "";
-    if (isReset) pageLimit = 1;
+    if (isReset){
+      isDataLoaded = false;
+      pageLimit = 1;
+    }
     FormData formData = FormData.fromMap({
       "category_id": getCategoryData?.id ?? 0,
       "page": pageLimit,
@@ -73,7 +76,6 @@ class ProductController extends GetxController {
         } else {
           if (pageLimit == 1) {
             noData.value = "No data found";
-            print("noDatanoDatanoDatanoDatanoData");
           }
           update();
         }
@@ -84,7 +86,6 @@ class ProductController extends GetxController {
         update();
       }
     } catch (e) {
-      print("} catch (e) {");
       noData.value = "no data found";
       update();
     }

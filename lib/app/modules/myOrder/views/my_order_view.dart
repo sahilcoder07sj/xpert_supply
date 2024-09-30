@@ -42,7 +42,7 @@ class MyOrderView extends GetView<MyOrderController> {
                           children: [
                             Padding(
                               padding:
-                              const EdgeInsets.symmetric(horizontal: 8.0),
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
                               child: Row(
                                 children: [
                                   Container(
@@ -61,7 +61,7 @@ class MyOrderView extends GetView<MyOrderController> {
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       children: [
                                         AppText(
                                           data.name ?? "",
@@ -80,16 +80,16 @@ class MyOrderView extends GetView<MyOrderController> {
                                             SizedBox(width: 4),
                                             data.discount != null
                                                 ? AppText(
-                                              "\$${data.discount}",
-                                              fontFamily:
-                                              FontFamily.medium,
-                                              fontSize: 12,
-                                              textDecoration:
-                                              TextDecoration
-                                                  .lineThrough,
-                                              color: AppColors
-                                                  .discountedPriceColor,
-                                            )
+                                                    "\$${data.discount}",
+                                                    fontFamily:
+                                                        FontFamily.medium,
+                                                    fontSize: 12,
+                                                    textDecoration:
+                                                        TextDecoration
+                                                            .lineThrough,
+                                                    color: AppColors
+                                                        .discountedPriceColor,
+                                                  )
                                                 : SizedBox(),
                                           ],
                                         )
@@ -115,7 +115,7 @@ class MyOrderView extends GetView<MyOrderController> {
                                     alignment: Alignment.center,
                                     width: 40.0,
                                     padding:
-                                    EdgeInsets.symmetric(vertical: 4.0),
+                                        EdgeInsets.symmetric(vertical: 4.0),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(7.0),
                                       color: AppColors.border.withOpacity(0.1),
@@ -183,7 +183,7 @@ class MyOrderView extends GetView<MyOrderController> {
                   5.verticalSpace,
                   Container(
                     padding:
-                    EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                        EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.0),
                       color: AppColors.white,
@@ -198,7 +198,7 @@ class MyOrderView extends GetView<MyOrderController> {
                           children: [
                             Padding(
                               padding:
-                              const EdgeInsets.symmetric(vertical: 10.0),
+                                  const EdgeInsets.symmetric(vertical: 10.0),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
@@ -220,24 +220,21 @@ class MyOrderView extends GetView<MyOrderController> {
                                       ),
                                       child: controller.addressId == data.id
                                           ? Container(
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: AppColors.primary,
-                                          border: Border.all(
-                                            color: AppColors.primary,
-                                          ),
-                                        ),
-                                      )
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: AppColors.primary,
+                                                border: Border.all(
+                                                  color: AppColors.primary,
+                                                ),
+                                              ),
+                                            )
                                           : SizedBox(),
                                     ),
                                   ),
                                   5.horizontalSpace,
                                   Expanded(
                                     child: AppText(
-                                      "${data.address ?? ""}, ${data.area ??
-                                          ""}, ${data.city ?? ""}, ${data
-                                          .country ?? ""}, ${data.pincode ??
-                                          ""}",
+                                      "${data.address ?? ""}, ${data.area ?? ""}, ${data.city ?? ""}, ${data.country ?? ""}, ${data.pincode ?? ""}",
                                       fontSize: 14.0,
                                     ),
                                   ),
@@ -247,7 +244,7 @@ class MyOrderView extends GetView<MyOrderController> {
                                       GestureDetector(
                                         onTap: () {
                                           Get.toNamed(Routes.ADD_EDIT_ADDRESS,
-                                              arguments: {
+                                                  arguments: {
                                                 "is_edit": true,
                                                 "address_data": data,
                                               })!
@@ -293,10 +290,10 @@ class MyOrderView extends GetView<MyOrderController> {
                             ),
                             index != 1
                                 ? Container(
-                              height: 1.0,
-                              width: double.infinity,
-                              color: AppColors.iconBG,
-                            )
+                                    height: 1.0,
+                                    width: double.infinity,
+                                    color: AppColors.iconBG,
+                                  )
                                 : SizedBox(),
                           ],
                         );
@@ -306,176 +303,168 @@ class MyOrderView extends GetView<MyOrderController> {
                   20.verticalSpace,
                   controller.deliveryData != null
                       ? Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 12.0),
-                    decoration: CommonWidget.commonShadowWidget(
-                      radius: 12.0,
-                    ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0),
-                          child: Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  AppText(
-                                    AppStrings.normalDelivery,
-                                    fontSize: 17.0,
-                                    fontFamily: FontFamily.medium,
-                                  ),
-                                  8.verticalSpace,
-                                  AppRichText(
-                                    firstText: AppStrings.days + ": ",
-                                    secondText: controller
-                                        .deliveryData!.normalDeliveryDays
-                                        .toString(),
-                                    fontSize: 14.0,
-                                    firstTextFontFamily:
-                                    FontFamily.regular,
-                                    secondTextFontFamily:
-                                    FontFamily.medium,
-                                  )
-                                ],
-                              ),
-                              Spacer(),
-                              GestureDetector(
-                                onTap: () =>
-                                controller
-                                    .isFastDelivery.value = false,
-                                child: Obx(() =>
-                                    Container(
-                                      padding: EdgeInsets.all(2.0),
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                            color: !controller
-                                                .isFastDelivery.value
-                                                ? AppColors.primary
-                                                : AppColors.border),
-                                      ),
-                                      child: CircleAvatar(
-                                        radius: 7.0,
-                                        backgroundColor: !controller
-                                            .isFastDelivery.value
-                                            ? AppColors.primary
-                                            : Colors.transparent,
-                                      ),
-                                    )),
-                              ),
-                            ],
-                          ),
-                        ),
-                        8.verticalSpace,
-                        Container(
-                          height: 1.0,
                           width: double.infinity,
-                          color: AppColors.iconBG,
-                        ),
-                        8.verticalSpace,
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0),
-                          child: Row(
+                          padding: EdgeInsets.symmetric(vertical: 12.0),
+                          decoration: CommonWidget.commonShadowWidget(
+                            radius: 12.0,
+                          ),
+                          child: Column(
                             children: [
-                              Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  AppText(
-                                    AppStrings.fastDelivery,
-                                    fontSize: 17.0,
-                                    fontFamily: FontFamily.medium,
-                                  ),
-                                  8.verticalSpace,
-                                  AppRichText(
-                                    firstText: AppStrings.days + ": ",
-                                    secondText: controller
-                                        .deliveryData!.fastDeliveryDays
-                                        .toString(),
-                                    fontSize: 14.0,
-                                    firstTextFontFamily:
-                                    FontFamily.regular,
-                                    secondTextFontFamily:
-                                    FontFamily.medium,
-                                  ),
-                                  8.verticalSpace,
-                                  AppRichText(
-                                    firstText: AppStrings.charges + ": ",
-                                    secondText:
-                                    "\$${controller.deliveryData!
-                                        .fastDeliveryCharges}",
-                                    fontSize: 14.0,
-                                    firstTextFontFamily:
-                                    FontFamily.regular,
-                                    secondTextFontFamily:
-                                    FontFamily.medium,
-                                  )
-                                ],
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0),
+                                child: Row(
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        AppText(
+                                          AppStrings.normalDelivery,
+                                          fontSize: 17.0,
+                                          fontFamily: FontFamily.medium,
+                                        ),
+                                        8.verticalSpace,
+                                        AppRichText(
+                                          firstText: AppStrings.days + ": ",
+                                          secondText: controller
+                                              .deliveryData!.normalDeliveryDays
+                                              .toString(),
+                                          fontSize: 14.0,
+                                          firstTextFontFamily:
+                                              FontFamily.regular,
+                                          secondTextFontFamily:
+                                              FontFamily.medium,
+                                        )
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    GestureDetector(
+                                      onTap: () => controller
+                                          .isFastDelivery.value = false,
+                                      child: Obx(() => Container(
+                                            padding: EdgeInsets.all(2.0),
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                  color: !controller
+                                                          .isFastDelivery.value
+                                                      ? AppColors.primary
+                                                      : AppColors.border),
+                                            ),
+                                            child: CircleAvatar(
+                                              radius: 7.0,
+                                              backgroundColor: !controller
+                                                      .isFastDelivery.value
+                                                  ? AppColors.primary
+                                                  : Colors.transparent,
+                                            ),
+                                          )),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Spacer(),
-                              GestureDetector(
-                                onTap: () =>
-                                controller
-                                    .isFastDelivery.value = true,
-                                child: Obx(() =>
-                                    Container(
-                                      padding: EdgeInsets.all(2.0),
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                            color: controller
-                                                .isFastDelivery.value
-                                                ? AppColors.primary
-                                                : AppColors.border),
-                                      ),
-                                      child: CircleAvatar(
-                                        radius: 7.0,
-                                        backgroundColor: controller
-                                            .isFastDelivery.value
-                                            ? AppColors.primary
-                                            : Colors.transparent,
-                                      ),
-                                    )),
+                              8.verticalSpace,
+                              Container(
+                                height: 1.0,
+                                width: double.infinity,
+                                color: AppColors.iconBG,
+                              ),
+                              8.verticalSpace,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0),
+                                child: Row(
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        AppText(
+                                          AppStrings.fastDelivery,
+                                          fontSize: 17.0,
+                                          fontFamily: FontFamily.medium,
+                                        ),
+                                        8.verticalSpace,
+                                        AppRichText(
+                                          firstText: AppStrings.days + ": ",
+                                          secondText: controller
+                                              .deliveryData!.fastDeliveryDays
+                                              .toString(),
+                                          fontSize: 14.0,
+                                          firstTextFontFamily:
+                                              FontFamily.regular,
+                                          secondTextFontFamily:
+                                              FontFamily.medium,
+                                        ),
+                                        8.verticalSpace,
+                                        AppRichText(
+                                          firstText: AppStrings.charges + ": ",
+                                          secondText:
+                                              "\$${controller.deliveryData!.fastDeliveryCharges}",
+                                          fontSize: 14.0,
+                                          firstTextFontFamily:
+                                              FontFamily.regular,
+                                          secondTextFontFamily:
+                                              FontFamily.medium,
+                                        )
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    GestureDetector(
+                                      onTap: () => controller
+                                          .isFastDelivery.value = true,
+                                      child: Obx(() => Container(
+                                            padding: EdgeInsets.all(2.0),
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                  color: controller
+                                                          .isFastDelivery.value
+                                                      ? AppColors.primary
+                                                      : AppColors.border),
+                                            ),
+                                            child: CircleAvatar(
+                                              radius: 7.0,
+                                              backgroundColor: controller
+                                                      .isFastDelivery.value
+                                                  ? AppColors.primary
+                                                  : Colors.transparent,
+                                            ),
+                                          )),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                  )
+                        )
                       : SizedBox(),
                   controller.deliveryData != null
                       ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      10.verticalSpace,
-                      AppText(
-                        AppStrings.deliveryDate,
-                        fontSize: 14.0,
-                        fontFamily: FontFamily.medium,
-                      ),
-                      5.verticalSpace,
-                      Obx(() {
-                        return Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.all(15.0),
-                          decoration: CommonWidget.commonShadowWidget(
-                            radius: 12.0
-                          ),
-                          child: AppText(
-                            "${controller.isFastDelivery.value ? controller
-                                .deliveryData!.fastDeliveryDate : controller
-                                .deliveryData!.normalDeliveryDate}",
-                            fontSize: 14.0,
-                          ),
-                        );
-                      }),
-                    ],
-                  )
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            10.verticalSpace,
+                            AppText(
+                              AppStrings.deliveryDate,
+                              fontSize: 14.0,
+                              fontFamily: FontFamily.medium,
+                            ),
+                            5.verticalSpace,
+                            Obx(() {
+                              return Container(
+                                width: double.infinity,
+                                padding: EdgeInsets.all(15.0),
+                                decoration: CommonWidget.commonShadowWidget(
+                                    radius: 12.0),
+                                child: AppText(
+                                  "${controller.isFastDelivery.value ? controller.deliveryData!.fastDeliveryDate : controller.deliveryData!.normalDeliveryDate}",
+                                  fontSize: 14.0,
+                                ),
+                              );
+                            }),
+                          ],
+                        )
                       : SizedBox(),
                   10.verticalSpace,
                   AppText(
@@ -488,15 +477,22 @@ class MyOrderView extends GetView<MyOrderController> {
                     contentPadding: EdgeInsets.all(15.0),
                     controller: controller.noteController,
                     maxLines: 5,
-                    hintText: "Lorem Ipsum is simply dummy text",
+                    hintText: "Type your notes",
                   ),
-                  20.verticalSpace,
-                  CommonButton(
-                    text: AppStrings.getQuote,
-                    borderColor: AppColors.primary,
-                    bgColor: AppColors.white,
-                    fontColor: AppColors.primary,
-                  ),
+                  controller.isHaveMultipleVendors == 0
+                      ? 20.verticalSpace
+                      : SizedBox(),
+                  controller.isHaveMultipleVendors == 0
+                      ? CommonButton(
+                          text: AppStrings.getQuote,
+                          borderColor: AppColors.primary,
+                          bgColor: AppColors.white,
+                          onTap: () {
+                            controller.quoteOrder();
+                          },
+                          fontColor: AppColors.primary,
+                        )
+                      : SizedBox(),
                   15.verticalSpace,
                   CommonButton(
                     text: AppStrings.placeOrder,
@@ -505,10 +501,7 @@ class MyOrderView extends GetView<MyOrderController> {
                     },
                   ),
                   SizedBox(
-                      height: MediaQuery
-                          .of(context)
-                          .padding
-                          .bottom + 10.0),
+                      height: MediaQuery.of(context).padding.bottom + 10.0),
                 ],
               ),
             ),

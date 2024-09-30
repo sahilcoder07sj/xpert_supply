@@ -33,6 +33,7 @@ class Constants {
   String addToCartProduct = "api/customer/cart/add-product";
   String customerCartGet = "api/customer/cart/get";
   String placeOrder = "api/customer/order/place";
+  String quoteOrder = "api/customer/request-quote";
 
   /// Address
   String addAddress = "api/customer/addresses/add";
@@ -45,4 +46,5 @@ class Constants {
 
   /// order
     String orderHistory = "api/customer/order-history";
+    String quoteHistory = "api/customer/quote-history";
 }

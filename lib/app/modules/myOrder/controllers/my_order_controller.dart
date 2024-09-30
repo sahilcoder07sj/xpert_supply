@@ -14,6 +14,7 @@ class MyOrderController extends GetxController {
   List<ProductsData> cartProducts = [];
   RxInt tempQty = 0.obs;
   int? cartId;
+  int? isHaveMultipleVendors;
   int? addressId;
   RxBool isOpenAllAddress = false.obs;
   RxBool isFastDelivery = false.obs;
@@ -23,7 +24,7 @@ class MyOrderController extends GetxController {
   void onInit() {
     getMyCartApi();
     getAddress();
-    getDeliveryCharges();
+
     super.onInit();
   }
 
@@ -117,6 +118,10 @@ class MyOrderController extends GetxController {
     if (myCartModel.status == 1) {
       cartProducts = myCartModel.data!.products ?? [];
       cartId = myCartModel.data!.cartId;
+      isHaveMultipleVendors = myCartModel.data!.isHaveMultipleVendors;
+      if (isHaveMultipleVendors == 0) {
+        getDeliveryCharges();
+      }
       update();
     } else {
       CommonDialogue.alertActionDialogApp(message: myCartModel.message);
@@ -128,20 +133,41 @@ class MyOrderController extends GetxController {
     FormData formData = FormData.fromMap({
       "cart_id": cartId,
       "delivery_address_id": addressId,
-      "is_fast_delivery": isFastDelivery.value ? "1" : "0",
-      "delivery_charges": deliveryData != null
-          ? deliveryData!.fastDeliveryCharges.toString()
-          : "0",
-      "delivery_date": deliveryData != null
-          ? isFastDelivery.value
-              ? deliveryData!.fastDeliveryDate
-              : deliveryData!.normalDeliveryDate
-          : "",
+      if (isHaveMultipleVendors == 0)
+        "is_fast_delivery": isFastDelivery.value ? "1" : "0",
+      if (isHaveMultipleVendors == 0)
+        "delivery_charges": deliveryData != null
+            ? deliveryData!.fastDeliveryCharges.toString()
+            : "0",
+      if (isHaveMultipleVendors == 0)
+        "delivery_date": deliveryData != null
+            ? isFastDelivery.value
+                ? deliveryData!.fastDeliveryDate
+                : deliveryData!.normalDeliveryDate
+            : "",
       if (noteController.text.isNotEmpty) "notes": noteController.text,
       "payment_id": "ABC123456"
     });
     final data = await APIFunction().apiCall(
       apiName: Constants().placeOrder,
+      context: Get.context!,
+      params: formData,
+      token: GetStorageData().readString(GetStorageData().token),
+    );
+    MyCartModel addToCartModel = MyCartModel.fromJson(data);
+    if (addToCartModel.status == 1) {
+      Get.toNamed(Routes.ORDER_CONFIRM);
+    } else {
+      CommonDialogue.alertActionDialogApp(message: addToCartModel.message);
+    }
+  }
+  /// Quote order api
+  quoteOrder() async {
+    FormData formData = FormData.fromMap({
+      "cart_id": cartId,
+    });
+    final data = await APIFunction().apiCall(
+      apiName: Constants().quoteOrder,
       context: Get.context!,
       params: formData,
       token: GetStorageData().readString(GetStorageData().token),

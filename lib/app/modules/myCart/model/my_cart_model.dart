@@ -25,6 +25,7 @@ class MyCartModel {
 
 class MyCartData {
   final int? cartId;
+  final int? isHaveMultipleVendors;
   final int? orderId;
   final List<ProductsData>? products;
 
@@ -32,15 +33,18 @@ class MyCartData {
     this.cartId,
     this.products,
     this.orderId,
+    this.isHaveMultipleVendors,
   });
 
   MyCartData.fromJson(Map<String, dynamic> json)
       : cartId = json['cart_id'] as int?,
        orderId = json['order_id'] as int?,
+        isHaveMultipleVendors = json['is_have_multiple_vendors'] as int?,
         products = (json['products'] as List?)?.map((dynamic e) => ProductsData.fromJson(e as Map<String,dynamic>)).toList();
 
   Map<String, dynamic> toJson() => {
     'cart_id' : cartId,
+    'is_have_multiple_vendors' : isHaveMultipleVendors,
     'order_id' : orderId,
     'products' : products?.map((e) => e.toJson()).toList()
   };

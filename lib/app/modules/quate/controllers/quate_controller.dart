@@ -165,8 +165,7 @@ class QuateController extends GetxController {
       if (orderHistoryModel.status == 1) {
 
         if (orderHistoryModel.data!.isNotEmpty) {
-          quoteHistoryData = orderHistoryModel.data ?? [];
-
+          quoteHistoryData.value = orderHistoryModel.data ?? [];
         } else {
           errorMessage.value = "No product found in cart";
         }

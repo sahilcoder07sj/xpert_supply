@@ -1,5 +1,4 @@
 import 'package:tbd_flutter/app/modules/quate/model/get_quote_model.dart';
-
 import '../../../data/all.dart';
 import '../controllers/quate_controller.dart';
 

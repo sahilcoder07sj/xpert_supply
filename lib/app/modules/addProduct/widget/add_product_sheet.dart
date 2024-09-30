@@ -43,7 +43,7 @@ class AddProductSheet extends GetView<ProductController> {
                   Get.back();
                   Get.toNamed(Routes.ADD_PRODUCT, arguments: {"cat_id" : controller.getCategoryData?.id})?.then((value) {
                     if(value != null){
-                      controller.getProduct(isLoading: false, isReset: true);
+                      controller.getProduct(isReset: true);
                     }
                   });
                 },

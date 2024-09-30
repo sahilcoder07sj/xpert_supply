@@ -22,10 +22,13 @@ class QuateController extends GetxController {
 
   @override
   void onInit() {
-    getQuoteHistoryApi();
     super.onInit();
     scrollController.addListener(onScroll);
-    getQuote();
+    if(Constants.selectUser == Constants.vendor){
+      getQuote();
+    } else{
+      getQuoteHistoryApi();
+    }
   }
 
   sendOfferDialogue({required int quoteId}) {
@@ -71,7 +74,11 @@ class QuateController extends GetxController {
     if (scrollController.position.extentAfter <= 0 && quoteList.length < (getQuoteModel.value?.pagination?.total ?? 0) && !isPaginationLoading.value) {
       isPaginationLoading.value = true;
       currentPage++;
-      getQuote(isLoading: false);
+      if(Constants.selectUser == Constants.vendor){
+        getQuote(isLoading: false);
+      } else{
+        getQuoteHistoryApi(isLoading: false);
+      }
     }
   }
 
@@ -140,13 +147,17 @@ class QuateController extends GetxController {
     }
   }
 
-  getQuoteHistoryApi() async {
-    FormData formData = FormData.fromMap({});
+  getQuoteHistoryApi({bool isLoading = true}) async {
+    FormData formData = FormData.fromMap({
+      "page" : currentPage,
+      "limit" : 10,
+    });
     try {
       final data = await APIFunction().apiCall(
         apiName: Constants().quoteHistory,
         context: Get.context!,
         params: formData,
+        isLoading: isLoading,
         token: GetStorageData().readString(GetStorageData().token),
       );
       QuoteHistoryModel orderHistoryModel = QuoteHistoryModel.fromJson(data);
@@ -158,6 +169,7 @@ class QuateController extends GetxController {
         } else {
           errorMessage.value = "No product found in cart";
         }
+        isPaginationLoading.value = false;
         update();
       } else {
         errorMessage.value = "No product found in cart";

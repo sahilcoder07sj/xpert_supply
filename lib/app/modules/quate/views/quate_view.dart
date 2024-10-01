@@ -713,7 +713,7 @@ class QuateView extends GetView<QuateController> {
                                                                     0.2)),
                                                       ),
                                                       child: AppText(
-                                                        "\$${data.totalPrice}",
+                                                        "\$${data.totalPrice ?? 0.0}",
                                                         fontFamily:
                                                             FontFamily.medium,
                                                         fontSize: 15.0,
@@ -752,7 +752,7 @@ class QuateView extends GetView<QuateController> {
                                                                     0.2)),
                                                       ),
                                                       child: AppText(
-                                                        "\$${data.offerPrice}",
+                                                        "\$${data.offerPrice ?? 0.0}",
                                                         fontFamily:
                                                             FontFamily.medium,
                                                         fontSize: 15.0,
@@ -763,7 +763,7 @@ class QuateView extends GetView<QuateController> {
                                               ],
                                             ),
                                           ),
-                                          data.message != null
+                                          data.message != null && data.message != ""
                                               ? Column(
                                                   children: [
                                                     10.verticalSpace,

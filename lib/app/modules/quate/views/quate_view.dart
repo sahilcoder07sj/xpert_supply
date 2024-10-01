@@ -25,7 +25,7 @@ class QuateView extends GetView<QuateController> {
                             padding: EdgeInsets.symmetric(vertical: 10.0),
                             itemCount: controller.quoteList.length,
                             itemBuilder: (context, index) {
-                              QuoteData data = controller.quoteList[index];
+                              GetQuoteData data = controller.quoteList[index];
                               return GestureDetector(
                                 onTap: () {
                                   if (data.isCheck?.value == true) {
@@ -123,44 +123,52 @@ class QuateView extends GetView<QuateController> {
                                                           ),
                                                           6.horizontalSpace,
                                                           AppText(
-                                                            "10 Furnival Street, EC4A 1AB London, UK",
+                                                            "${data.customer?.address}, ${data.customer?.city}, ${data.customer?.country}",
                                                             fontSize: 12.0,
                                                           )
                                                         ],
                                                       ),
                                                     ),
-                                                    10.verticalSpace,
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 15.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Container(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    5.0),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5.0),
-                                                              color: AppColors
-                                                                  .iconBG,
+                                                    if (data.customer
+                                                            ?.phoneNumber !=
+                                                        null) ...[
+                                                      10.verticalSpace,
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal:
+                                                                    15.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(5.0),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5.0),
+                                                                color: AppColors
+                                                                    .iconBG,
+                                                              ),
+                                                              child: SvgPicture
+                                                                  .asset(AppIcons
+                                                                      .iconsPhone),
                                                             ),
-                                                            child: SvgPicture
-                                                                .asset(AppIcons
-                                                                    .iconsPhone),
-                                                          ),
-                                                          6.horizontalSpace,
-                                                          AppText(
-                                                            "+1 1257456541",
-                                                            fontSize: 12.0,
-                                                          )
-                                                        ],
+                                                            6.horizontalSpace,
+                                                            AppText(
+                                                              data.customer
+                                                                      ?.phoneNumber ??
+                                                                  "",
+                                                              fontSize: 12.0,
+                                                            )
+                                                          ],
+                                                        ),
                                                       ),
-                                                    ),
+                                                    ],
                                                     10.verticalSpace,
                                                     Padding(
                                                       padding: const EdgeInsets
@@ -370,8 +378,7 @@ class QuateView extends GetView<QuateController> {
                                                                       child:
                                                                           CommonNetworkImage(
                                                                         imageUrl:
-                                                                            data.products?[i].imageUrl ??
-                                                                                "",
+                                                                            data.products?[i].images?.first.imageUrl ?? "",
                                                                         height:
                                                                             50.0,
                                                                         width:
@@ -384,7 +391,7 @@ class QuateView extends GetView<QuateController> {
                                                                     Expanded(
                                                                       child:
                                                                           AppText(
-                                                                        data.products?[i].name ??
+                                                                        data.products?[i].productName ??
                                                                             "",
                                                                         fontSize:
                                                                             14.0,
@@ -402,7 +409,8 @@ class QuateView extends GetView<QuateController> {
                                                                         ),
                                                                         2.verticalSpace,
                                                                         AppText(
-                                                                          "${data.products?[i].quantity ?? 0}",
+                                                                          // "${data.products?[i].quantity ?? 0}",
+                                                                          "022",
                                                                           fontSize:
                                                                               15.0,
                                                                           fontFamily:
@@ -481,7 +489,11 @@ class QuateView extends GetView<QuateController> {
                                                         ),
                                                       ),
                                                     ],
-                                                    Column(
+                                                    if(Constants.vendor ==
+                                                        Constants
+                                                            .selectUser &&
+                                                        data.status !=
+                                                            "pending")Column(
                                                       children: [
                                                         10.verticalSpace,
                                                         buildDivider(),
@@ -817,7 +829,8 @@ class QuateView extends GetView<QuateController> {
                                                             child:
                                                                 CommonNetworkImage(
                                                               imageUrl: data
-                                                                      .products?[i]
+                                                                      .products?[
+                                                                          i]
                                                                       .imageUrl ??
                                                                   "",
                                                               height: 50.0,
@@ -869,61 +882,69 @@ class QuateView extends GetView<QuateController> {
                                           10.verticalSpace,
                                           buildDivider(),
                                           20.verticalSpace,
-                                          data.status == "offered" ?    Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 15.0),
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  child: CommonButton(
-                                                    text: "Reject Offer",
-                                                    bgColor: AppColors.white,
-                                                    fontColor:
-                                                        AppColors.primary,
-                                                    onTap: () {
-                                                      controller
-                                                          .customerManageQuote(
-                                                          isAccepted: false,
-                                                          index: index,
-                                                          quoteId: data
-                                                              .quoteId
-                                                              .toString());
-                                                    },
+                                          data.status == "offered"
+                                              ? Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 15.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: CommonButton(
+                                                          text: "Reject Offer",
+                                                          bgColor:
+                                                              AppColors.white,
+                                                          fontColor:
+                                                              AppColors.primary,
+                                                          onTap: () {
+                                                            controller
+                                                                .customerManageQuote(
+                                                                    isAccepted:
+                                                                        false,
+                                                                    index:
+                                                                        index,
+                                                                    quoteId: data
+                                                                        .quoteId
+                                                                        .toString());
+                                                          },
+                                                        ),
+                                                      ),
+                                                      15.horizontalSpace,
+                                                      Expanded(
+                                                        child: CommonButton(
+                                                          text: "Accept Offer",
+                                                          bgColor:
+                                                              AppColors.white,
+                                                          fontColor:
+                                                              AppColors.primary,
+                                                          onTap: () {
+                                                            controller
+                                                                .customerManageQuote(
+                                                                    isAccepted:
+                                                                        true,
+                                                                    index:
+                                                                        index,
+                                                                    quoteId: data
+                                                                        .quoteId
+                                                                        .toString());
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              : Align(
+                                                  alignment: Alignment.center,
+                                                  child: AppText(
+                                                    data.status
+                                                            ?.capitalizeFirst ??
+                                                        "",
+                                                    color: data.status ==
+                                                            "canceled"
+                                                        ? AppColors.red
+                                                        : Colors.green,
                                                   ),
                                                 ),
-                                                15.horizontalSpace,
-                                                Expanded(
-                                                  child: CommonButton(
-                                                    text: "Accept Offer",
-                                                    bgColor: AppColors.white,
-                                                    fontColor:
-                                                        AppColors.primary,
-                                                    onTap: () {
-                                                      controller
-                                                          .customerManageQuote(
-                                                              isAccepted: true,
-                                                              index: index,
-                                                              quoteId: data
-                                                                  .quoteId
-                                                                  .toString());
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ):Align(
-                                            alignment: Alignment.center,
-                                            child: AppText(
-                                              data.status
-                                                  ?.capitalizeFirst ??
-                                                  "",
-                                              color:
-                                              data.status == "canceled"
-                                                  ? AppColors.red
-                                                  : Colors.green,
-                                            ),
-                                          ),
-
                                         ],
                                       )
                                     : SizedBox()),

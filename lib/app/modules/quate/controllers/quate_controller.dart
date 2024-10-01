@@ -13,7 +13,7 @@ class QuateController extends GetxController {
   RxList<QuoteHistoryData> quoteHistoryData = RxList();
   RxInt selectIndex = 10.obs;
   TextEditingController amountController = TextEditingController();
-  RxList<QuoteData> quoteList = RxList();
+  RxList<GetQuoteData> quoteList = RxList();
   RxBool isPaginationLoading = false.obs;
   ScrollController scrollController = ScrollController();
   Rxn<GetQuote> getQuoteModel = Rxn<GetQuote>();

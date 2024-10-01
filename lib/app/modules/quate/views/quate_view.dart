@@ -87,33 +87,35 @@ class QuateView extends GetView<QuateController> {
                                         ),
                                         6.horizontalSpace,
                                         AppText(
-                                          "10 Furnival Street, EC4A 1AB London, UK",
+                                          "${data.customer?.address ?? ""}, ${data.customer?.city ?? ""}, ${data.customer?.country ?? ""}",
                                           fontSize: 12.0,
                                         )
                                       ],
                                     ),
                                   ),
-                                  10.verticalSpace,
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.all(5.0),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(5.0),
-                                            color: AppColors.iconBG,
+                                  if(data.customer?.phoneNumber != null)...[
+                                    10.verticalSpace,
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.all(5.0),
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(5.0),
+                                              color: AppColors.iconBG,
+                                            ),
+                                            child: SvgPicture.asset(AppIcons.iconsPhone),
                                           ),
-                                          child: SvgPicture.asset(AppIcons.iconsPhone),
-                                        ),
-                                        6.horizontalSpace,
-                                        AppText(
-                                          "+1 1257456541",
-                                          fontSize: 12.0,
-                                        )
-                                      ],
+                                          6.horizontalSpace,
+                                          AppText(
+                                            data.customer?.phoneNumber ?? "",
+                                            fontSize: 12.0,
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                   10.verticalSpace,
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -306,7 +308,7 @@ class QuateView extends GetView<QuateController> {
                                       ),
                                     ),
                                   ],
-                                  Column(
+                                  if(Constants.vendor == Constants.selectUser && data.status != "pending")Column(
                                     children: [
                                       10.verticalSpace,
                                       buildDivider(),

@@ -93,18 +93,30 @@ class QuoteData {
 class QuoteCustomer {
   String? name;
   String? email;
+  String? phoneNumber;
+  String? address;
+  String? city;
+  String? country;
 
-  QuoteCustomer({this.name, this.email});
+  QuoteCustomer({this.name, this.email, this.phoneNumber, this.address, this.city, this.country});
 
   QuoteCustomer.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     email = json['email'];
+    phoneNumber = json['phone_number'];
+    address = json['address'];
+    city = json['city'];
+    country = json['country'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['name'] = this.name;
     data['email'] = this.email;
+    data['phone_number'] = this.phoneNumber;
+    data['address'] = this.address;
+    data['city'] = this.city;
+    data['country'] = this.country;
     return data;
   }
 }

@@ -1,41 +1,75 @@
-
 import 'package:tbd_flutter/app/modules/editProduct/model/edit_product_model.dart';
-
+import 'package:tbd_flutter/app/modules/product/model/get_product_model.dart';
 import '../../../data/all.dart';
 
 class ArchivedController extends GetxController {
 
   String noDatFound =  "";
-
-  List productList = [
-    {
-      "name": "Arabic Ginger",
-      "price": "\$25",
-      "discounted_price": "\$25",
-      "image": "assets/images/aadu.png",
-    },
-    {
-      "name": "Organic Carrots",
-      "price": "\$25",
-      "discounted_price": "\$25",
-      "image": "assets/images/gajar.png",
-    },
-    {
-      "name": "Fresh Lettuce",
-      "price": "\$25",
-      "discounted_price": "\$25",
-      "image": "assets/images/kobi.png",
-    },
-  ];
+  Rxn<GetProduct> getCategory = Rxn<GetProduct>();
+  RxString noData = "".obs;
+  RxList<Products> getProductList = RxList();
+  ScrollController scrollController = ScrollController();
+  RxBool isPaginationLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
+    getProduct();
   }
 
-  unArchivedProduct({required int productId, required int categoryId}) async {
+  int pageLimit = 1;
+  bool isDataLoaded = false;
+  getProduct({bool isLoading = true, bool isReset = false}) async {
+    noData.value = "";
+    if (isReset){
+      isDataLoaded = false;
+      pageLimit = 1;
+    }
     FormData formData = FormData.fromMap({
-      "category_id" : categoryId,
+      "page": pageLimit,
+      "limit": 10,
+      "status": 1,
+    });
+
+    try {
+      final data = await APIFunction().apiCall(
+        apiName: Constants.getProduct,
+        context: Get.context!,
+        params: formData,
+        isLoading: isLoading,
+        token: GetStorageData().readString(GetStorageData().token),
+      );
+
+      GetProduct model = GetProduct.fromJson(data);
+      if (model.status == 1) {
+        getCategory.value = model;
+        if (isReset) getProductList.clear();
+        if (model.data?.products != null && model.data!.products!.isNotEmpty) {
+          getProductList.addAll(model.data?.products ?? []);
+          if (getProductList.length == (getCategory.value?.data?.total ?? 0)) {
+            isDataLoaded = true;
+          }
+          isPaginationLoading.value = false;
+        } else {
+          if (pageLimit == 1) {
+            noData.value = "No data found";
+          }
+          update();
+        }
+      } else {
+        CommonDialogue.alertActionDialogApp(message: model.message);
+        noData.value = "no data found";
+
+        update();
+      }
+    } catch (e) {
+      noData.value = "no data found";
+      update();
+    }
+  }
+
+  unArchivedProduct({required int productId, required int index}) async {
+    FormData formData = FormData.fromMap({
       "id" : productId,
       "status" : 0,
     });
@@ -49,7 +83,7 @@ class ArchivedController extends GetxController {
 
     EditProduct model = EditProduct.fromJson(data);
     if(model.status == 1){
-      // getProductList.removeAt(index);
+      getProductList.removeAt(index);
     } else{
       CommonDialogue.alertActionDialogApp(message: data["message"]);
     }

@@ -12,7 +12,6 @@ class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     Utils.darkStatusBar();
-
     return GetBuilder<SplashController>(
       assignId: true,
       init: SplashController(),
@@ -27,6 +26,9 @@ class SplashView extends GetView<SplashController> {
               child: CircleAvatar(
                 radius: 80.0,
                 backgroundColor: AppColors.white,
+                child: ClipOval(
+                  child: Image.asset(AppIcons.appLogo),
+                ),
               ),
             ),
           ),

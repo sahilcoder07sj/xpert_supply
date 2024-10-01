@@ -53,6 +53,7 @@ class AppIcons {
   static const String sampleFile = 'assets/images/sample_file.png';
   static const String unarchive = 'assets/icons/unarchive.png';
   static const String uploadCsv = 'assets/icons/upload_csv.svg';
+  static const String appLogo = 'assets/images/app_logo.png';
 
 
 

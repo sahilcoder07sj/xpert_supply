@@ -1,8 +1,5 @@
-import 'package:tbd_flutter/app/CommonWidget/app_text.dart';
-import 'package:tbd_flutter/app/data/app_strings.dart';
-import 'package:tbd_flutter/app/data/constants.dart';
-import 'package:tbd_flutter/app/data/extenstion.dart';
-import 'package:tbd_flutter/app/routes/app_pages.dart';
+import 'package:tbd_flutter/app/data/utils.dart';
+
 import '../../../data/all.dart';
 import '../controllers/select_user_controller.dart';
 
@@ -10,6 +7,10 @@ class SelectUserView extends GetView<SelectUserController> {
   const SelectUserView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Utils.darkStatusBar(
+      statusBarBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+    );
     return Scaffold(
       backgroundColor: AppColors.screenBG,
       body: Padding(

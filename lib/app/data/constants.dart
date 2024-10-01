@@ -64,4 +64,5 @@ class Constants {
   /// order
   String orderHistory = "api/customer/order-history";
   String quoteHistory = "api/customer/quote-history";
+  static String customerManageQuote = "api/customer/manage-quote";
 }

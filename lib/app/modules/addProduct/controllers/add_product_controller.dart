@@ -48,6 +48,7 @@ class AddProductController extends GetxController {
         "name" : productNameController.text,
         "amount" : int.parse(productAmountController.text),
         "description" : productDescriptionController.text,
+        "discount" : int.parse(productDiscountController.text),
       });
 
       if (selectImageList.isNotEmpty) {

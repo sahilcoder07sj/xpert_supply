@@ -1,5 +1,4 @@
 import 'package:intl/intl.dart';
-import 'package:tbd_flutter/app/CommonWidget/common_botttom_sheet.dart';
 import 'package:tbd_flutter/app/modules/orderList/controllers/order_list_controller.dart';
 import 'package:tbd_flutter/app/modules/orderList/model/get_orders_model.dart';
 import '../../../data/all.dart';
@@ -56,8 +55,11 @@ class OrderListView extends GetView<OrderListController> {
           itemCount: controller.orderList.length,
           itemBuilder: (context, index) {
             Orders data = controller.orderList[index];
-            DateTime dateTime = DateFormat("yyyy-MM-dd HH:mm:ss").parse(data.deliveryDate ?? "");
-            String formattedDate = DateFormat("dd/MM/yyyy").format(dateTime);
+            String? formattedDate;
+            if(data.deliveryDate != null){
+              DateTime dateTime = DateFormat("yyyy-MM-dd HH:mm:ss").parse(data.deliveryDate ?? "");
+              formattedDate = DateFormat("dd/MM/yyyy").format(dateTime);
+            }
             return GestureDetector(
               onTap: () {
                 if(controller.orderList[index].isCheck.value){
@@ -222,10 +224,10 @@ class OrderListView extends GetView<OrderListController> {
                           ),
                           10.verticalSpace,
                         ],
-                        buildDivider(),
-                        10.verticalSpace,
-                        if(data.notes != null)...[
-                          Padding(
+                        if(data.notes != "")...[
+                          buildDivider(),
+                          10.verticalSpace,
+                          Padding (
                             padding: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Row(
                               children: [
@@ -236,7 +238,7 @@ class OrderListView extends GetView<OrderListController> {
                                 ),
                                 Expanded(
                                   child: AppText(
-                                    data.notes ?? "",
+                                    data.notes ?? "" ,
                                     fontSize: 13.0,
                                   ),
                                 ),

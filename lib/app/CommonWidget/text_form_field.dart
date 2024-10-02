@@ -146,7 +146,7 @@ class CommonTextFormField extends StatelessWidget {
                 hintText: hintText,
                 hintStyle: AppTextStyle(
                   fontFamily: hintFamily ?? FontFamily.light,
-                  color: hintColor ?? AppColors.primary,
+                  color: hintColor ?? AppColors.primary.withOpacity(0.4),
                   fontSize: 15
                 ),
               ),

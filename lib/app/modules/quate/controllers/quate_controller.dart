@@ -30,7 +30,7 @@ class QuateController extends GetxController {
     }
   }
 
-  sendOfferDialogue({required int quoteId}) {
+  sendOfferDialogue({required int quoteId, required int index}) {
     showDialog(
       context: Get.context!,
       builder: (context) => BackdropFilter(
@@ -60,6 +60,7 @@ class QuateController extends GetxController {
                 CommonButton(
                   text: AppStrings.send,
                   onTap: () => manageQuote(
+                    index: index,
                       quoteId: quoteId,
                       isSend: true,
                       offerPrice: int.parse(amountController.text)),
@@ -88,7 +89,7 @@ class QuateController extends GetxController {
 
   getQuote({bool isLoading = true}) async {
     errorMessage.value = "";
-    try {
+    // try {
       FormData formData = FormData.fromMap({
         "page": currentPage,
         "limit": 10,
@@ -109,10 +110,10 @@ class QuateController extends GetxController {
         errorMessage.value = "No data found";
         CommonDialogue.alertActionDialogApp(message: model.message);
       }
-    } catch (e) {
-      errorMessage.value = "No data found";
-      print("error : $e");
-    }
+    // } catch (e) {
+    //   errorMessage.value = "No data found";
+    //   print("error : $e");
+    // }
   }
 
   manageQuote(
@@ -139,10 +140,14 @@ class QuateController extends GetxController {
 
       ManageOrder model = ManageOrder.fromJson(data);
       if (model.status == 1) {
-        if (model.data?.status == "canceled") {
-          quoteList.removeAt(index!);
+        if(isSend == true){
+          amountController.clear();
+          Get.back();
+          quoteList[index!].status = "offered";
+        } else{
+          quoteList[index!].status = "canceled";
         }
-        amountController.clear();
+        quoteList.refresh();
         Utils.flutterToast(model.message);
       } else {
         CommonDialogue.alertActionDialogApp(message: model.message);
@@ -153,6 +158,7 @@ class QuateController extends GetxController {
   }
 
   getQuoteHistoryApi() async {
+    errorMessage.value = "";
     FormData formData = FormData.fromMap({});
     try {
       final data = await APIFunction().apiCall(

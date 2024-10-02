@@ -8,3 +8,4 @@ Future<void> main() async {
   Loading.configLoading();
   runApp(MyApp());
 }
+/// 9r8bgg1631x

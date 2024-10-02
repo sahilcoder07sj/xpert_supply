@@ -41,8 +41,8 @@ class GetQuote {
 
 class GetQuoteData {
   int? quoteId;
-  String? totalPrice;
-  int? offerPrice;
+  dynamic totalPrice;
+  dynamic offerPrice;
   String? status;
   String? createdAt;
   RxBool? isCheck = false.obs;

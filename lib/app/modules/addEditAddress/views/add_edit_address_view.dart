@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
-import 'package:tbd_flutter/app/CommonWidget/screen.dart';
 import 'package:tbd_flutter/app/data/all.dart';
-
 import '../controllers/add_edit_address_controller.dart';
 
 class AddEditAddressView extends GetView<AddEditAddressController> {

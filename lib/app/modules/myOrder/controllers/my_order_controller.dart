@@ -162,6 +162,7 @@ class MyOrderController extends GetxController {
       CommonDialogue.alertActionDialogApp(message: addToCartModel.message);
     }
   }
+
   /// Quote order api
   quoteOrder() async {
     FormData formData = FormData.fromMap({

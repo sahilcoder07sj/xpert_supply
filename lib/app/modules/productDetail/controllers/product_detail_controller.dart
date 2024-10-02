@@ -13,7 +13,6 @@ import '../../../data/utils.dart';
 
 class ProductDetailController extends GetxController {
 
-
   Rxn<Products> products = Rxn<Products>();
   Rxn<SingleProductDetails> singleProductDetails = Rxn<SingleProductDetails>();
   CategoryData? getCategoryData;

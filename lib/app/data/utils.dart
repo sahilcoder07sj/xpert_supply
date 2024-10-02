@@ -17,6 +17,19 @@ class Utils {
     ));
   }
 
+  static int countExit = 0;
+   exitEvent() {
+    countExit ++;
+    Future.delayed(const Duration(seconds: 3),() {
+      countExit = 0;
+    },);
+    if(countExit == 1) {
+      flutterToast(AppStrings.pleaseClickBACKAgainExit);
+    } else {
+      exit(0);
+    }
+  }
+
   /// <<< To choose screens portrait --------- >>>
   static void screenPortrait() {
     SystemChrome.setPreferredOrientations([
@@ -37,19 +50,6 @@ class Utils {
   /// <<< hide keyboard --------- >>>
   static hideKeyboard() {
     FocusManager.instance.primaryFocus?.unfocus();
-  }
-
-  static int countExit = 0;
-  exitEvent() {
-    countExit ++;
-    Future.delayed(Duration(seconds: 3),() {
-      countExit = 0;
-    },);
-    if(countExit == 1) {
-      // snackBar(text: AppStrings.pleaseClickBACKAgainExit);
-    } else {
-      exit(0);
-    }
   }
 
   static flutterToast(text){

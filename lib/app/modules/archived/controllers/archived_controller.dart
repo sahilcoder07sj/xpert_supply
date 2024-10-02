@@ -28,7 +28,7 @@ class ArchivedController extends GetxController {
     FormData formData = FormData.fromMap({
       "page": pageLimit,
       "limit": 10,
-      "status": 1,
+      "status": 0,
     });
 
     try {
@@ -71,7 +71,7 @@ class ArchivedController extends GetxController {
   unArchivedProduct({required int productId, required int index}) async {
     FormData formData = FormData.fromMap({
       "id" : productId,
-      "status" : 0,
+      "status" : 1,
     });
 
     final data = await APIFunction().apiCall(

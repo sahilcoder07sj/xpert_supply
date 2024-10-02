@@ -408,8 +408,7 @@ class QuateView extends GetView<QuateController> {
                                                                         ),
                                                                         2.verticalSpace,
                                                                         AppText(
-                                                                          // "${data.products?[i].quantity ?? 0}",
-                                                                          "022",
+                                                                          "${data.products?[i].quantity ?? 0}",
                                                                           fontSize:
                                                                               15.0,
                                                                           fontFamily:
@@ -479,6 +478,7 @@ class QuateView extends GetView<QuateController> {
                                                                         .primary,
                                                                 onTap: () => controller
                                                                     .sendOfferDialogue(
+                                                                  index: index,
                                                                         quoteId:
                                                                             data.quoteId ??
                                                                                 0),
@@ -539,8 +539,7 @@ class QuateView extends GetView<QuateController> {
                     )
                   : Center(child: SvgPicture.asset(AppIcons.emptyProduct))),
             )
-          : Obx(() {
-              return Padding(
+          : Obx(() => controller.errorMessage.isEmpty ? Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: ListView.builder(
                   itemCount: controller.quoteHistoryData.length,
@@ -932,8 +931,7 @@ class QuateView extends GetView<QuateController> {
                     );
                   },
                 ),
-              );
-            }),
+              ) : Center(child: SvgPicture.asset(AppIcons.emptyProduct))),
     );
   }
 

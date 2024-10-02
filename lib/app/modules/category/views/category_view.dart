@@ -84,6 +84,7 @@ class CategoryView extends GetView<CategoryController> {
             ),
             child: GestureDetector(
               onTap: () {
+                print('controller.categoryList ----> ${controller.categoryList[index].id}');
                 Get.toNamed(Routes.PRODUCT, arguments: {"cat_data" : controller.categoryList[index]});
               },
               child: Container(

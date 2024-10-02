@@ -16,8 +16,17 @@ class MyCartView extends GetView<MyCartController> {
           title: AppStrings.myCart,
           body: controller.noData.isNotEmpty
               ? Center(
-                  child: SvgPicture.asset(
-                    AppIcons.emptyProduct,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        AppIcons.emptyProduct,
+                      ),
+                      AppText(
+                          controller.noData,
+                        textAlign: TextAlign.center,
+                      )
+                    ],
                   ),
                 )
               : ListView.builder(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:tbd_flutter/app/data/utils.dart';
 import 'package:tbd_flutter/app/modules/splash/bindings/splash_binding.dart';
 import 'package:tbd_flutter/app/routes/app_pages.dart';
 
@@ -9,6 +10,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Utils.screenPortrait();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: SplashBinding(),

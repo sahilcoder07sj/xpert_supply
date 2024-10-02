@@ -88,6 +88,7 @@ class AppStrings{
   static const iAMLeavingBecause = "I’m leaving because...";
   static const deleteMyAccount = "Delete My Account";
   static const deleteAddress = "Delete Address";
+  static const pleaseClickBACKAgainExit = "Please click BACK again to exit";
   static const areYouSureYouWantToDeleteAddress = "Are you sure you want to\ndelete address?";
   static const areYouSureYouWantToDeleteYourAccount = "Are you sure you want to\ndelete your account?";
   static const areYouSureYouWantToDeleteThisProduct = "Are you sure you want to\ndelete this product?";
@@ -156,6 +157,7 @@ class AppStrings{
   static const pleaseEnterProductName = "Please enter product name";
   static const pleaseEnterAmount = "Please enter amount";
   static const pleaseEnterDiscount = "Please enter discount";
+  static const discountAmountShouldBeLessThanAmount = "Discount amount should be less than amount";
   static const pleaseEnterDescription = "Please enter description";
   static const pleaseSelectProductImage = "Please select product image";
 }

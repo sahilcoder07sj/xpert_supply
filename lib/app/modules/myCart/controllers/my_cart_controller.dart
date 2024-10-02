@@ -17,6 +17,7 @@ class MyCartController extends GetxController {
   }
 
   getMyCartApi() async {
+    noData = "";
     FormData formData = FormData.fromMap({});
     try {
       final data = await APIFunction().apiCall(
@@ -30,17 +31,17 @@ class MyCartController extends GetxController {
         if (myCartModel.data!.products!.isNotEmpty) {
           cartList = myCartModel.data!.products ?? [];
         } else {
-          noData = "No product found in cart";
+          noData = "You have not added anything in the cart yet";
         }
         update();
       } else {
-        noData = "No product found in cart";
+        noData = "You have not added anything in the cart yet";
 
         update();
         CommonDialogue.alertActionDialogApp(message: myCartModel.message);
       }
     } catch (e) {
-      noData = "No product found in cart";
+      noData = "You have not added anything in the cart yet";
       update();
     }
   }

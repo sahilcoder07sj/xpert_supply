@@ -31,8 +31,14 @@ class AddProductController extends GetxController {
     } else if(productAmountController.text.isEmpty){
       CommonDialogue.alertActionDialogApp(message: AppStrings.pleaseEnterAmount);
       return false;
-    } else if(productDescriptionController.text.isEmpty){
+    } else if(productDiscountController.text.isEmpty){
       CommonDialogue.alertActionDialogApp(message: AppStrings.pleaseEnterDiscount);
+      return false;
+    } else if(int.parse(productAmountController.text) <= int.parse(productDiscountController.text)){
+      CommonDialogue.alertActionDialogApp(message: AppStrings.discountAmountShouldBeLessThanAmount);
+      return false;
+    } else if(productDescriptionController.text.isEmpty){
+      CommonDialogue.alertActionDialogApp(message: AppStrings.pleaseEnterDescription);
       return false;
     } else if(selectImageList.length == 0){
       CommonDialogue.alertActionDialogApp(message: AppStrings.pleaseEnterDescription);

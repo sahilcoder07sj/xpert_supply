@@ -50,6 +50,7 @@ class ProductView extends GetView<ProductController> {
                             controller.getProductList
                                 .removeAt(controller.selectIndex);
                           } else {
+                            // if(Constants.selectUser == Constants.vendor){}
                             controller.getProduct(isReset: true);
                           }
                         });

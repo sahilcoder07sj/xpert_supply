@@ -48,7 +48,10 @@ class LoginController extends GetxController {
       otpController.clear();
       if (Constants.isSignUp) {
         Get.bottomSheet(
+          enableDrag: false,
+          isDismissible: false,
           CommonBottomSheet(
+            isDismissBack: false,
             title: AppStrings.congratulations,
             subTitle: AppStrings.youHaveSuccessfullyCreatedYourAccount,
             image: AppIcons.iconsRoundTick,

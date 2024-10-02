@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'package:tbd_flutter/app/api_repository/api_function.dart';
-import 'package:tbd_flutter/app/api_repository/get_storage.dart';
 import 'package:tbd_flutter/app/modules/login/controllers/login_controller.dart';
 import 'package:tbd_flutter/app/modules/sign_up/model/sign_up_model.dart';
 import '../../../data/all.dart';

@@ -129,8 +129,7 @@ class QuateView extends GetView<QuateController> {
                                                         ],
                                                       ),
                                                     ),
-                                                    if (data.customer
-                                                            ?.phoneNumber !=
+                                                    /*if (data.customer?.phoneNumber !=
                                                         null) ...[
                                                       10.verticalSpace,
                                                       Padding(
@@ -168,7 +167,7 @@ class QuateView extends GetView<QuateController> {
                                                           ],
                                                         ),
                                                       ),
-                                                    ],
+                                                    ],*/
                                                     10.verticalSpace,
                                                     Padding(
                                                       padding: const EdgeInsets
@@ -378,7 +377,7 @@ class QuateView extends GetView<QuateController> {
                                                                       child:
                                                                           CommonNetworkImage(
                                                                         imageUrl:
-                                                                            data.products?[i].images?.first.imageUrl ?? "",
+                                                                            data.products?[i].imageUrl ?? "",
                                                                         height:
                                                                             50.0,
                                                                         width:
@@ -391,7 +390,7 @@ class QuateView extends GetView<QuateController> {
                                                                     Expanded(
                                                                       child:
                                                                           AppText(
-                                                                        data.products?[i].productName ??
+                                                                        data.products?[i].name ??
                                                                             "",
                                                                         fontSize:
                                                                             14.0,

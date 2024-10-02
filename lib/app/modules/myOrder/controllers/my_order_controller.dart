@@ -44,6 +44,7 @@ class MyOrderController extends GetxController {
       addressList = addressModel.data ?? [];
       if (addressList.isNotEmpty) {
         addressId = addressList.first.id;
+
       }
       update();
     } else {
@@ -165,6 +166,7 @@ class MyOrderController extends GetxController {
   quoteOrder() async {
     FormData formData = FormData.fromMap({
       "cart_id": cartId,
+      "delivery_address_id": addressId,
     });
     final data = await APIFunction().apiCall(
       apiName: Constants().quoteOrder,

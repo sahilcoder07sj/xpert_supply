@@ -623,35 +623,12 @@ class QuateView extends GetView<QuateController> {
                                                       AppIcons.iconsLocation),
                                                 ),
                                                 6.horizontalSpace,
-                                                AppText(
-                                                  "10 Furnival Street, EC4A 1AB London, UK",
-                                                  fontSize: 12.0,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          10.verticalSpace,
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 15.0),
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  padding: EdgeInsets.all(5.0),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5.0),
-                                                    color: AppColors.iconBG,
+                                                data.address != null ?  Expanded(
+                                                  child: AppText(
+                                                    "${data.address?.address ?? ""}, ${data.address?.area ?? ""}, ${data.address?.city ?? ""}, ${data.address?.country ?? ""}, ${data.address?.pincode ?? ""}",
+                                                    fontSize: 14.0,
                                                   ),
-                                                  child: SvgPicture.asset(
-                                                      AppIcons.iconsPhone),
-                                                ),
-                                                6.horizontalSpace,
-                                                AppText(
-                                                  "+1 1257456541",
-                                                  fontSize: 12.0,
-                                                )
+                                                ):SizedBox(),
                                               ],
                                             ),
                                           ),

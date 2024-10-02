@@ -182,7 +182,9 @@ class ProductDetailView extends GetView<ProductDetailController> {
                       Expanded(
                         child: CommonButton(
                           text: AppStrings.orderNow,
-                          onTap: () => Get.toNamed(Routes.MY_ORDER),
+                          onTap: (){
+                            controller.addToCartApi(isOrderNow: true);
+                          },
                         ),
                       ),
                     ],

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:tbd_flutter/app/modules/addEditAddress/model/add_edit_address_model.dart';
 import 'package:tbd_flutter/app/modules/orderHistory/model/order_history_model.dart';
 
 class QuoteHistoryModel {
@@ -40,6 +41,7 @@ class QuoteHistoryData {
   final String? totalPrice;
   final String? offerPrice;
   final Vendor? vendor;
+  final AddEditAddressData? address;
   RxBool? isCheck = false.obs;
   final List<OrderProductsData>? products;
 
@@ -51,6 +53,7 @@ class QuoteHistoryData {
     this.offerPrice,
     this.isCheck,
     this.vendor,
+    this.address,
     this.products,
   });
 
@@ -63,6 +66,7 @@ class QuoteHistoryData {
         vendor = (json['vendor'] as Map<String, dynamic>?) != null
             ? Vendor.fromJson(json['vendor'] as Map<String, dynamic>)
             : null,
+  address =  (json['data'] as Map<String,dynamic>?) != null ? AddEditAddressData.fromJson(json['data'] as Map<String,dynamic>) : null,
         products = (json['products'] as List?)
             ?.map((dynamic e) =>
                 OrderProductsData.fromJson(e as Map<String, dynamic>))
@@ -75,6 +79,7 @@ class QuoteHistoryData {
         'total_price': totalPrice,
         'offer_price': offerPrice,
         'vendor': vendor?.toJson(),
+        'address': address?.toJson(),
         'products': products?.map((e) => e.toJson()).toList()
       };
 }

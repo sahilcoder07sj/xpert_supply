@@ -29,7 +29,7 @@ class ProductDetailController extends GetxController {
   }
 
   /// Add vendor
-  addToCartApi() async {
+  addToCartApi({bool isOrderNow = false}) async {
     FormData formData = FormData.fromMap({
       "product_id": products.value!.productId,
       "quantity": '1',
@@ -42,7 +42,12 @@ class ProductDetailController extends GetxController {
     );
     AddToCartModel addToCartModel = AddToCartModel.fromJson(data);
     if (addToCartModel.status == 1) {
-      Get.toNamed(Routes.MY_CART);
+      if(isOrderNow){
+        Get.offNamed(Routes.MY_ORDER);
+      }else{
+        Get.offNamed( Routes.MY_CART);
+      }
+
     } else {
       CommonDialogue.alertActionDialogApp(message: addToCartModel.message);
     }

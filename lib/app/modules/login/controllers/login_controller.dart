@@ -54,19 +54,16 @@ class LoginController extends GetxController {
             image: AppIcons.iconsRoundTick,
             isOneButton: true,
             singleButtonText: AppStrings.continueNew,
-            commonOnTap: () {
-              if (Constants.vendor == Constants.selectUser) {
-                Get.offAllNamed(Routes.DELIVERY);
-              } else {
-                Get.offAllNamed(Routes.CONSUMER_PRODUCTS);
-              }
+            commonOnTap: () async {
+              Get.offAllNamed(Routes.LOGIN);
               Get.delete<LoginController>(force: true);
               Get.delete<SignUpController>(force: true);
             },
           ),
         );
       } else {
-        await GetStorageData().saveString(GetStorageData().token, data["token"]);
+        await GetStorageData()
+            .saveString(GetStorageData().token, data["token"]);
         Get.toNamed(Routes.RESET_PASSWORD);
       }
       update();
@@ -94,12 +91,14 @@ class LoginController extends GetxController {
     if (loginUserModel.status == 1) {
       await GetStorageData()
           .saveString(GetStorageData().token, loginUserModel.token);
-      await GetStorageData().saveObject(GetStorageData().userData, loginUserModel.data?.toJson());
+      await GetStorageData()
+          .saveObject(GetStorageData().userData, loginUserModel.data?.toJson());
       if (Constants.vendor == Constants.selectUser) {
-        print("loginUserModel -----> ${loginUserModel.data?.normalDeliveryDays}");
-        if(loginUserModel.data?.normalDeliveryDays == null){
+        print(
+            "loginUserModel -----> ${loginUserModel.data?.normalDeliveryDays}");
+        if (loginUserModel.data?.normalDeliveryDays == null) {
           Get.offAllNamed(Routes.DELIVERY);
-        } else{
+        } else {
           Get.offAllNamed(Routes.MANAGEMENT);
         }
       } else {
@@ -147,7 +146,8 @@ class LoginController extends GetxController {
     );
     LoginUserModel loginUserModel = LoginUserModel.fromJson(data);
     if (loginUserModel.status == 1) {
-      await GetStorageData().saveString(GetStorageData().token, loginUserModel.token);
+      await GetStorageData()
+          .saveString(GetStorageData().token, loginUserModel.token);
       Constants.isSignUp = false;
       Get.toNamed(
         Routes.OTP,

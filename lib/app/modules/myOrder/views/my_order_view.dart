@@ -181,125 +181,135 @@ class MyOrderView extends GetView<MyOrderController> {
                     ],
                   ),
                   5.verticalSpace,
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.0),
-                      color: AppColors.white,
-                    ),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: controller.addressList.length,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        AddEditAddressData data = controller.addressList[index];
-                        return Column(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
+                  controller.addressList.isNotEmpty
+                      ? Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 12.0, vertical: 5.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                            color: AppColors.white,
+                          ),
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: controller.addressList.length,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              AddEditAddressData data =
+                                  controller.addressList[index];
+                              return Column(
                                 children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      controller.addressId = data.id;
-                                      controller.update();
-                                    },
-                                    child: Container(
-                                      height: 20,
-                                      width: 20,
-                                      margin: EdgeInsets.only(bottom: 18),
-                                      padding: EdgeInsets.all(2),
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: AppColors.primary,
-                                        ),
-                                      ),
-                                      child: controller.addressId == data.id
-                                          ? Container(
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10.0),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            controller.addressId = data.id;
+                                            controller.update();
+                                          },
+                                          child: Container(
+                                            height: 20,
+                                            width: 20,
+                                            margin: EdgeInsets.only(bottom: 18),
+                                            padding: EdgeInsets.all(2),
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
                                                 color: AppColors.primary,
-                                                border: Border.all(
-                                                  color: AppColors.primary,
-                                                ),
                                               ),
-                                            )
-                                          : SizedBox(),
-                                    ),
-                                  ),
-                                  5.horizontalSpace,
-                                  Expanded(
-                                    child: AppText(
-                                      "${data.address ?? ""}, ${data.area ?? ""}, ${data.city ?? ""}, ${data.country ?? ""}, ${data.pincode ?? ""}",
-                                      fontSize: 14.0,
-                                    ),
-                                  ),
-                                  5.horizontalSpace,
-                                  Row(
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          Get.toNamed(Routes.ADD_EDIT_ADDRESS,
-                                                  arguments: {
-                                                "is_edit": true,
-                                                "address_data": data,
-                                              })!
-                                              .then((value) {
-                                            if (value != null) {
-                                              data = value;
-                                              controller.update();
-                                            }
-                                          });
-                                        },
-                                        child: SvgPicture.asset(
-                                          AppIcons.iconsEditDeliveryAddress,
-                                        ),
-                                      ),
-                                      5.horizontalSpace,
-                                      GestureDetector(
-                                        onTap: () {
-                                          Get.bottomSheet(
-                                            CommonBottomSheet(
-                                              title: AppStrings.deleteMyAccount,
-                                              subTitle: AppStrings
-                                                  .areYouSureYouWantToDeleteAddress,
-                                              image: AppIcons.iconsDeleteBig,
-                                              iconBgColor: AppColors.red
-                                                  .withOpacity(0.1),
-                                              firstOnTap: () {
-                                                controller.deleteAddress(
-                                                    addressId: data.id);
-                                              },
                                             ),
-                                          );
-                                        },
-                                        child: SvgPicture.asset(
-                                          AppIcons.iconsDelete,
-                                          color: Colors.red,
+                                            child: controller.addressId ==
+                                                    data.id
+                                                ? Container(
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: AppColors.primary,
+                                                      border: Border.all(
+                                                        color:
+                                                            AppColors.primary,
+                                                      ),
+                                                    ),
+                                                  )
+                                                : SizedBox(),
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                        5.horizontalSpace,
+                                        Expanded(
+                                          child: AppText(
+                                            "${data.address ?? ""}, ${data.area ?? ""}, ${data.city ?? ""}, ${data.country ?? ""}, ${data.pincode ?? ""}",
+                                            fontSize: 14.0,
+                                          ),
+                                        ),
+                                        5.horizontalSpace,
+                                        Row(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.toNamed(
+                                                        Routes.ADD_EDIT_ADDRESS,
+                                                        arguments: {
+                                                      "is_edit": true,
+                                                      "address_data": data,
+                                                    })!
+                                                    .then((value) {
+                                                  if (value != null) {
+                                                    data = value;
+                                                    controller.update();
+                                                  }
+                                                });
+                                              },
+                                              child: SvgPicture.asset(
+                                                AppIcons
+                                                    .iconsEditDeliveryAddress,
+                                              ),
+                                            ),
+                                            5.horizontalSpace,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.bottomSheet(
+                                                  CommonBottomSheet(
+                                                    title: AppStrings
+                                                        .deleteMyAccount,
+                                                    subTitle: AppStrings
+                                                        .areYouSureYouWantToDeleteAddress,
+                                                    image:
+                                                        AppIcons.iconsDeleteBig,
+                                                    iconBgColor: AppColors.red
+                                                        .withOpacity(0.1),
+                                                    firstOnTap: () {
+                                                      controller.deleteAddress(
+                                                          addressId: data.id);
+                                                    },
+                                                  ),
+                                                );
+                                              },
+                                              child: SvgPicture.asset(
+                                                AppIcons.iconsDelete,
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        5.horizontalSpace,
+                                      ],
+                                    ),
                                   ),
-                                  5.horizontalSpace,
+                                  index != 1
+                                      ? Container(
+                                          height: 1.0,
+                                          width: double.infinity,
+                                          color: AppColors.iconBG,
+                                        )
+                                      : SizedBox(),
                                 ],
-                              ),
-                            ),
-                            index != 1
-                                ? Container(
-                                    height: 1.0,
-                                    width: double.infinity,
-                                    color: AppColors.iconBG,
-                                  )
-                                : SizedBox(),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
+                              );
+                            },
+                          ),
+                        )
+                      : SizedBox(),
                   20.verticalSpace,
                   controller.deliveryData != null
                       ? Container(
@@ -488,7 +498,12 @@ class MyOrderView extends GetView<MyOrderController> {
                           borderColor: AppColors.primary,
                           bgColor: AppColors.white,
                           onTap: () {
-                            controller.quoteOrder();
+                            if (controller.addressId != null) {
+                              controller.quoteOrder();
+                            } else {
+                              CommonDialogue.alertActionDialogApp(
+                                  message: "Please add your address");
+                            }
                           },
                           fontColor: AppColors.primary,
                         )
@@ -497,7 +512,12 @@ class MyOrderView extends GetView<MyOrderController> {
                   CommonButton(
                     text: AppStrings.placeOrder,
                     onTap: () {
-                      controller.placeOrder();
+                      if (controller.addressId != null) {
+                        controller.placeOrder();
+                      } else {
+                        CommonDialogue.alertActionDialogApp(
+                            message: "Please add your address");
+                      }
                     },
                   ),
                   SizedBox(

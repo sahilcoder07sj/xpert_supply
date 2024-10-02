@@ -69,8 +69,8 @@ class ProductView extends GetView<ProductController> {
                               children: [
                                 Align(
                                   alignment: Alignment.center,
-                                  child: CommonNetworkImage(
-                                    imageUrl: data.imageUrl ?? "",
+                                  child: CustomImageView(
+                                    imagePath: data.imageUrl ?? "",
                                     height: 140.0,
                                     width: 120.0,
                                   ),

@@ -52,6 +52,17 @@ class Utils {
     FocusManager.instance.primaryFocus?.unfocus();
   }
 
+  static double getPercentage(double defaultValue, double percentage) {
+    return (defaultValue * percentage)/100;
+  }
+
+  static double calculatePercentage(double value, double total) {
+    if (total == 0) {
+      throw ArgumentError("Total cannot be zero");
+    }
+    return (value / total) * 100;
+  }
+
   static flutterToast(text){
     Fluttertoast.showToast(
       msg: text,

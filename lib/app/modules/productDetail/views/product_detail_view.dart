@@ -50,46 +50,47 @@ class ProductDetailView extends GetView<ProductDetailController> {
                       24.verticalSpace,
                       Row(
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              AppText(
-                                controller.singleProductDetails.value?.data
-                                        ?.name ??
-                                    "",
-                                fontFamily: FontFamily.medium,
-                                fontSize: 24,
-                              ),
-                              SizedBox(height: 3),
-                              Row(
-                                children: [
-                                  if (controller.singleProductDetails.value
-                                              ?.data?.discount !=
-                                          null &&
-                                      controller.singleProductDetails.value
-                                              ?.data?.discount !=
-                                          0) ...[
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                AppText(
+                                  controller.singleProductDetails.value?.data
+                                      ?.name ??
+                                      "",
+                                  fontFamily: FontFamily.medium,
+                                  fontSize: 24,
+                                ),
+                                SizedBox(height: 3),
+                                Row(
+                                  children: [
+                                    if (controller.singleProductDetails.value
+                                                ?.data?.discount !=
+                                            null &&
+                                        controller.singleProductDetails.value
+                                                ?.data?.discount !=
+                                            0) ...[
+                                      AppText(
+                                        "\$${controller.singleProductDetails.value?.data?.discount ?? 0}",
+                                        fontFamily: FontFamily.semiBold,
+                                        fontSize: 18,
+                                        color: AppColors.priceColor,
+                                      ),
+                                      SizedBox(width: 4),
+                                    ],
                                     AppText(
-                                      "\$${controller.singleProductDetails.value?.data?.discount ?? 0}",
-                                      fontFamily: FontFamily.semiBold,
-                                      fontSize: 18,
-                                      color: AppColors.priceColor,
+                                      "\$${controller.singleProductDetails.value?.data?.amount ?? 0}",
+                                      fontFamily: FontFamily.medium,
+                                      fontSize: 14,
+                                      textDecoration: TextDecoration.lineThrough,
+                                      color: AppColors.discountedPriceColor,
                                     ),
-                                    SizedBox(width: 4),
                                   ],
-                                  AppText(
-                                    "\$${controller.singleProductDetails.value?.data?.amount ?? 0}",
-                                    fontFamily: FontFamily.medium,
-                                    fontSize: 14,
-                                    textDecoration: TextDecoration.lineThrough,
-                                    color: AppColors.discountedPriceColor,
-                                  ),
-                                ],
-                              )
-                            ],
+                                )
+                              ],
+                            ),
                           ),
-                          Spacer(),
-                          if (Constants.selectUser == Constants.vendor) ...[
+                          if (Constants.selectUser == Constants.vendor)...[
                             GestureDetector(
                               onTap: () {
                                 Get.toNamed(Routes.EDIT_PRODUCT, arguments: {

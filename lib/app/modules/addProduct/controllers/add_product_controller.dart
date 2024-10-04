@@ -1,6 +1,7 @@
 import 'package:image_picker/image_picker.dart';
 import 'package:tbd_flutter/app/CommonWidget/camera_bottom_sheet.dart';
 import 'package:tbd_flutter/app/data/pick_image.dart';
+import 'package:tbd_flutter/app/data/utils.dart';
 import 'package:tbd_flutter/app/modules/addProduct/model/add_product_model.dart';
 import '../../../data/all.dart';
 
@@ -48,14 +49,21 @@ class AddProductController extends GetxController {
   }
 
   addProduct() async {
+    double? discount;
+    if(productDiscountController.text.isNotEmpty){
+      discount = Utils.getPercentage(double.parse(productAmountController.text), double.parse(productDiscountController.text));
+    }
     if(validation()){
       FormData formData = FormData.fromMap({
         "category_id" : catId,
         "name" : productNameController.text,
         "amount" : int.parse(productAmountController.text),
         "description" : productDescriptionController.text,
-        "discount" : int.parse(productDiscountController.text),
       });
+
+      if(discount != null){
+        formData.fields.add(MapEntry("discount", discount.toString()));
+      }
 
       if (selectImageList.isNotEmpty) {
         for(int i = 0 ; i < selectImageList.length ; i++){

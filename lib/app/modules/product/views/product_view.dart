@@ -81,6 +81,7 @@ class ProductView extends GetView<ProductController> {
                                   data.name ?? "",
                                   fontFamily: FontFamily.medium,
                                   fontSize: 12,
+                                  maxLines: 2,
                                 ),
                                 SizedBox(height: 5),
                                 Row(
@@ -99,9 +100,8 @@ class ProductView extends GetView<ProductController> {
                                     AppText(
                                       "\$${data.amount ?? 0}",
                                       fontFamily: FontFamily.medium,
-                                      fontSize: 10,
-                                      textDecoration:
-                                      TextDecoration.lineThrough,
+                                      fontSize: data.discount != null && data.discount != 0 ? 10 : 14.0,
+                                      textDecoration: data.discount != null && data.discount != 0 ? TextDecoration.lineThrough : TextDecoration.none,
                                       color: AppColors
                                           .discountedPriceColor,
                                     ),

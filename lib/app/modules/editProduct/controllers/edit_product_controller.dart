@@ -20,8 +20,13 @@ class EditProductController extends GetxController {
       singleProductDetails.value = Get.arguments["details"];
       productNameController.text = singleProductDetails.value?.data?.name ?? "";
       amountNameController.text = singleProductDetails.value?.data?.amount != null && singleProductDetails.value?.data?.amount != 0 ? singleProductDetails.value?.data?.amount.toString() ?? "" : "";
-      discountNameController.text = singleProductDetails.value?.data?.discount != null && singleProductDetails.value?.data?.discount != 0 ? singleProductDetails.value?.data?.discount.toString() ?? "" : "";
       descriptionNameController.text = singleProductDetails.value?.data?.description ?? "";
+      if(singleProductDetails.value?.data?.discount != null){
+        discountNameController.text = Utils.calculatePercentage(
+          double.parse(singleProductDetails.value?.data?.discount.toString() ?? "0"),
+          double.parse(singleProductDetails.value?.data?.amount.toString() ?? "0"),
+        ).toString();
+      }
     }
   }
 

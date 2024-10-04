@@ -38,7 +38,7 @@ class MyCartController extends GetxController {
         noData = "You have not added anything in the cart yet";
 
         update();
-        CommonDialogue.alertActionDialogApp(message: myCartModel.message);
+        // CommonDialogue.alertActionDialogApp(message: myCartModel.message);
       }
     } catch (e) {
       noData = "You have not added anything in the cart yet";

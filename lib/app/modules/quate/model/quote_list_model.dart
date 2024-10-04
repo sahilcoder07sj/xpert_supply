@@ -66,7 +66,10 @@ class QuoteHistoryData {
         vendor = (json['vendor'] as Map<String, dynamic>?) != null
             ? Vendor.fromJson(json['vendor'] as Map<String, dynamic>)
             : null,
-  address =  (json['data'] as Map<String,dynamic>?) != null ? AddEditAddressData.fromJson(json['data'] as Map<String,dynamic>) : null,
+        address = (json['address'] as Map<String, dynamic>?) != null
+            ? AddEditAddressData.fromJson(
+                json['address'] as Map<String, dynamic>)
+            : null,
         products = (json['products'] as List?)
             ?.map((dynamic e) =>
                 OrderProductsData.fromJson(e as Map<String, dynamic>))

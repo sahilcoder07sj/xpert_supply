@@ -1,3 +1,4 @@
+import 'package:tbd_flutter/app/CommonWidget/common_botttom_sheet.dart';
 import 'package:tbd_flutter/app/api_repository/api_function.dart';
 import 'package:tbd_flutter/app/api_repository/get_storage.dart';
 import 'package:tbd_flutter/app/modules/addEditAddress/model/add_edit_address_model.dart';
@@ -44,7 +45,6 @@ class MyOrderController extends GetxController {
       addressList = addressModel.data ?? [];
       if (addressList.isNotEmpty) {
         addressId = addressList.first.id;
-
       }
       update();
     } else {
@@ -177,7 +177,21 @@ class MyOrderController extends GetxController {
     );
     MyCartModel addToCartModel = MyCartModel.fromJson(data);
     if (addToCartModel.status == 1) {
-      Get.toNamed(Routes.ORDER_CONFIRM);
+      Get.bottomSheet(
+        enableDrag: false,
+        isDismissible: false,
+        CommonBottomSheet(
+          isDismissBack: false,
+          title: AppStrings.quoteRequestSuccess,
+          subTitle: AppStrings.yourQuoteRequestHasBeenSent,
+          image: AppIcons.iconsRoundTick,
+          isOneButton: true,
+          singleButtonText: AppStrings.continueNew,
+          commonOnTap: () async {
+            Get.offAllNamed(Routes.CONSUMER_PRODUCTS);
+          },
+        ),
+      );
     } else {
       CommonDialogue.alertActionDialogApp(message: addToCartModel.message);
     }

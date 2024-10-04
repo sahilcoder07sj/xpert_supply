@@ -60,7 +60,7 @@ class QuateController extends GetxController {
                 CommonButton(
                   text: AppStrings.send,
                   onTap: () => manageQuote(
-                    index: index,
+                      index: index,
                       quoteId: quoteId,
                       isSend: true,
                       offerPrice: int.parse(amountController.text)),
@@ -90,26 +90,26 @@ class QuateController extends GetxController {
   getQuote({bool isLoading = true}) async {
     errorMessage.value = "";
     // try {
-      FormData formData = FormData.fromMap({
-        "page": currentPage,
-        "limit": 10,
-      });
-      final data = await APIFunction().apiCall(
-        apiName: Constants.getQuoteHistory,
-        context: Get.context!,
-        params: formData,
-        isLoading: isLoading,
-        token: GetStorageData().readString(GetStorageData().token),
-      );
+    FormData formData = FormData.fromMap({
+      "page": currentPage,
+      "limit": 10,
+    });
+    final data = await APIFunction().apiCall(
+      apiName: Constants.getQuoteHistory,
+      context: Get.context!,
+      params: formData,
+      isLoading: isLoading,
+      token: GetStorageData().readString(GetStorageData().token),
+    );
 
-      GetQuote model = GetQuote.fromJson(data);
-      if (model.status == 1) {
-        quoteList.addAll(model.data ?? []);
-        isPaginationLoading.value = false;
-      } else {
-        errorMessage.value = "No data found";
-        CommonDialogue.alertActionDialogApp(message: model.message);
-      }
+    GetQuote model = GetQuote.fromJson(data);
+    if (model.status == 1) {
+      quoteList.addAll(model.data ?? []);
+      isPaginationLoading.value = false;
+    } else {
+      errorMessage.value = "No data found";
+      CommonDialogue.alertActionDialogApp(message: model.message);
+    }
     // } catch (e) {
     //   errorMessage.value = "No data found";
     //   print("error : $e");
@@ -140,11 +140,11 @@ class QuateController extends GetxController {
 
       ManageOrder model = ManageOrder.fromJson(data);
       if (model.status == 1) {
-        if(isSend == true){
+        if (isSend == true) {
           amountController.clear();
           Get.back();
           quoteList[index!].status = "offered";
-        } else{
+        } else {
           quoteList[index!].status = "canceled";
         }
         quoteList.refresh();
@@ -206,8 +206,11 @@ class QuateController extends GetxController {
       if (model.status == 1) {
         if (model.data?.status == "reject_offer") {
           quoteList.removeAt(index!);
-          update();
         }
+        if (model.data?.status == "accept_offer") {
+          quoteList[index!].status = "accepted";
+        }
+        update();
         Utils.flutterToast(model.message);
       } else {
         CommonDialogue.alertActionDialogApp(message: model.message);

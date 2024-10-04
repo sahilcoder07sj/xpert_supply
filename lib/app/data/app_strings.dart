@@ -77,6 +77,7 @@ class AppStrings{
   static const editProfile = "Edit Profile";
   static const deleteAccount = "Delete Account";
   static const signOut = "Sign Out";
+  static const exit = "Exit";
   static const editDelivery = "Edit Delivery";
   static const changePassword = "Change Password";
   static const currentPassword = "Current Password";
@@ -95,10 +96,13 @@ class AppStrings{
   static const yes = "Yes";
   static const no = "No";
   static const areYouSureYouWantToSignOutFromApp = "Are you sure you want to sign out\nfrom app?";
+  static const areYouSureYouWantToExitFromApp = "Are you sure you want to Exit\nfrom app?";
   static const congratulations = "Congratulations";
   static const youHaveSuccessfullyCreatedYourAccount = "You have successfully created\nyour account";
   static const products = "Products";
   static const apply = "Apply";
+  static const quoteRequestSuccess = "Quote Request Success";
+  static const yourQuoteRequestHasBeenSent = "Your Quote Request has been sent to the vendor please check your quote history";
   static const addToCart = "Add to Cart";
   static const orderNow = "Order Now";
   static const myCart = "My Cart";

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tbd_flutter/app/CommonWidget/common_botttom_sheet.dart';
 import 'all.dart';
 
 class Utils {
@@ -24,7 +25,16 @@ class Utils {
       countExit = 0;
     },);
     if(countExit == 1) {
-      flutterToast(AppStrings.pleaseClickBACKAgainExit);
+      Get.bottomSheet(
+        CommonBottomSheet(
+          title: AppStrings.exit,
+          subTitle: AppStrings.areYouSureYouWantToSignOutFromApp,
+          image: AppIcons.iconsLogoutBig,
+          firstOnTap: () {
+            exit(0);
+          },
+        ),
+      );
     } else {
       exit(0);
     }

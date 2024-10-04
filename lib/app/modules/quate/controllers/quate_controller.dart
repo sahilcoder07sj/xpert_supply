@@ -54,16 +54,23 @@ class QuateController extends GetxController {
                   prefixIcon: AppIcons.iconsAmount,
                   hintText: AppStrings.amount,
                   textInputAction: TextInputAction.done,
+                  maxLength: 6,
                   keyboardType: TextInputType.numberWithOptions(decimal: true),
                 ),
                 25.verticalSpace,
                 CommonButton(
                   text: AppStrings.send,
-                  onTap: () => manageQuote(
-                      index: index,
-                      quoteId: quoteId,
-                      isSend: true,
-                      offerPrice: int.parse(amountController.text)),
+                  onTap: () {
+                    if(amountController.text.isEmpty){
+                      CommonDialogue.alertActionDialogApp(message: AppStrings.pleaseEnterOfferAmount);
+                    } else{
+                      manageQuote(
+                          index: index,
+                          quoteId: quoteId,
+                          isSend: true,
+                          offerPrice: int.parse(amountController.text));
+                    }
+                  },
                 )
               ],
             ),
@@ -122,35 +129,39 @@ class QuateController extends GetxController {
       required bool isSend,
       int? index}) async {
     try {
-      FormData formData = FormData.fromMap({
-        "quote_id": quoteId,
-        "action": isSend ? "send_offer" : "cancel_offer",
-        // "message" : "",
-      });
+      if(isSend && double.parse(quoteList[index!].totalPrice ?? "") <= double.parse(amountController.text)){
+        CommonDialogue.alertActionDialogApp(message: AppStrings.offerPriceShouldBeLessThan);
+      } else{
+        FormData formData = FormData.fromMap({
+          "quote_id": quoteId,
+          "action": isSend ? "send_offer" : "cancel_offer",
+          // "message" : "",
+        });
 
-      if (offerPrice != null) {
-        formData.fields.add(MapEntry("offer_price", offerPrice.toString()));
-      }
-      final data = await APIFunction().apiCall(
-        apiName: Constants.manageOffer,
-        context: Get.context!,
-        params: formData,
-        token: GetStorageData().readString(GetStorageData().token),
-      );
-
-      ManageOrder model = ManageOrder.fromJson(data);
-      if (model.status == 1) {
-        if (isSend == true) {
-          amountController.clear();
-          Get.back();
-          quoteList[index!].status = "offered";
-        } else {
-          quoteList[index!].status = "canceled";
+        if (offerPrice != null) {
+          formData.fields.add(MapEntry("offer_price", offerPrice.toString()));
         }
-        quoteList.refresh();
-        Utils.flutterToast(model.message);
-      } else {
-        CommonDialogue.alertActionDialogApp(message: model.message);
+        final data = await APIFunction().apiCall(
+          apiName: Constants.manageOffer,
+          context: Get.context!,
+          params: formData,
+          token: GetStorageData().readString(GetStorageData().token),
+        );
+
+        ManageOrder model = ManageOrder.fromJson(data);
+        if (model.status == 1) {
+          if (isSend == true) {
+            amountController.clear();
+            Get.back();
+            quoteList[index!].status = "offered";
+          } else {
+            quoteList[index!].status = "canceled";
+          }
+          quoteList.refresh();
+          Utils.flutterToast(model.message);
+        } else {
+          CommonDialogue.alertActionDialogApp(message: model.message);
+        }
       }
     } catch (e) {
       print("error : $e");

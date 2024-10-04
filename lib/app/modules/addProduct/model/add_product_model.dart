@@ -27,7 +27,7 @@ class AddProductData {
   int? categoryId;
   String? name;
   int? amount;
-  int? discount;
+  dynamic discount;
   String? description;
   String? updatedAt;
   String? createdAt;

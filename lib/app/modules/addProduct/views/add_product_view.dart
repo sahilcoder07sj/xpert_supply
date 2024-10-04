@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/services.dart';
 import 'package:tbd_flutter/app/data/all.dart';
+import 'package:tbd_flutter/app/data/utils.dart';
 import '../controllers/add_product_controller.dart';
 
 class AddProductView extends GetView<AddProductController> {
@@ -31,7 +32,7 @@ class AddProductView extends GetView<AddProductController> {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.digitsOnly
             ],
-            maxLength: 3,
+            maxLength: 6,
           ),
           SizedBox(height: 20),
           CommonTextFormField(
@@ -43,7 +44,7 @@ class AddProductView extends GetView<AddProductController> {
               FilteringTextInputFormatter.digitsOnly,
             ],
             keyboardType: TextInputType.numberWithOptions(signed: true),
-            maxLength: 3,
+            maxLength: 2,
           ),
           SizedBox(height: 20),
           CommonTextFormField(

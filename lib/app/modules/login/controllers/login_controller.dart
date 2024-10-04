@@ -97,8 +97,6 @@ class LoginController extends GetxController {
       await GetStorageData()
           .saveObject(GetStorageData().userData, loginUserModel.data?.toJson());
       if (Constants.vendor == Constants.selectUser) {
-        print(
-            "loginUserModel -----> ${loginUserModel.data?.normalDeliveryDays}");
         if (loginUserModel.data?.normalDeliveryDays == null) {
           Get.offAllNamed(Routes.DELIVERY);
         } else {
@@ -107,6 +105,8 @@ class LoginController extends GetxController {
       } else {
         Get.offAllNamed(Routes.CONSUMER_PRODUCTS);
       }
+      Get.delete<LoginController>(force: true);
+      Get.delete<SignUpController>(force: true);
     } else {
       CommonDialogue.alertActionDialogApp(message: data["message"]);
     }

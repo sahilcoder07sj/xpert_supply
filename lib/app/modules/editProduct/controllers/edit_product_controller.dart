@@ -25,7 +25,7 @@ class EditProductController extends GetxController {
         discountNameController.text = Utils.calculatePercentage(
           double.parse(singleProductDetails.value?.data?.discount.toString() ?? "0"),
           double.parse(singleProductDetails.value?.data?.amount.toString() ?? "0"),
-        ).toString();
+        ).toStringAsFixed(0);
       }
     }
   }
@@ -48,6 +48,10 @@ class EditProductController extends GetxController {
   }
 
   updateProduct() async {
+    double? discount;
+    if(discountNameController.text.isNotEmpty){
+      discount = Utils.calculateDiscountedPrice(double.parse(amountNameController.text), double.parse(discountNameController.text));
+    }
     if(validation()){
       FormData formData = FormData.fromMap({
         "category_id" : Get.find<ProductController>().getCategory.value?.data?.categoryId ?? "",
@@ -55,9 +59,12 @@ class EditProductController extends GetxController {
         "amount" : int.parse(amountNameController.text),
         "description" : descriptionNameController.text,
         "id" : singleProductDetails.value?.data?.productId ?? 0,
-        "discount" : int.parse(discountNameController.text),
         "status" : 1,
       });
+
+      if(discount != null){
+        formData.fields.add(MapEntry("discount", discount.toStringAsFixed(0)));
+      }
 
       if(selectImage.value.isNotEmpty){
         formData.files.add(

@@ -62,8 +62,15 @@ class Utils {
     FocusManager.instance.primaryFocus?.unfocus();
   }
 
-  static double getPercentage(double defaultValue, double percentage) {
-    return (defaultValue * percentage)/100;
+  static double calculateDiscountedPrice(double originalPrice, double discountPercentage) {
+    if (discountPercentage < 0 || discountPercentage > 100) {
+      throw ArgumentError('Discount percentage should be between 0 and 100');
+    }
+    double discountAmount = (discountPercentage / 100) * originalPrice;
+
+    double finalPrice = originalPrice - discountAmount;
+
+    return finalPrice;
   }
 
   static double calculatePercentage(double value, double total) {

@@ -84,6 +84,9 @@ class ArchivedController extends GetxController {
     EditProduct model = EditProduct.fromJson(data);
     if(model.status == 1){
       getProductList.removeAt(index);
+      if(getProductList.isEmpty){
+        noData.value = "no data found";
+      }
     } else{
       CommonDialogue.alertActionDialogApp(message: data["message"]);
     }

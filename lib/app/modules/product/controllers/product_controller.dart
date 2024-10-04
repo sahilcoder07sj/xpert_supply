@@ -95,7 +95,7 @@ class ProductController extends GetxController {
     FormData formData = FormData.fromMap({
       "category_id": getCategory.value?.data?.categoryId ?? "",
       "id": productId,
-      "status": 1,
+      "status": 0,
     });
 
     final data = await APIFunction().apiCall(
@@ -108,6 +108,9 @@ class ProductController extends GetxController {
     EditProduct model = EditProduct.fromJson(data);
     if (model.status == 1) {
       getProductList.removeAt(index);
+      if(getProductList.isEmpty){
+        noData.value = "No data found";
+      }
     } else {
       CommonDialogue.alertActionDialogApp(message: data["message"]);
     }

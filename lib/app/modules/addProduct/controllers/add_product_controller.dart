@@ -32,13 +32,13 @@ class AddProductController extends GetxController {
     } else if(productAmountController.text.isEmpty){
       CommonDialogue.alertActionDialogApp(message: AppStrings.pleaseEnterAmount);
       return false;
-    } else if(productDiscountController.text.isEmpty){
+    } /*else if(productDiscountController.text.isEmpty){
       CommonDialogue.alertActionDialogApp(message: AppStrings.pleaseEnterDiscount);
       return false;
     } else if(int.parse(productAmountController.text) <= int.parse(productDiscountController.text)){
       CommonDialogue.alertActionDialogApp(message: AppStrings.discountAmountShouldBeLessThanAmount);
       return false;
-    } else if(productDescriptionController.text.isEmpty){
+    } */else if(productDescriptionController.text.isEmpty){
       CommonDialogue.alertActionDialogApp(message: AppStrings.pleaseEnterDescription);
       return false;
     } else if(selectImageList.length == 0){
@@ -51,7 +51,7 @@ class AddProductController extends GetxController {
   addProduct() async {
     double? discount;
     if(productDiscountController.text.isNotEmpty){
-      discount = Utils.getPercentage(double.parse(productAmountController.text), double.parse(productDiscountController.text));
+      discount = Utils.calculateDiscountedPrice(double.parse(productAmountController.text), double.parse(productDiscountController.text));
     }
     if(validation()){
       FormData formData = FormData.fromMap({
@@ -62,7 +62,7 @@ class AddProductController extends GetxController {
       });
 
       if(discount != null){
-        formData.fields.add(MapEntry("discount", discount.toString()));
+        formData.fields.add(MapEntry("discount", discount.toStringAsFixed(0)));
       }
 
       if (selectImageList.isNotEmpty) {
@@ -100,6 +100,7 @@ class AddProductController extends GetxController {
           XFile? file = await PickImage.pickImageCamera();
           if(file != null){
             Get.back();
+            selectImageList.clear();
             selectImageList.insert(0, file.path);
             if(selectImageList.length == 1){
               isPickImage.value = false;
@@ -110,6 +111,7 @@ class AddProductController extends GetxController {
           XFile? file = await PickImage.pickImageGallery();
           if(file != null){
             Get.back();
+            selectImageList.clear();
             selectImageList.insert(0, file.path);
             if(selectImageList.length == 1){
               isPickImage.value = false;

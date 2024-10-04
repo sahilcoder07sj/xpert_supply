@@ -72,7 +72,7 @@ class Products {
   int? productId;
   String? name;
   int? amount;
-  int? discount;
+  dynamic discount;
   String? description;
   String? imageUrl;
   List<Images>? images;

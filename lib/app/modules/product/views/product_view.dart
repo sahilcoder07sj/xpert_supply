@@ -102,8 +102,7 @@ class ProductView extends GetView<ProductController> {
                                       fontFamily: FontFamily.medium,
                                       fontSize: data.discount != null && data.discount != 0 ? 10 : 14.0,
                                       textDecoration: data.discount != null && data.discount != 0 ? TextDecoration.lineThrough : TextDecoration.none,
-                                      color: AppColors
-                                          .discountedPriceColor,
+                                      color: data.discount != null && data.discount != 0 ? AppColors.discountedPriceColor : AppColors.priceColor,
                                     ),
                                   ],
                                 )

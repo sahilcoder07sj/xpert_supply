@@ -45,7 +45,7 @@ class EditProductView extends GetView<EditProductController> {
             title: AppStrings.amount,
             keyboardType: TextInputType.numberWithOptions(decimal: true),
             contentPadding: EdgeInsets.all(14.0),
-            maxLength: 3,
+            maxLength: 6,
           ),
           10.verticalSpace,
           CommonTextFormField(
@@ -53,7 +53,7 @@ class EditProductView extends GetView<EditProductController> {
             title: AppStrings.discount,
             keyboardType: TextInputType.numberWithOptions(decimal: true),
             contentPadding: EdgeInsets.all(14.0),
-            maxLength: 3,
+            maxLength: 2,
           ),
           10.verticalSpace,
           CommonTextFormField(

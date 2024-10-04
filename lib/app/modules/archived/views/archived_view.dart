@@ -1,3 +1,4 @@
+import 'package:tbd_flutter/app/CommonWidget/custom_image_view.dart';
 import 'package:tbd_flutter/app/data/dynamic_height_grid.dart';
 import 'package:tbd_flutter/app/modules/archived/controllers/archived_controller.dart';
 
@@ -42,11 +43,11 @@ class ArchivedView extends GetView<ArchivedController> {
                         children: [
                           Align(
                             alignment: Alignment.center,
-                            child: CommonNetworkImage(
-                              imageUrl: data.imageUrl ?? "",
+                            child: CustomImageView(
+                              imagePath: data.imageUrl ?? "",
                               height: 140.0,
                               width: 120.0,
-                            ),
+                            )
                           ),
                           SizedBox(height: 10),
                           AppText(

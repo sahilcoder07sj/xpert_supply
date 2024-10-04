@@ -163,5 +163,7 @@ class AppStrings{
   static const pleaseEnterDiscount = "Please enter discount";
   static const discountAmountShouldBeLessThanAmount = "Discount amount should be less than amount";
   static const pleaseEnterDescription = "Please enter description";
+  static const pleaseEnterOfferAmount = "Please enter offer amount";
   static const pleaseSelectProductImage = "Please select product image";
+  static const offerPriceShouldBeLessThan = "Offer price should be less than total amount";
 }

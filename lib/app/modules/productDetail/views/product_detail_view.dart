@@ -34,8 +34,8 @@ class ProductDetailView extends GetView<ProductDetailController> {
                     ),
                   ),
                   child: Center(
-                    child: CommonNetworkImage(
-                      imageUrl: controller
+                    child: CustomImageView(
+                      imagePath: controller
                               .singleProductDetails.value?.data?.imageUrl ??
                           "",
                       height: 150,

@@ -65,7 +65,7 @@ class SignUpController extends GetxController {
       'password': passwordController.text.trim(),
       'password_confirmation': confirmPasswordController.text.trim(),
       'device_id': "vdvd",
-      'device_token': "vcsc",
+      'device_token': GetStorageData().readString(GetStorageData().firebaseToken),
       'device_type': Platform.isAndroid ? "ANDROID" : "IOS",
     });
     try {

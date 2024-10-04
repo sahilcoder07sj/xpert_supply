@@ -1,4 +1,4 @@
-package com.example.tbd_flutter
+package com.xpert_supply_network
 
 import io.flutter.embedding.android.FlutterActivity
 

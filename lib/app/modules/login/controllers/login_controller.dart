@@ -82,7 +82,7 @@ class LoginController extends GetxController {
       "email": emailController.text,
       "password": passwordController.text,
       "device_id": "EFGHI54321",
-      "device_token": "ABCDEFGHITJKLMNOPQRSTUVWXYZ",
+      "device_token": GetStorageData().readString(GetStorageData().firebaseToken),
       "device_type": Platform.isAndroid ? "ANDROID" : "IOS"
     });
     final data = await APIFunction().apiCall(

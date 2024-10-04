@@ -36,7 +36,7 @@ class QuoteHistoryModel {
 
 class QuoteHistoryData {
   final int? quoteId;
-  final String? status;
+   String? status;
   final dynamic message;
   final String? totalPrice;
   final String? offerPrice;

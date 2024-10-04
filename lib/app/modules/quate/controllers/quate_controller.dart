@@ -108,7 +108,7 @@ class QuateController extends GetxController {
       isPaginationLoading.value = false;
     } else {
       errorMessage.value = "No data found";
-      CommonDialogue.alertActionDialogApp(message: model.message);
+      // CommonDialogue.alertActionDialogApp(message: model.message);
     }
     // } catch (e) {
     //   errorMessage.value = "No data found";
@@ -179,7 +179,7 @@ class QuateController extends GetxController {
         errorMessage.value = "No product found in cart";
 
         update();
-        CommonDialogue.alertActionDialogApp(message: orderHistoryModel.message);
+        // CommonDialogue.alertActionDialogApp(message: orderHistoryModel.message);
       }
     } catch (e) {
       errorMessage.value = "No product found in cart";
@@ -196,7 +196,7 @@ class QuateController extends GetxController {
       });
 
       final data = await APIFunction().apiCall(
-        apiName: Constants.manageOffer,
+        apiName: Constants.customerManageQuote,
         context: Get.context!,
         params: formData,
         token: GetStorageData().readString(GetStorageData().token),
@@ -204,13 +204,15 @@ class QuateController extends GetxController {
 
       ManageOrder model = ManageOrder.fromJson(data);
       if (model.status == 1) {
-        if (model.data?.status == "reject_offer") {
-          quoteList.removeAt(index!);
+        if (!isAccepted) {
+          quoteHistoryData[index!].status = "rejected";
+          update();
         }
-        if (model.data?.status == "accept_offer") {
-          quoteList[index!].status = "accepted";
+        if (isAccepted) {
+          quoteHistoryData[index!].status = "accepted";
+          update();
         }
-        update();
+
         Utils.flutterToast(model.message);
       } else {
         CommonDialogue.alertActionDialogApp(message: model.message);

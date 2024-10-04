@@ -217,13 +217,11 @@ class QuateController extends GetxController {
       if (model.status == 1) {
         if (!isAccepted) {
           quoteHistoryData[index!].status = "rejected";
-          update();
         }
         if (isAccepted) {
           quoteHistoryData[index!].status = "accepted";
-          update();
         }
-
+        quoteHistoryData.refresh();
         Utils.flutterToast(model.message);
       } else {
         CommonDialogue.alertActionDialogApp(message: model.message);

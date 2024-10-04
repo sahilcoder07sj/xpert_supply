@@ -4,7 +4,6 @@ class Constants {
   static const dateRegX =
       r'^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/(19|20)\d\d$';
   static const passwordRegX = r'^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9]).{8,}$';
-
   static String selectUser = '';
   static const String consumer = 'customer';
   static const String vendor = 'vendor';
@@ -33,7 +32,7 @@ class Constants {
   static String updateCategory = "api/vendor/category/update";
   static String deleteCategory = "api/vendor/category/delete";
   static String addProduct = "api/vendor/product/add";
-  static String getProduct = "api/vendor/product/get";
+  static String getProduct = "api/${selectUser}/product/get";
   static String deleteProduct = "api/vendor/product/delete";
   static String updateProduct = "api/vendor/product/update";
   static String getOrder = "api/vendor/order/get";
@@ -44,7 +43,6 @@ class Constants {
   /// vendor api customer
 
   String vendorHistory = "api/$selectUser/vendor-history/get";
-  String productList = "api/vendor/product/get";
 
   /// cart
   String addToCartProduct = "api/customer/cart/add-product";

@@ -80,7 +80,7 @@ class ProductController extends GetxController {
           update();
         }
       } else {
-        CommonDialogue.alertActionDialogApp(message: model.message);
+        // CommonDialogue.alertActionDialogApp(message: model.message);
         noData.value = "no data found";
 
         update();

@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:tbd_flutter/app/CommonWidget/camera_bottom_sheet.dart';
 import 'package:tbd_flutter/app/CommonWidget/custom_image_view.dart';
 import 'package:tbd_flutter/app/data/all.dart';
+import 'package:text_marquee/text_marquee.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 import '../../../CommonWidget/common_botttom_sheet.dart';
 import '../controllers/product_detail_controller.dart';
@@ -54,12 +56,19 @@ class ProductDetailView extends GetView<ProductDetailController> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                /*TextScroll(
+                                    controller.singleProductDetails.value?.data?.name ?? "",
+                                  mode: TextScrollMode.bouncing,
+                                  style: AppTextStyle(
+                                    fontFamily: FontFamily.medium,
+                                    fontSize: 22,
+                                  ),
+                                ),*/
                                 AppText(
-                                  controller.singleProductDetails.value?.data
-                                      ?.name ??
-                                      "",
+                                    controller.singleProductDetails.value?.data?.name ?? "",
                                   fontFamily: FontFamily.medium,
-                                  fontSize: 24,
+                                  fontSize: 22,
+                                  maxLines: 2,
                                 ),
                                 SizedBox(height: 3),
                                 Row(
@@ -81,9 +90,9 @@ class ProductDetailView extends GetView<ProductDetailController> {
                                     AppText(
                                       "\$${controller.singleProductDetails.value?.data?.amount ?? 0}",
                                       fontFamily: FontFamily.medium,
-                                      fontSize: 14,
-                                      textDecoration: TextDecoration.lineThrough,
-                                      color: AppColors.discountedPriceColor,
+                                      fontSize: controller.singleProductDetails.value?.data?.discount != null ? 14 : 18,
+                                      textDecoration: controller.singleProductDetails.value?.data?.discount != null ? TextDecoration.lineThrough : TextDecoration.none,
+                                      color: controller.singleProductDetails.value?.data?.discount != null ? AppColors.discountedPriceColor : AppColors.priceColor,
                                     ),
                                   ],
                                 )
@@ -91,6 +100,7 @@ class ProductDetailView extends GetView<ProductDetailController> {
                             ),
                           ),
                           if (Constants.selectUser == Constants.vendor)...[
+                            5.horizontalSpace,
                             GestureDetector(
                               onTap: () {
                                 Get.toNamed(Routes.EDIT_PRODUCT, arguments: {

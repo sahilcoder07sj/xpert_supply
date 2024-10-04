@@ -9,167 +9,164 @@ class VendorListView extends GetView<VendorListController> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
-        Utils().exitEvent();
-        return Future.value(false);
-      },
-      child: GetBuilder<VendorListController>(
-        assignId: true,
-        init: VendorListController(),
-        builder: (controller) {
-          return WillPopScope(
-            onWillPop: () {
-              return controller.backMethod();
-            },
-            child: GestureDetector(
-              onTap: () => Utils.hideKeyboard(),
-              child: CommonScreen(
-                isLeading: controller.vendorList.isEmpty
-                    ? false
-                    : controller.isAddVendor,
-                leadingOnTap: controller.isAddVendor
-                    ? () {
-                        controller.isAddVendor = false;
+    return GetBuilder<VendorListController>(
+      assignId: true,
+      init: VendorListController(),
+      builder: (controller) {
+        return WillPopScope(
+          onWillPop: () {
+            return Utils().exitEvent(
+              isBack: true,
+              backMethod: controller.backMethod(),
+            );
+          },
+          child: GestureDetector(
+            onTap: () => Utils.hideKeyboard(),
+            child: CommonScreen(
+              isLeading: controller.vendorList.isEmpty
+                  ? false
+                  : controller.isAddVendor,
+              leadingOnTap: controller.isAddVendor
+                  ? () {
+                      controller.isAddVendor = false;
+                      controller.update();
+                    }
+                  : null,
+              title: controller.isAddVendor
+                  ? AppStrings.addVendor
+                  : AppStrings.vendor + "s",
+              floatingActionButton: !controller.isAddVendor
+                  ? GestureDetector(
+                      onTap: () {
+                        controller.isAddVendor = true;
                         controller.update();
-                      }
-                    : null,
-                title: controller.isAddVendor
-                    ? AppStrings.addVendor
-                    : AppStrings.vendor + "s",
-                floatingActionButton: !controller.isAddVendor
-                    ? GestureDetector(
-                        onTap: () {
-                          controller.isAddVendor = true;
-                          controller.update();
-                        },
-                        child: Container(
-                          height: 60,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            color: AppColors.primary,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            child: Icon(
-                              Icons.add_rounded,
-                              size: 30,
-                              color: AppColors.white,
-                            ),
+                      },
+                      child: Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.add_rounded,
+                            size: 30,
+                            color: AppColors.white,
                           ),
                         ),
-                      )
-                    : SizedBox(),
-                actions: [
-                  GestureDetector(
-                    onTap: () => Get.toNamed(Routes.MY_CART),
-                    child: CommonWidget.circularIconWidget(
-                      icon: AppIcons.iconsCart,
-                      radius: 18.0,
-                    ),
+                      ),
+                    )
+                  : SizedBox(),
+              actions: [
+                GestureDetector(
+                  onTap: () => Get.toNamed(Routes.MY_CART),
+                  child: CommonWidget.circularIconWidget(
+                    icon: AppIcons.iconsCart,
+                    radius: 18.0,
                   ),
-                  SizedBox(width: 10),
-                  GestureDetector(
-                    onTap: () => Get.toNamed(Routes.MY_PROFILE),
-                    child: CommonWidget.circularIconWidget(
-                      icon: AppIcons.iconsUser,
-                      radius: 18.0,
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                ],
-                body: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: controller.isAddVendor
-                      ? Center(
-                          child: Column(
-                            children: [
-                              10.verticalSpace,
-                              SvgPicture.asset(AppIcons.productVendor),
-                              CommonTextFormField(
-                                controller: controller.vendorCodeController,
-                                hintText: AppStrings.enterVendorCode,
-                                textInputAction: TextInputAction.done,
-                                inputFormatters: [
-                                  UpperCaseTextFormatter(),
-                                ],
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(20.0, 12.0, 20.0, 12.0),
-                                border: customOutlineInputBorder(
-                                  borderColor: AppColors.border.withOpacity(0.1),
-                                ),
-                                fillColor: AppColors.iconBG,
-                                isShadow: false,
-                              ),
-                            ],
-                          ),
-                        )
-                      : ListView.builder(
-                          itemCount: controller.vendorList.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            VendorListData data = controller.vendorList[index];
-                            return GestureDetector(
-                              onTap: () => Get.toNamed(Routes.VENDOR_CATEGORIES,
-                                  arguments: {
-                                    "vendor_code": data.vendorNo,
-                                    "vendor_name": data.name ?? "vendor name",
-                                  }),
-                              child: Container(
-                                width: double.infinity,
-                                padding: EdgeInsets.all(15.0),
-                                margin: EdgeInsets.only(bottom: 10.0),
-                                decoration:
-                                    CommonWidget.commonShadowWidget(radius: 15.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: AppText(
-                                        data.name ?? "Vendor",
-                                        fontSize: 15.0,
-                                        color: AppColors.primary,
-                                      ),
-                                    ),
-                                    SvgPicture.asset(AppIcons.iconsRightArrow)
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
                 ),
-
-                /// bottom button
-                bottomNavigationBar: controller.isAddVendor
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                SizedBox(width: 10),
+                GestureDetector(
+                  onTap: () => Get.toNamed(Routes.MY_PROFILE),
+                  child: CommonWidget.circularIconWidget(
+                    icon: AppIcons.iconsUser,
+                    radius: 18.0,
+                  ),
+                ),
+                SizedBox(width: 10),
+              ],
+              body: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: controller.isAddVendor
+                    ? Center(
                         child: Column(
-                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            CommonButton(
-                              text: AppStrings.apply,
-                              onTap: () {
-                                if (controller
-                                    .vendorCodeController.text.isNotEmpty) {
-                                  controller.addVendorApi();
-                                } else {
-                                  CommonDialogue.alertActionDialogApp(
-                                      message: "Please enter vendor code");
-                                }
-                              },
+                            10.verticalSpace,
+                            SvgPicture.asset(AppIcons.productVendor),
+                            CommonTextFormField(
+                              controller: controller.vendorCodeController,
+                              hintText: AppStrings.enterVendorCode,
+                              textInputAction: TextInputAction.done,
+                              inputFormatters: [
+                                UpperCaseTextFormatter(),
+                              ],
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(20.0, 12.0, 20.0, 12.0),
+                              border: customOutlineInputBorder(
+                                borderColor: AppColors.border.withOpacity(0.1),
+                              ),
+                              fillColor: AppColors.iconBG,
+                              isShadow: false,
                             ),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).padding.bottom + 10.0),
                           ],
                         ),
                       )
-                    : SizedBox(),
+                    : ListView.builder(
+                        itemCount: controller.vendorList.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          VendorListData data = controller.vendorList[index];
+                          return GestureDetector(
+                            onTap: () => Get.toNamed(Routes.VENDOR_CATEGORIES,
+                                arguments: {
+                                  "vendor_code": data.vendorNo,
+                                  "vendor_name": data.name ?? "vendor name",
+                                }),
+                            child: Container(
+                              width: double.infinity,
+                              padding: EdgeInsets.all(15.0),
+                              margin: EdgeInsets.only(bottom: 10.0),
+                              decoration:
+                                  CommonWidget.commonShadowWidget(radius: 15.0),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: AppText(
+                                      data.name ?? "Vendor",
+                                      fontSize: 15.0,
+                                      color: AppColors.primary,
+                                    ),
+                                  ),
+                                  SvgPicture.asset(AppIcons.iconsRightArrow)
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
               ),
+
+              /// bottom button
+              bottomNavigationBar: controller.isAddVendor
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CommonButton(
+                            text: AppStrings.apply,
+                            onTap: () {
+                              if (controller
+                                  .vendorCodeController.text.isNotEmpty) {
+                                controller.addVendorApi();
+                              } else {
+                                CommonDialogue.alertActionDialogApp(
+                                    message: "Please enter vendor code");
+                              }
+                            },
+                          ),
+                          SizedBox(
+                              height:
+                                  MediaQuery.of(context).padding.bottom + 10.0),
+                        ],
+                      ),
+                    )
+                  : SizedBox(),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

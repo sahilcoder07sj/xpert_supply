@@ -19,25 +19,30 @@ class Utils {
   }
 
   static int countExit = 0;
-   exitEvent() {
-    countExit ++;
-    Future.delayed(const Duration(seconds: 3),() {
-      countExit = 0;
-    },);
-    if(countExit == 1) {
-      Get.bottomSheet(
-        CommonBottomSheet(
-          title: AppStrings.exit,
-          subTitle: AppStrings.areYouSureYouWantToSignOutFromApp,
-          image: AppIcons.iconsLogoutBig,
-          firstOnTap: () {
-            exit(0);
-          },
-        ),
-      );
-    } else {
-      exit(0);
-    }
+   exitEvent({bool isBack = false,Function()? backMethod}) {
+     if(!isBack){
+       countExit ++;
+       Future.delayed(const Duration(seconds: 3),() {
+         countExit = 0;
+       },);
+       if(countExit == 1) {
+         Get.bottomSheet(
+           CommonBottomSheet(
+             title: AppStrings.exit,
+             subTitle: AppStrings.areYouSureYouWantToSignOutFromApp,
+             image: AppIcons.iconsLogoutBig,
+             firstOnTap: () {
+               exit(0);
+             },
+           ),
+         );
+       } else {
+         exit(0);
+       }
+     }else{
+       backMethod!();
+     }
+
   }
 
   /// <<< To choose screens portrait --------- >>>

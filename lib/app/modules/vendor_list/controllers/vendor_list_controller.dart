@@ -71,13 +71,13 @@ class VendorListController extends GetxController {
   /// back method when user adding vendor
   backMethod() {
     if (vendorList.isEmpty) {
-      exit(0);
+      Utils().exitEvent();
     } else {
       if (isAddVendor) {
         isAddVendor = false;
         update();
       } else {
-        exit(0);
+        Utils().exitEvent();
       }
     }
   }

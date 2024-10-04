@@ -30,7 +30,6 @@ class ArchivedController extends GetxController {
       "limit": 10,
       "status": 0,
     });
-
     try {
       final data = await APIFunction().apiCall(
         apiName: Constants.getProduct,
@@ -57,7 +56,7 @@ class ArchivedController extends GetxController {
           update();
         }
       } else {
-        CommonDialogue.alertActionDialogApp(message: model.message);
+        // CommonDialogue.alertActionDialogApp(message: model.message);
         noData.value = "no data found";
 
         update();

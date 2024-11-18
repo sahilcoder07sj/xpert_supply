@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "462380467430",
-    "project_id": "xpert-supply-network",
-    "storage_bucket": "xpert-supply-network.appspot.com"
+    "project_number": "928947529205",
+    "project_id": "xpert-supply-network-b94b6",
+    "storage_bucket": "xpert-supply-network-b94b6.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:462380467430:android:8df88c5d8b445a571fe727",
+        "mobilesdk_app_id": "1:928947529205:android:e2a623b0fbfed1c48eecbc",
         "android_client_info": {
           "package_name": "com.xpert_supply_network"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBhEmxnqopCMIkCSk9T4Xg42IU_w4tEodA"
+          "current_key": "AIzaSyBOdNqg9svoMHhTrM3_DgXuEjWENHvNT5k"
         }
       ],
       "services": {

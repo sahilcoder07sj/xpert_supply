@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAf3MtvxsqzErukhggGxJC8Cniqpskl_x0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>928947529205</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.xpert-supply-network</string>
+	<key>PROJECT_ID</key>
+	<string>xpert-supply-network-b94b6</string>
+	<key>STORAGE_BUCKET</key>
+	<string>xpert-supply-network-b94b6.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:928947529205:ios:978ce20cc2c381cf8eecbc</string>
+</dict>
+</plist>
